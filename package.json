@@ -1,5 +1,5 @@
 {
-  "name": "int-ecommerce-cloud",
+  "name": "smart-pos",
   "version": "0.2.3",
   "description": "",
   "main": "lib/index.js",
@@ -14,14 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KavinduDhananjaya/int-ecommerce-cloud.git"
+    "url": "git+https://github.com/mahela97/smart-pos-backend.git"
   },
-  "author": "fcodelabs",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/KavinduDhananjaya/int-ecommerce-cloud/issues"
-  },
-  "homepage": "https://github.com/KavinduDhananjaya/int-ecommerce-cloud#readme",
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/joi": "^17.2.3",

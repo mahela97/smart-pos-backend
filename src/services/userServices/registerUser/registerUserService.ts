@@ -5,5 +5,7 @@ export default class RegisterUserService {
 
   async registerUser(data: any, tenantId: string): Promise<any> {
 
+
+
   }
 }

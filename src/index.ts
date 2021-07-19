@@ -4,7 +4,6 @@ import * as dotenv from "dotenv";
 
 import apiRouter from "./routes/api-routers/api-router";
 
-import firebaseInitialize from "./utill/firebaseInstance";
 
 dotenv.config();
 
