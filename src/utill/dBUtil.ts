@@ -5,4 +5,6 @@ export default abstract class DBUtil {
 
   static readonly PRODUCT = "product";
 
+  static readonly CATEGORIES = "categories";
+
 }
