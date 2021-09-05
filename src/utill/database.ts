@@ -1,9 +1,10 @@
 import Mongoose = require("mongoose");
+import config from "../config/appConfig.json";
 
 export default class DBConnection {
   private static db: Mongoose.Connection;
 
-  private static uri = process.env.MONGO_URL;
+  private static uri = config.development.mongo_url;
 
   static async connect(): Promise<Mongoose.Connection> {
     if (this.db !== undefined) return this.db;
