@@ -47,4 +47,4 @@ const wareHouseSchema = new mongoose.Schema(
 );
 
 
-export default mangoose.model<WarehouseDocument>(DBUtil.WAREHOUSE, wareHouseSchema);
+export default mongoose.model<WarehouseDocument>(DBUtil.WAREHOUSE, wareHouseSchema);
