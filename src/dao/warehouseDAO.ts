@@ -1,4 +1,4 @@
-import Warehouse, {WarehouseDocument} from "../schemaModels/warehouse.model";
+import Warehouse from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 
