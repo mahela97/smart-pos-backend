@@ -15,7 +15,7 @@ export default class UserDAO extends Dao {
     userData: UserModel,
     session: any
   ): Promise<UserDocument> {
-    return await new this.model(userData).save(session);
+    return new this.model(userData).save(session);
   }
 
   public async getUser(
