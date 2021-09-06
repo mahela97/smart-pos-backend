@@ -1,14 +1,14 @@
 import * as mongoose from "mongoose";
 import {Document} from "mongoose";
 import DBUtil from "../utill/dBUtil";
-import ProductModel from "../models/productModel";
+import ShopModel from "../models/shopModel";
 
-export interface ProductDocument extends ProductModel, Document {
+export interface ShopDocument extends ShopModel, Document {
 }
 
-const productSchema = new mongoose.Schema(
+const shopSchema = new mongoose.Schema(
     {
-        pid: {
+        sid: {
             type: String,
             trim: true,
         },
@@ -16,22 +16,23 @@ const productSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
-        categoryId: {
-            type: mongoose.Schema.Types.ObjectId,
-            trim: true,
-            ref: DBUtil.CATEGORY
-        },
-        variantId: {
-            // array
-            type: mongoose.Schema.Types.ObjectId,
-            trim: true,
-            ref: DBUtil.WAREHOUSE
-        },
-        description: {
+        location: {
             type: String,
             trim: true,
         },
-        photo: {
+        email: {
+            type: String,
+            trim: true,
+        },
+        telephone: {
+            type: String,
+            trim: true,
+        },
+        ownerName: {
+            type: String,
+            trim: true,
+        },
+        address: {
             type: String,
             trim: true,
         },
@@ -44,4 +45,4 @@ const productSchema = new mongoose.Schema(
     {timestamps: true}
 );
 
-export default mongoose.model<ProductDocument>(DBUtil.PRODUCT, productSchema);
+export default mongoose.model<ShopDocument>(DBUtil.SHOP, shopSchema);

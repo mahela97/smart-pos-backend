@@ -3,7 +3,7 @@ export default abstract class DBUtil {
 
   static readonly WAREHOUSE = "warehouses";
 
-  static readonly PRODUCT = "product";
+  static readonly SHOP = "shop";
 
   static readonly CATEGORY = "category";
 
