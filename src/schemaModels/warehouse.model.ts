@@ -9,10 +9,6 @@ export interface WarehouseDocument extends WarehouseModel, Document{
 
 const wareHouseSchema = new mongoose.Schema(
     {
-        wid: {
-            type: String,
-            trim: true,
-        },
         location: {
             type: String,
             trim: true,

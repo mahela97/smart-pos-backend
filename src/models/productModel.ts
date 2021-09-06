@@ -1,5 +1,4 @@
 interface  ProductModel {
-    pid?: string;
     name: string;
     categoryId: string;
     variant1: string;

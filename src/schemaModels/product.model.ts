@@ -8,10 +8,6 @@ export interface ProductDocument extends productModel, Document{
 
 const productSchema = new mongoose.Schema(
     {
-        pid: {
-            type: String,
-            trim: true,
-        },
         name: {
             type: String,
             trim: true,

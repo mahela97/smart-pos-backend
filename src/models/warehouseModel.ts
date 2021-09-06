@@ -1,5 +1,4 @@
 interface WarehouseModel{
-    wid?: string;
     location: string;
     telephone: string;
     name: string;
