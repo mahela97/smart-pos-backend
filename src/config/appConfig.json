@@ -1,0 +1,6 @@
+{
+  "development": {
+    "config_id": "development",
+    "mongo_url": " mongodb+srv://mahela:12345@cluster0.qi8o5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  }
+}
