@@ -11,7 +11,7 @@ export default class WarehouseDAO extends Dao {
         const queryHelper = new QueryHelper(
             filterData.query,
             ["name"],
-            ["managerId", "salespersonId"],
+            ["managerId", "salesPersonId"],
             filterData.sortBy,
             filterData.filter,
             filterData.page,
