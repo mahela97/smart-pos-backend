@@ -4,11 +4,12 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "node lib/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build",
     "dev": "nodemon -x ts-node src/config/server.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "build": "tsc",
     "prestart": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"
