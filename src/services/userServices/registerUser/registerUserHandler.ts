@@ -24,7 +24,9 @@ export default class RegisterUserHandler {
    const result = await userService.registerUser(body);
    res.status(201).send({message:result});
  }catch(error){
-   res.status(401).send({message:error.message});
+     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+   // @ts-ignore
+     res.status(401).send({message:error.message});
  }
   }
 }
