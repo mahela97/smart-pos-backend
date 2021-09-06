@@ -4,10 +4,10 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "start": "node lib/index.js",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon -x ts-node src/index.ts",
     "build": "tsc",
     "postinstall": "npm run build",
-    "dev": "nodemon -x ts-node src/config/server.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prestart": "npm run build",
