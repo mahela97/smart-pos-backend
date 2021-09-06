@@ -1,8 +1,12 @@
-import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import UserDAO from "../dao/userDAO";
 import WarehouseDAO from "../dao/warehouseDAO";
+import ShopDAO from "../dao/shopDAO";
+
+import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
 import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
+import AddShopService from "../services/salespersonServices/addShop/addShopService";
+
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -16,7 +20,6 @@ export default class ServiceLocator {
   }
 
   // user
-
   static get userDAO(): UserDAO {
     const key = "user_dao";
     if (!this.instances.get(key)) {
@@ -34,6 +37,16 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  // Shop
+  static get shopDAO(): ShopDAO{
+    const key = "shop_dao";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new ShopDAO());
+    }
+    return this.instances.get(key);
+  }
+
+
   static get addWarehouse(): AddWarehouseService {
     const key = "add_warehouse_service";
     if (!this.instances.get(key)) {
@@ -49,6 +62,16 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+
+  static get addShop(): AddShopService {
+    const key = "add_shop_service";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new AddShopService((this.shopDAO)));
+    }
+    return this.instances.get(key);
+  }
+
 
   
 }
