@@ -41,9 +41,12 @@ const productSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
             index: true,
+        },
+        photo:{
+            type:String
         }
     }
 );
 
 
-export default mongoose.model<ProductDocument>(DBUtil.WAREHOUSE, productSchema);
+export default mongoose.model<ProductDocument>(DBUtil.PRODUCT, productSchema);
