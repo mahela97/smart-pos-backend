@@ -1,4 +1,4 @@
-import Warehouse, {WarehouseDocument} from "../schemaModels/warehouse.model";
+import Warehouse from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 
@@ -11,7 +11,7 @@ export default class WarehouseDAO extends Dao {
         const queryHelper = new QueryHelper(
             filterData.query,
             ["name"],
-            ["managerId", "salespersonId"],
+            ["managerId", "salesPersonId"],
             filterData.sortBy,
             filterData.filter,
             filterData.page,
