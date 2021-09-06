@@ -2,6 +2,7 @@ import Joi from "joi";
 import {Request, Response} from "express";
 import ServiceLocator from "../../../utill/serviceLocator";
 import WarehouseModel from "../../../models/warehouseModel";
+import {errorResponse} from "../../../utill/responses";
 
 export default class AddWarehouseHandler {
     public static async addWarehouse(req: Request, res: Response): Promise<void> {
@@ -26,7 +27,8 @@ export default class AddWarehouseHandler {
             const result = await warehouseService.addWarehouse(data);
             res.status(201).send({id: result});
         } catch (error) {
-            res.status(error.status).send({message: error.message});
+            const errorRes = errorResponse(error);
+            res.status(errorRes.code).send(errorRes.response);
         }
 
     }
