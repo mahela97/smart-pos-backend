@@ -9,8 +9,6 @@ interface OrderModel{
     archived:boolean;
     isPaid:boolean;
     receivedPrice:number;
-
 }
-
 
 export default OrderModel;
