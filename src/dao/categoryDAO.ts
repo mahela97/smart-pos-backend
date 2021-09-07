@@ -11,7 +11,7 @@ export default class CategoryDAO extends Dao {
         const queryHelper = new QueryHelper(
             filterData.query,
             ["name"],
-            ["managerId", "salesPersonId"],
+            [],
             filterData.sortBy,
             filterData.filter,
             filterData.page,
