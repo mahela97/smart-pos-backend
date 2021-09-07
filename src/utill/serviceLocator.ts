@@ -6,6 +6,7 @@ import LeaveDAO from "../dao/leaveDAO";
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
 import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
+import AssignManagerService from "../services/adminServices/assignManager/assignManagerService";
 import AddShopService from "../services/salespersonServices/addShop/addShopService";
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
 import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveService";
@@ -57,6 +58,16 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get assignManager(): AssignManagerService {
+    const key = "assign_manager_warehouse";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new AssignManagerService(this.warehouseDAO, this.userDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
  // ###########################################################################################################
 
   // Shop
@@ -109,5 +120,5 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
-  
+
 }
