@@ -19,7 +19,6 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "*");
   next();
 });
-console.log("gg");
 app.use("/api", apiRouter);
 
 app.listen(PORT, () => {
