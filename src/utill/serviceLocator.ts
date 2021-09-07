@@ -2,6 +2,7 @@ import UserDAO from "../dao/userDAO";
 import WarehouseDAO from "../dao/warehouseDAO";
 import ShopDAO from "../dao/shopDAO";
 import LeaveDAO from "../dao/leaveDAO";
+import CategoryDAO from "../dao/categoryDAO";
 
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
@@ -11,7 +12,10 @@ import AddShopService from "../services/salespersonServices/addShop/addShopServi
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
 import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveService";
 import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/getAllLeavesService";
-
+import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
+import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
+import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
+import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -38,6 +42,15 @@ export default class ServiceLocator {
     const key = "warehouse_dao";
     if(!this.instances.get(key)){
       this.instances.set(key,new WarehouseDAO());
+    }
+    return this.instances.get(key);
+  }
+
+// categories
+  static get categoryDAO():CategoryDAO{
+    const key = "category_dao";
+    if(!this.instances.get(key)){
+      this.instances.set(key,new CategoryDAO());
     }
     return this.instances.get(key);
   }
@@ -117,8 +130,20 @@ export default class ServiceLocator {
     const key = "get_all_leaves";
     if(!this.instances.get(key)){
       this.instances.set(key, new GetAllLeavesService(this.leaveDAO));
+
+  static get addCategory(): AddCategoryService {
+    const key = "add_category_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new AddCategoryService(this.categoryDAO));
     }
     return this.instances.get(key);
   }
 
+  static get getAllCategories():GetAllCategoryService{
+    const key = "get_all_categories";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllCategoryService(this.categoryDAO));
+    }
+    return this.instances.get(key);
+  }
 }

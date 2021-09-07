@@ -11,6 +11,7 @@ const categorySchema = new mongoose.Schema(
         name: {
             type: String,
             trim: true,
+            unique:true,
         },
         archived: {
             type: Boolean,
