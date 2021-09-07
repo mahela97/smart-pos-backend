@@ -12,8 +12,6 @@ import AddShopService from "../services/salespersonServices/addShop/addShopServi
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
 import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveService";
 import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/getAllLeavesService";
-import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
-import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
 import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
 import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
 
@@ -130,6 +128,9 @@ export default class ServiceLocator {
     const key = "get_all_leaves";
     if(!this.instances.get(key)){
       this.instances.set(key, new GetAllLeavesService(this.leaveDAO));
+    }
+    return this.instances.get(key);
+  }
 
   static get addCategory(): AddCategoryService {
     const key = "add_category_service";
