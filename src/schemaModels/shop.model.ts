@@ -12,12 +12,15 @@ const shopSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
-        location:{
+        email:{
             type:String
         },
-        email:{type:String},
         telephone:{
             type:String
+        },
+        location: {
+            type: String,
+            trim: true,
         },
         longitude:{
             type:String
@@ -27,7 +30,8 @@ const shopSchema = new mongoose.Schema(
         },
         ownerName:{
             type:String
-        },address:{
+        },
+        address:{
             type:String
         },
         archived: {
