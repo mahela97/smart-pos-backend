@@ -4,8 +4,8 @@ interface LeaveModel{
     approved:boolean;
     from:string;
     to:string;
-    createdAt:string;
-    updatedAt:string;
+    createdAt?:string;
+    updatedAt?:string;
     archived:boolean;
 }
 
