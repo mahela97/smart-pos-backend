@@ -9,7 +9,7 @@ export interface LeaveDocument extends LeaveModel, Document{
 const leaveSchema = new mongoose.Schema(
     {
         userId: {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
           ref:DBUtil.USER
         },
         description:{
