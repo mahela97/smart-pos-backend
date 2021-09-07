@@ -3,6 +3,7 @@ import WarehouseDAO from "../dao/warehouseDAO";
 import ShopDAO from "../dao/shopDAO";
 import LeaveDAO from "../dao/leaveDAO";
 import CategoryDAO from "../dao/categoryDAO";
+import ProductDAO from "../dao/productDAO";
 
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
@@ -14,6 +15,8 @@ import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveSe
 import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/getAllLeavesService";
 import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
 import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
+import AddProductService from "../services/managerServices/addProduct/addProductService";
+import GetAllProductService from "../services/managerServices/getAllProducts/getAllProductService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -49,6 +52,15 @@ export default class ServiceLocator {
     const key = "category_dao";
     if(!this.instances.get(key)){
       this.instances.set(key,new CategoryDAO());
+    }
+    return this.instances.get(key);
+  }
+
+// product
+  static get productDAO():ProductDAO{
+    const key = "product_dao";
+    if(!this.instances.get(key)){
+      this.instances.set(key,new ProductDAO());
     }
     return this.instances.get(key);
   }
@@ -144,6 +156,22 @@ export default class ServiceLocator {
     const key = "get_all_categories";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetAllCategoryService(this.categoryDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get addProduct(): AddProductService {
+    const key = "add_product_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new AddProductService(this.productDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllProduct():GetAllProductService{
+    const key = "get_all_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllProductService(this.productDAO));
     }
     return this.instances.get(key);
   }
