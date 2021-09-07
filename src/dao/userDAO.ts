@@ -1,6 +1,9 @@
+import mongodb = require("mongodb");
 import UserModel from "../models/userModel";
 import User, { UserDocument } from "../schemaModels/user.model";
 import Dao from "../interfaces/dao";
+
+const { ObjectID } = mongodb;
 
 export default class UserDAO extends Dao {
   constructor() {
@@ -9,6 +12,16 @@ export default class UserDAO extends Dao {
 
   public async add(userData: UserModel): Promise<UserDocument> {
     return super.add(userData);
+  }
+
+  public async assignWarehouse(
+    warehouseId: string,
+    managerId: string
+  ): Promise<void> {
+    console.log(warehouseId, managerId);
+    await this.model.findByIdAndUpdate(new ObjectID(managerId), {
+      warehouseId,
+    });
   }
 
   public async addUser(
@@ -25,5 +38,4 @@ export default class UserDAO extends Dao {
     const user = await this.model.findOne({ uid, tenantId });
     return user;
   }
-
 }

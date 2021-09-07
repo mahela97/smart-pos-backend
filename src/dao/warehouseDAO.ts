@@ -1,23 +1,37 @@
+import mongodb = require("mongodb");
 import Warehouse from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 
+const { ObjectID } = mongodb;
+
 export default class WarehouseDAO extends Dao {
-    constructor() {
-        super(Warehouse);
-    }
+  constructor() {
+    super(Warehouse);
+  }
 
-    public async getAll(filterData: Record<string, any>): Promise<Record<string,any>> {
-        const queryHelper = new QueryHelper(
-            filterData.query,
-            ["name"],
-            ["managerId", "salesPersonId"],
-            filterData.sortBy,
-            filterData.filter,
-            filterData.page,
-            filterData.limit
-        );
+  public async getAll(
+    filterData: Record<string, any>
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["name"],
+      ["managerId", "salesPersonId"],
+      filterData.sortBy,
+      filterData.filter,
+      filterData.page,
+      filterData.limit
+    );
 
-        return queryHelper.generate(Warehouse);
-    }
+    return queryHelper.generate(Warehouse);
+  }
+
+  public async assignManager(
+    managerId: string,
+    warehouseId: string
+  ): Promise<void> {
+    await this.model.findByIdAndUpdate(new ObjectID(warehouseId), {
+      managerId,
+    });
+  }
 }
