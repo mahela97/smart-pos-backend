@@ -12,8 +12,6 @@ export default class AddLeaveHandler{
             approved: Joi.boolean().required(),
             from: Joi.string().required(),
             to: Joi.string().required(),
-            createdAt: Joi.string(),
-            updateAt: Joi.string(),
             archived: Joi.boolean().default(false)
         });
 
