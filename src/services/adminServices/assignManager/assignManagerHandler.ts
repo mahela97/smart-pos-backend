@@ -20,12 +20,14 @@ export default class AssignManagerHandler {
       res.status(401).send(validation.error.message);
       return;
     }
-    const warehouseId = pathValidation.value;
-    const managerId = validation.value;
+    const warehouseId = pathValidation.value.id;
+    const { managerId } = validation.value;
     const service = ServiceLocator.assignManager;
     try {
       await service.assignManager(warehouseId, managerId);
+      res.status(201).send({ success: 1 });
     } catch (error) {
+      console.log(error);
       const errorRs = errorResponse(error);
       res.status(errorRs.code).send(errorRs.message);
     }

@@ -7,5 +7,8 @@ export default class AssignManagerService {
     protected userDao: UserDAO
   ) {}
 
-  async assignManager(data: Record<string, string>): Promise<void> {}
+  async assignManager(warehouseId: string, managerId: string): Promise<void> {
+    await this.userDao.assignWarehouse(warehouseId, managerId);
+    await this.warehouseDao.assignManager(managerId, warehouseId);
+  }
 }
