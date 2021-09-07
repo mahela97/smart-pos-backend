@@ -1,4 +1,4 @@
-import { Router } from "express";
+import {Router} from "express";
 import AddWarehouseHandler from "../../services/adminServices/addWarehouse/addWarehouseHandler";
 import GetAllWarehouseHandler from "../../services/adminServices/getAllWarehouses/getAllWarehouseHandler";
 
@@ -9,5 +9,6 @@ adminRouter
     .post(AddWarehouseHandler.addWarehouse);
 
 adminRouter.route("/warehouse").get(GetAllWarehouseHandler.getAllWarehouse);
+adminRouter.route("/warehouse/:id").patch();
 
 export default adminRouter;
