@@ -6,8 +6,13 @@ import {errorResponse} from "../../../utill/responses";
 
 export default class AddProductHandler {
     public static async addProduct(req: Request, res: Response): Promise<void> {
+
         const schema = Joi.object({
             name: Joi.string().required(),
+            categoryId: Joi.string().required(),
+            unitPrice: Joi.number().required(),
+            description: Joi.string(),
+            photo: Joi.string().required(),
             archived: Joi.boolean().default(false)
         });
 
@@ -19,9 +24,11 @@ export default class AddProductHandler {
         const productService = ServiceLocator.addProduct;
         const data: ProductModel = validation.value;
         try {
+            console.log("error");
             const result = await productService.addProduct(data);
             res.status(201).send({id: result});
         } catch (error) {
+            console.log("error");
             const errorRes = errorResponse(error);
             res.status(errorRes.code).send(errorRes.response);
         }

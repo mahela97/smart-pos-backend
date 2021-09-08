@@ -5,6 +5,12 @@ import AddProductHandler from "../../services/managerServices/addProduct/addProd
 import GetAllProductHandler from "../../services/managerServices/getAllProducts/getAllProductHandler";
 
 const managerRouter = Router();
+// product
+managerRouter
+    .route("/product")
+    .post(AddProductHandler.addProduct);
+
+managerRouter.route("/product").get(GetAllProductHandler.getAllProduct);
 
 // category
 managerRouter
@@ -12,14 +18,6 @@ managerRouter
     .post(AddCategoryHandler.addCategory);
 
 managerRouter.route("/category").get(GetAllCategoryHandler.getAllCategory);
-
-// product
-console.log("gg");
-managerRouter
-    .route("/products")
-    .post(AddProductHandler.addProduct);
-
-managerRouter.route("/product").get(GetAllProductHandler.getAllProduct);
 
 
 export default managerRouter;

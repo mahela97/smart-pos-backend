@@ -5,6 +5,7 @@ import ServiceLocator from "../../../utill/serviceLocator";
 
 export default class GetAllCategoryHandler{
     public static async getAllCategory(req:Request,res:Response):Promise<void>{
+        console.log('awaaa');
         const schema = Joi.object({
             query: Joi.string().allow("").default(""),
             sortBy: Joi.string().required(),

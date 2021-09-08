@@ -25,13 +25,13 @@ const productSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        photo:{
+            type:String
+        },
         archived: {
             type: Boolean,
             default: false,
             index: true,
-        },
-        photo:{
-            type:String
         }
     }
 );
