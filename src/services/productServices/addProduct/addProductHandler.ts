@@ -12,7 +12,6 @@ export default class AddProductHandler {
             categoryId: Joi.string().required(),
             unitPrice: Joi.number().required(),
             description: Joi.string(),
-            photo: Joi.string().required(),
             archived: Joi.boolean().default(false)
         });
 
