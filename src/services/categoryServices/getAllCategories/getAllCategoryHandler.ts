@@ -5,12 +5,11 @@ import ServiceLocator from "../../../utill/serviceLocator";
 
 export default class GetAllCategoryHandler{
     public static async getAllCategory(req:Request,res:Response):Promise<void>{
-        console.log('awaaa');
         const schema = Joi.object({
             query: Joi.string().allow("").default(""),
             sortBy: Joi.string().required(),
             page: Joi.number().default(1),
-            limit: Joi.number().default(10),
+            limit: Joi.number().default(100),
             filter: Joi.string().allow("").default(""),
         });
 

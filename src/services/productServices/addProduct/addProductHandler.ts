@@ -24,11 +24,9 @@ export default class AddProductHandler {
         const productService = ServiceLocator.addProduct;
         const data: ProductModel = validation.value;
         try {
-            console.log("error");
             const result = await productService.addProduct(data);
             res.status(201).send({id: result});
         } catch (error) {
-            console.log("error");
             const errorRes = errorResponse(error);
             res.status(errorRes.code).send(errorRes.response);
         }

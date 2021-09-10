@@ -11,7 +11,7 @@ export default class ProductDAO extends Dao {
         const queryHelper = new QueryHelper(
             filterData.query,
             ["name"],
-            [],
+            ["categoryId"],
             filterData.sortBy,
             filterData.filter,
             filterData.page,

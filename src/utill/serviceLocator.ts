@@ -13,10 +13,10 @@ import AddShopService from "../services/salespersonServices/addShop/addShopServi
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
 import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveService";
 import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/getAllLeavesService";
-import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
-import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
-import AddProductService from "../services/managerServices/addProduct/addProductService";
-import GetAllProductService from "../services/managerServices/getAllProducts/getAllProductService";
+import AddCategoryService from "../services/categoryServices/addCategory/addCaregoryService";
+import GetAllCategoryService from "../services/categoryServices/getAllCategories/getAllCategoryServices";
+import AddProductService from "../services/productServices/addProduct/addProductService";
+import GetAllProductService from "../services/productServices/getAllProducts/getAllProductService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
