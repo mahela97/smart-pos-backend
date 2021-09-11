@@ -1,5 +1,5 @@
 import mongodb = require("mongodb");
-import Warehouse from "../schemaModels/warehouse.model";
+import Warehouse, { WarehouseDocument } from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 
@@ -24,6 +24,13 @@ export default class WarehouseDAO extends Dao {
     );
 
     return queryHelper.generate(Warehouse);
+  }
+
+  public async getOneWarehouse(id: string): Promise<WarehouseDocument> {
+    return this.model
+      .findById(id)
+      .populate("managerId")
+      .populate("salespersonId");
   }
 
   public async assignManager(

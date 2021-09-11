@@ -5,7 +5,7 @@ export default class GetOneWarehouseService {
   constructor(protected warehouseDao: WarehouseDAO) {}
 
   async getWarehouse(id: string): Promise<WarehouseDocument> {
-    const result = this.warehouseDao.findOne(id);
+    const result = this.warehouseDao.getOneWarehouse(id);
     return result;
   }
 }
