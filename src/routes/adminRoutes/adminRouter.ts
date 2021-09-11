@@ -1,13 +1,10 @@
 import { Router } from "express";
-import AddWarehouseHandler from "../../services/adminServices/addWarehouse/addWarehouseHandler";
-import GetAllWarehouseHandler from "../../services/adminServices/getAllWarehouses/getAllWarehouseHandler";
-import AssignManagerHandler from "../../services/adminServices/assignManager/assignManagerHandler";
+import warehouseRouter from "./warehouseRouter";
+import managerRouter from "./managerRouter";
 
 const adminRouter = Router();
 
-adminRouter.route("/warehouse").post(AddWarehouseHandler.addWarehouse);
-
-adminRouter.route("/warehouse").get(GetAllWarehouseHandler.getAllWarehouse);
-adminRouter.route("/warehouse/:id").patch(AssignManagerHandler.assignManager);
+adminRouter.use("/warehouse", warehouseRouter);
+adminRouter.use("/managers", managerRouter);
 
 export default adminRouter;
