@@ -32,8 +32,14 @@ export default abstract class Dao {
     return limit > 0 ? items.skip(skip - 1).limit(limit) : items.skip(0);
   }
 
-  async findOne(ref: string): Promise<any> {
-    return this.model.findById(ref);
+  async findOne(ref: string, pop?: string[]): Promise<any> {
+    if (pop) {
+      const query = this.model.findById(ref);
+      pop.forEach((p) => query.populate(p));
+      console.log(query);
+      const res = await query.exec();
+      console.log(res);
+    }
   }
 
   async findIdByuid(uid: string): Promise<string> {

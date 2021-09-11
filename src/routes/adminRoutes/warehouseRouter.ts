@@ -11,5 +11,6 @@ warehouseRouter.route("/").post(AddWarehouseHandler.addWarehouse);
 warehouseRouter.route("/").get(GetAllWarehouseHandler.getAllWarehouse);
 warehouseRouter.route("/:id").patch(AssignManagerHandler.assignManager);
 warehouseRouter.route("/:id").get(GetOneWarehouseHandler.getWarehouse);
+warehouseRouter.route("/:id/").get();
 
 export default warehouseRouter;

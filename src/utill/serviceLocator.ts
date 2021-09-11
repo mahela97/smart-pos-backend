@@ -12,6 +12,9 @@ import GetAllShopsService from "../services/salespersonServices/getAllShops/getA
 import AddLeaveService from "../services/salespersonServices/addLeave/addLeaveService";
 import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/getAllLeavesService";
 import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
+import GetOneManagerService from "../services/adminServices/getOneManager/getOneManagerService";
+import GetAllManagerService from "../services/adminServices/getAllmanagers/getAllManagerService";
+// import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -127,4 +130,27 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+  static get getOneManager(): GetOneManagerService {
+    const key = "get_one_manager";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetOneManagerService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllManagers(): GetAllManagerService {
+    const key = "get_all_managers";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllManagerService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  // static get getWarehouseSales(): GetWarehouseSalesService {
+  //   const key = "get_warehouse_sales";
+  //   if (!this.instances.get(key)) {
+  //     this.instances.set(key, new GetWarehouseSalesService());
+  //   }
+  // }
 }
