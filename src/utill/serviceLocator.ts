@@ -14,6 +14,7 @@ import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/ge
 import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
 import GetOneManagerService from "../services/adminServices/getOneManager/getOneManagerService";
 import GetAllManagerService from "../services/adminServices/getAllmanagers/getAllManagerService";
+import UserRoleService from "../services/userServices/getUserRole/userRoleService";
 // import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 
 export default class ServiceLocator {
@@ -143,6 +144,14 @@ export default class ServiceLocator {
     const key = "get_all_managers";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetAllManagerService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getUserRole(): UserRoleService {
+    const key = "get_user_role";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new UserRoleService(this.userDAO));
     }
     return this.instances.get(key);
   }

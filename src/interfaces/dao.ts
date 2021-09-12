@@ -42,9 +42,9 @@ export default abstract class Dao {
     }
   }
 
-  async findIdByuid(uid: string): Promise<string> {
+  async findRoleByuid(uid: string): Promise<string> {
     const user: UserDocument = await this.model.findOne({ uid });
-    return user._id;
+    return user.role;
   }
 
   async delete(ref: string): Promise<any> {
