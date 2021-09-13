@@ -1,5 +1,5 @@
-import Product from "../schemaModels/product.model";
 import Dao from "../interfaces/dao";
+import Product, {ProductDocument} from "../schemaModels/product.model";
 import QueryHelper from "../utill/QueryHelper";
 
 export default class ProductDAO extends Dao {
@@ -7,7 +7,7 @@ export default class ProductDAO extends Dao {
         super(Product);
     }
 
-    public async getAll(filterData: Record<string, any>): Promise<Record<string,any>> {
+    public async getAll(filterData: Record<string, any>): Promise<Record<string, any>> {
         const queryHelper = new QueryHelper(
             filterData.query,
             ["name"],
@@ -19,5 +19,11 @@ export default class ProductDAO extends Dao {
         );
 
         return queryHelper.generate(Product);
+    }
+
+    public async getOneProduct(id: string): Promise<ProductDocument> {
+        return this.model
+            .findById(id)
+            .populate("categoryId");
     }
 }
