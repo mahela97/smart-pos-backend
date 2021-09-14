@@ -4,7 +4,6 @@ interface OrderModel{
     products:ProductObjectModel[];
     shop:string;
     salesperson:string;
-    timestamp:string;
     totalPrice:number;
     archived:boolean;
     receivedPrice:number;
