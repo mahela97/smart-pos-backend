@@ -3,38 +3,39 @@ import {Document} from "mongoose";
 import DBUtil from "../utill/dBUtil";
 import OrderModel from "../models/orderModel";
 
-
 export interface OrderDocument extends OrderModel, Document {
 }
 
 const orderSchema = new mongoose.Schema(
     {
-
-        variantId: [{
-            variant: {type: mongoose.Types.ObjectId, ref: DBUtil.VARIANT}, quantity: {
-                type: Number
-            }
-        }],
-        lastName: {
-            type: String,
-            trim: true,
-        },
-        email: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        role: {
-            type: String,
-            trim: true,
-        },
-        warehouseId: {
+        products: [
+            {
+                product: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: DBUtil.PRODUCT
+                },
+                quantity: {
+                    type: Number,
+                },
+            },
+        ],
+        shop: {
             type: mongoose.Schema.Types.ObjectId,
-            trim: true,
-            ref: DBUtil.WAREHOUSE
+            ref: DBUtil.SHOP,
+            required: true
         },
-        isPaid: {
-            type: Boolean,
+        salesperson: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: DBUtil.USER,
+            required: true
+        },
+        totalPrice: {
+            type: Number,
+            required: true,
+        },
+        receivedPrice: {
+            type: Number,
+            required: true,
         },
         archived: {
             type: Boolean,

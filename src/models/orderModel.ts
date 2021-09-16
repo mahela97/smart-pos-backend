@@ -1,13 +1,11 @@
 import ProductObjectModel from "./productObjectModel";
 
 interface OrderModel{
-    variantId:ProductObjectModel[];
-    shopId:string;
-    salespersonId:string;
-    timestamp:string;
+    products:ProductObjectModel[];
+    shop:string;
+    salesperson:string;
     totalPrice:number;
     archived:boolean;
-    isPaid:boolean;
     receivedPrice:number;
 }
 
