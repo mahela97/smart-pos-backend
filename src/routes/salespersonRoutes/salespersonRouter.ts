@@ -4,6 +4,7 @@ import GetAllShopsHandler from "../../services/salespersonServices/getAllShops/g
 import AddLeaveHandler from "../../services/salespersonServices/addLeave/addLeaveHandler";
 import GetAllLeavesHandler from "../../services/salespersonServices/getAllLeaves/getAllLeavesHandler";
 import GetOneShopHandler from "../../services/salespersonServices/getOneShop/getOneShopHandler";
+import AddOrderHandler from "../../services/salespersonServices/addOrder/addOrderHandler";
 
 const salespersonRouter = Router();
 
@@ -13,9 +14,12 @@ salespersonRouter.route("/shop").get(GetAllShopsHandler.getAllShops);
 salespersonRouter.route("/shop/:id").get(GetOneShopHandler.getOneShop);
 
 // Leave
-console.log("gg");
 salespersonRouter.route("/leave").post(AddLeaveHandler.addLeave);
 salespersonRouter.route("/leave").get(GetAllLeavesHandler.getAllLeaves);
+
+// Order
+salespersonRouter.route("/order").post(AddOrderHandler.addOrder);
+
 
 
 
