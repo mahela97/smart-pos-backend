@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema(
   {
     products: [
       {
-        variant: { type: mongoose.Types.ObjectId, ref: DBUtil.VARIANT },
+        variant: { type: mongoose.Types.ObjectId, ref: DBUtil.PRODUCT },
         quantity: {
           type: Number,
         },
