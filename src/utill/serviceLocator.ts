@@ -2,6 +2,7 @@ import UserDAO from "../dao/userDAO";
 import WarehouseDAO from "../dao/warehouseDAO";
 import ShopDAO from "../dao/shopDAO";
 import LeaveDAO from "../dao/leaveDAO";
+import OrderDAO from "../dao/orderDAO";
 import CategoryDAO from "../dao/categoryDAO";
 
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
@@ -15,6 +16,7 @@ import GetAllLeavesService from "../services/salespersonServices/getAllLeaves/ge
 import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
 import GetOneManagerService from "../services/adminServices/getOneManager/getOneManagerService";
 import GetAllManagerService from "../services/adminServices/getAllmanagers/getAllManagerService";
+import AddOrderService from "../services/salespersonServices/addOrder/addOrderService";
 // import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
 import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
@@ -105,6 +107,17 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  // Order
+  static get orderDAO(): OrderDAO {
+    const key = "order_dao";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new OrderDAO());
+    }
+    return this.instances.get(key);
+  }
+
+
+
   static get addShop(): AddShopService {
     const key = "add_shop_service";
     if (!this.instances.get(key)) {
@@ -141,6 +154,18 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+  static get addOrder(): AddOrderService {
+    const key = "add_order_service";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new AddOrderService(this.orderDAO));
+    }
+    return this.instances.get(key);
+  }
+
+
+  // ##############################################################################################################
+
 
   static get getOneWarehouse(): GetOneWarehouseService {
     const key = "get_one_warehouse";
