@@ -19,6 +19,9 @@ import AddOrderService from "../services/salespersonServices/addOrder/addOrderSe
 import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
 import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
 import GetOneShopService from "../services/salespersonServices/getOneShop/getoneShopService";
+import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
+import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
+import GetOrdersOfOneShopService from "../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -138,6 +141,14 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getOrdersOfOneShop(): GetOrdersOfOneShopService {
+    const key = "get_orders_of_one_shop";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new GetOrdersOfOneShopService((this.orderDAO)));
+    }
+    return this.instances.get(key);
+  }
+
 
   static get addLeave(): AddLeaveService {
     const key = "add_leave_service";
@@ -155,7 +166,9 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
-  }
+
+
+
 
   static get addCategory(): AddCategoryService {
     const key = "add_category_service";

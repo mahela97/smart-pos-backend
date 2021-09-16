@@ -5,7 +5,7 @@ export default class GetOneShopService{
     constructor(protected shopDao: ShopDAO) {}
 
     async getOneShop(id: string): Promise<ShopDocument>{
-        const result = await this.shopDao.getOneshop(id);
+        const result = await this.shopDao.getOneShop(id);
         return result;
     }
 }

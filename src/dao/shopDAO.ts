@@ -20,7 +20,7 @@ export default class ShopDAO extends Dao {
         return queryHelper.generate(Shop);
     }
 
-    public async getOneshop(id: string): Promise<ShopDocument> {
+    public async getOneShop(id: string): Promise<ShopDocument> {
         return this.model.findOne({_id: id, archived: false});
     }
 
