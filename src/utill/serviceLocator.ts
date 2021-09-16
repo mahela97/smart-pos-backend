@@ -6,8 +6,6 @@ import OrderDAO from "../dao/orderDAO";
 import CategoryDAO from "../dao/categoryDAO";
 
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
-import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
-import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
 import AssignManagerService from "../services/adminServices/assignManager/assignManagerService";
 import AddShopService from "../services/salespersonServices/addShop/addShopService";
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
@@ -20,6 +18,10 @@ import AddOrderService from "../services/salespersonServices/addOrder/addOrderSe
 // import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 import AddCategoryService from "../services/managerServices/addCategory/addCaregoryService";
 import GetAllCategoryService from "../services/managerServices/getAllCategories/getAllCategoryServices";
+import GetOneShopService from "../services/salespersonServices/getOneShop/getoneShopService";
+import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
+import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
+import GetOrdersOfOneShopService from "../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -50,11 +52,11 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
-  // categories
-  static get categoryDAO(): CategoryDAO {
+// categories
+  static get categoryDAO():CategoryDAO{
     const key = "category_dao";
-    if (!this.instances.get(key)) {
-      this.instances.set(key, new CategoryDAO());
+    if(!this.instances.get(key)){
+      this.instances.set(key,new CategoryDAO());
     }
     return this.instances.get(key);
   }
@@ -79,12 +81,13 @@ export default class ServiceLocator {
     const key = "assign_manager_warehouse";
     if (!this.instances.get(key)) {
       this.instances.set(
-        key,
-        new AssignManagerService(this.warehouseDAO, this.userDAO)
+          key,
+          new AssignManagerService(this.warehouseDAO, this.userDAO)
       );
     }
     return this.instances.get(key);
   }
+
   // ###########################################################################################################
 
   // Shop
@@ -130,6 +133,23 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getOneShop(): GetOneShopService {
+    const key = "get_one_shop";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetOneShopService(this.shopDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getOrdersOfOneShop(): GetOrdersOfOneShopService {
+    const key = "get_orders_of_one_shop";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new GetOrdersOfOneShopService((this.orderDAO)));
+    }
+    return this.instances.get(key);
+  }
+
+
   static get addLeave(): AddLeaveService {
     const key = "add_leave_service";
     if (!this.instances.get(key)) {
@@ -145,6 +165,10 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+
+
+
 
   static get addCategory(): AddCategoryService {
     const key = "add_category_service";
@@ -203,3 +227,4 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 }
+
