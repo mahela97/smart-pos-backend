@@ -9,39 +9,27 @@ const productSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
+    unique: true,
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     trim: true,
     ref: DBUtil.CATEGORIES,
   },
-  variant1: {
-    type: String,
-    trim: true,
-  },
-  variant2: {
-    type: String,
-    trim: true,
-  },
-  variant1Options: {
-    type: [String],
-    ref: DBUtil.USER,
-  },
-  variant2Options: {
-    type: [String],
-    ref: DBUtil.USER,
+  unitPrice: {
+    type: Number,
   },
   description: {
     type: String,
     trim: true,
   },
+  photo: {
+    type: String,
+  },
   archived: {
     type: Boolean,
     default: false,
     index: true,
-  },
-  photo: {
-    type: String,
   },
 });
 

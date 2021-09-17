@@ -9,4 +9,3 @@ export default class AddLeaveService {
     return result._id;
   }
 }
-

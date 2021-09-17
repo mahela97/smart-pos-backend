@@ -9,4 +9,3 @@ export default class AddOrderService {
     return result._id;
   }
 }
-

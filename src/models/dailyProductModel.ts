@@ -2,7 +2,7 @@ import ProductObjectModel from "./productObjectModel";
 
 interface DailyProductModel {
   dailyProducts: ProductObjectModel[];
-  salesperson: string;
+  salespersonId: string;
 }
 
 export default DailyProductModel;

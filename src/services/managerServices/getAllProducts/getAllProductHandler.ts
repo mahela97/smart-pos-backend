@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 import { errorResponse } from "../../../utill/responses";
 import ServiceLocator from "../../../utill/serviceLocator";
 
-export default class GetAllCategoryHandler {
-  public static async getAllCategory(
+export default class GetAllProductHandler {
+  public static async getAllProduct(
     req: Request,
     res: Response
   ): Promise<void> {
@@ -12,7 +12,7 @@ export default class GetAllCategoryHandler {
       query: Joi.string().allow("").default(""),
       sortBy: Joi.string().required(),
       page: Joi.number().default(1),
-      limit: Joi.number().default(100),
+      limit: Joi.number().default(10),
       filter: Joi.string().allow("").default(""),
     });
 
@@ -22,9 +22,9 @@ export default class GetAllCategoryHandler {
       return;
     }
     const data = validation.value;
-    const service = ServiceLocator.getAllCategories;
+    const service = ServiceLocator.getAllProduct;
     try {
-      const result = await service.getAllCategories(data);
+      const result = await service.getAllProducts(data);
       res.status(201).send({
         totalItems: result.total,
         items: result.items,

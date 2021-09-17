@@ -1,13 +1,11 @@
 import { Router } from "express";
-import AddCategoryHandler from "../../services/managerServices/addCategory/addCategoryHandler";
-import GetAllCategoryHandler from "../../services/managerServices/getAllCategories/getAllCategoryHandler";
-import AddDailyProductsHandler from "../../services/managerServices/addDailyProducts/addDailyProductsHandler";
+import productRouter from "./productRouter";
+import categoryRouter from "./categoryRouter";
 
 const managerRouter = Router();
 
-managerRouter.route("/category").post(AddCategoryHandler.addCategory);
-
-managerRouter.route("/category").get(GetAllCategoryHandler.getAllCategory);
+managerRouter.use("/product", productRouter);
+managerRouter.use("/category", categoryRouter);
 
 managerRouter
   .route("/dailyProducts")
