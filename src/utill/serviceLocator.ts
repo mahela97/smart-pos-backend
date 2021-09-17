@@ -21,6 +21,7 @@ import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/ge
 import GetOneManagerService from "../services/adminServices/getOneManager/getOneManagerService";
 import GetAllManagerService from "../services/adminServices/getAllmanagers/getAllManagerService";
 import GetOneProductService from "../services/managerServices/getOneProduct/getOneProductService";
+import UpdateProductService from "../services/managerServices/updateProduct/updateProductService";
 // import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 
 export default class ServiceLocator {
@@ -208,6 +209,14 @@ export default class ServiceLocator {
     const key = "get_one_product";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetOneProductService(this.productDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get updateProduct(): UpdateProductService {
+    const key = "update_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new UpdateProductService(this.productDAO));
     }
     return this.instances.get(key);
   }
