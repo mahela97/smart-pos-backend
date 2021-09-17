@@ -18,6 +18,4 @@ salespersonRouter.route("/leave").get(GetAllLeavesHandler.getAllLeaves);
 // Order
 salespersonRouter.route("/order").post(AddOrderHandler.addOrder);
 
-
-
 export default salespersonRouter;

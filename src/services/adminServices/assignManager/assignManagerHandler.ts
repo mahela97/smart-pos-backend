@@ -1,4 +1,4 @@
-import { Response, Request } from "express";
+import { Request, Response } from "express";
 import Joi from "joi";
 import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
