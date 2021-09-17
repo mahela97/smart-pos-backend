@@ -7,7 +7,6 @@ import CategoryDAO from "../dao/categoryDAO";
 import ProductDAO from "../dao/productDAO";
 import RegisterUserService from "../services/userServices/registerUser/registerUserService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
-import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
 import AssignManagerService from "../services/adminServices/assignManager/assignManagerService";
 import AddShopService from "../services/salespersonServices/addShop/addShopService";
 import GetAllShopsService from "../services/salespersonServices/getAllShops/getAllShopsService";
@@ -22,6 +21,8 @@ import GetAllManagerService from "../services/adminServices/getAllmanagers/getAl
 import GetOneProductService from "../services/managerServices/getOneProduct/getOneProductService";
 import UpdateProductService from "../services/managerServices/updateProduct/updateProductService";
 import AddOrderService from "../services/salespersonServices/addOrder/addOrderService";
+import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
+import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
 // import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 
 export default class ServiceLocator {
@@ -80,7 +81,7 @@ export default class ServiceLocator {
   }
 
   static get getAllWarehouses(): GetAllWarehouseService {
-    const key = "get_all_warehouses";
+    const key = "get_one_warehouses";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetAllWarehouseService(this.warehouseDAO));
     }
@@ -104,6 +105,14 @@ export default class ServiceLocator {
     const key = "shop_dao";
     if (!this.instances.get(key)) {
       this.instances.set(key, new ShopDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  static get getOneWarehouse(): GetOneWarehouseService {
+    const key = "get_one_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetOneWarehouseService(this.warehouseDAO));
     }
     return this.instances.get(key);
   }
