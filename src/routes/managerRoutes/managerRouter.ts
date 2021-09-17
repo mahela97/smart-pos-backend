@@ -1,6 +1,7 @@
 import { Router } from "express";
 import productRouter from "./productRouter";
 import categoryRouter from "./categoryRouter";
+import AddDailyProductsHandler from "../../services/managerServices/addDailyProducts/addDailyProductsHandler";
 
 const managerRouter = Router();
 
