@@ -2,13 +2,19 @@ import { Request, Response } from "express";
 import Joi from "joi";
 import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
+import ProductModel from "../../../models/productModel";
 
-export default class AssignManagerHandler {
-  public static async assignManager(
+export default class UpdateProductHandler {
+  public static async updateProduct(
     req: Request,
     res: Response
   ): Promise<void> {
-    const schema = Joi.object({ managerId: Joi.string().required() });
+    const schema = Joi.object({
+      name: Joi.string().required(),
+      unitPrice: Joi.number().required(),
+      description: Joi.string(),
+      photo: Joi.string(),
+    });
     const validation = schema.validate(req.body);
     const pathSchema = Joi.object({ id: Joi.string().required() });
     const pathValidation = pathSchema.validate(req.params);
@@ -20,11 +26,11 @@ export default class AssignManagerHandler {
       res.status(401).send(validation.error.message);
       return;
     }
-    const warehouseId = pathValidation.value.id;
-    const { managerId } = validation.value;
-    const service = ServiceLocator.assignManager;
+    const productId = pathValidation.value.id;
+    const productDetails: Partial<ProductModel> = validation.value;
+    const service = ServiceLocator.updateProduct;
     try {
-      await service.assignManager(warehouseId, managerId);
+      await service.updateProduct(productId, productDetails);
       res.status(201).send({ success: 1 });
     } catch (error) {
       console.log(error);

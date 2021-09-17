@@ -22,6 +22,4 @@ salespersonRouter.route("/leave").get(GetAllLeavesHandler.getAllLeaves);
 salespersonRouter.route("/order").post(AddOrderHandler.addOrder);
 salespersonRouter.route("/ordersOfOneShop/:id").get(GetOrdersOfOneShopHandler.getOrderOfShop);
 
-
-
 export default salespersonRouter;

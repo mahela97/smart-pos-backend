@@ -4,7 +4,6 @@ import * as dotenv from "dotenv";
 
 import apiRouter from "./routes/api-routers/api-router";
 
-
 dotenv.config();
 
 const app = express();

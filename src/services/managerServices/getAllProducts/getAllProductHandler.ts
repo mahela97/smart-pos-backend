@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 import { errorResponse } from "../../../utill/responses";
 import ServiceLocator from "../../../utill/serviceLocator";
 
-export default class GetAllWarehouseHandler {
-  public static async getAllWarehouse(
+export default class GetAllProductHandler {
+  public static async getAllProduct(
     req: Request,
     res: Response
   ): Promise<void> {
@@ -22,9 +22,9 @@ export default class GetAllWarehouseHandler {
       return;
     }
     const data = validation.value;
-    const service = ServiceLocator.getAllWarehouses;
+    const service = ServiceLocator.getAllProduct;
     try {
-      const result = await service.getAllWarehouses(data);
+      const result = await service.getAllProducts(data);
       res.status(201).send({
         totalItems: result.total,
         items: result.items,
