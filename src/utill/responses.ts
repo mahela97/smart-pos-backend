@@ -20,23 +20,11 @@ export const errorResponse = (error: any): ErrorResponse => {
   } else if (error instanceof SystemError) {
     errResponse = error.error;
   } else if (error.code === 11000) {
-    errResponse = ErrorResponse.voidError(
-      ID_EXISTS,
-      409,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(ID_EXISTS, 409, error.toString());
   } else if (error.message === USER_VALIDATION_FAILED) {
-    errResponse = ErrorResponse.voidError(
-      error.message,
-      422,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(error.message, 422, error.toString());
   } else if (error.message === VALIDATION_FAILED) {
-    errResponse = ErrorResponse.voidError(
-      error.message,
-      422,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(error.message, 422, error.toString());
   } else if (error.kind === "ObjectId") {
     errResponse = ErrorResponse.voidError(
       INVALID_UID,
@@ -44,23 +32,11 @@ export const errorResponse = (error: any): ErrorResponse => {
       error.reason.toString()
     );
   } else if (error.message === INSUFFICIENT_QUANTITY) {
-    errResponse = ErrorResponse.voidError(
-      error.message,
-      400,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(error.message, 400, error.toString());
   } else if (error.message === ARCHIVED_ITEM) {
-    errResponse = ErrorResponse.voidError(
-      error.message,
-      400,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(error.message, 400, error.toString());
   } else if (error.message === NO_USER) {
-    errResponse = ErrorResponse.voidError(
-      error.message,
-      400,
-      error.toString()
-    );
+    errResponse = ErrorResponse.voidError(error.message, 400, error.toString());
   } else {
     console.log(error.message);
     errResponse = ErrorResponse.voidError("Error", 422, error.toString());

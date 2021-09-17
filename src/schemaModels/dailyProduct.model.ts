@@ -1,29 +1,34 @@
 import * as mongoose from "mongoose";
-import {Document} from "mongoose";
+import { Document } from "mongoose";
 import DBUtil from "../utill/dBUtil";
 import DailyProductModel from "../models/dailyProductModel";
 
-export interface DailyProductDocument extends DailyProductModel, Document{
-}
+export interface DailyProductDocument extends DailyProductModel, Document {}
 
 const dailyProductSchema = new mongoose.Schema(
-    {
-        dailyProducts: [{
-            variant: {type: mongoose.Types.ObjectId, ref: DBUtil.VARIANT}, quantity: {
-                type: Number
-            }
-        }],
-        salespersonId:{
-            type:mongoose.Types.ObjectId,
-            ref:DBUtil.DAILYPRODUCT
+  {
+    dailyProducts: [
+      {
+        product: { type: mongoose.Schema.Types.ObjectId, ref: DBUtil.PRODUCT },
+        quantity: {
+          type: Number,
         },
-        archived: {
-            type: Boolean,
-            default: false,
-            index: true,
-        },
-    },{timestamps:true}
+      },
+    ],
+    salesperson: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: DBUtil.DAILYPRODUCT,
+    },
+    archived: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+  },
+  { timestamps: true }
 );
 
-
-export default mongoose.model<DailyProductDocument>(DBUtil.DAILYPRODUCT, dailyProductSchema);
+export default mongoose.model<DailyProductDocument>(
+  DBUtil.DAILYPRODUCT,
+  dailyProductSchema
+);

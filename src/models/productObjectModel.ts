@@ -1,6 +1,6 @@
-interface ProductObjectModel{
-    variant:string;
-    quantity:number
+interface ProductObjectModel {
+  variant: string;
+  quantity: number;
 }
 
 export default ProductObjectModel;
