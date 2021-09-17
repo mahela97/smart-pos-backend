@@ -1,6 +1,6 @@
-interface CategoryModel{
-    name:string;
-    archived:boolean;
+interface CategoryModel {
+  name: string;
+  archived: boolean;
 }
 
 export default CategoryModel;

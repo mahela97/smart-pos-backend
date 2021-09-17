@@ -3,8 +3,8 @@ import Joi from "joi";
 import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
 
-export default class GetOrdersOfOneShopHandler {
-  public static async getOrderOfShop(
+export default class GetDailyProductsHandler {
+  public static async getDailyProducts(
     req: Request,
     res: Response
   ): Promise<void> {
@@ -14,14 +14,13 @@ export default class GetOrdersOfOneShopHandler {
       res.status(401).send({ message: validation.error.message });
       return;
     }
-
     const { id } = validation.value;
-    const service = ServiceLocator.getOrdersOfOneShop;
+    const service = ServiceLocator.getDailyProducts;
     try {
-      const result = await service.getOrdersOfOneShop(id);
+      const result = await service.getDailyProductsOfOneSalesperson(id);
       res.status(201).send({ success: 1, result });
-    } catch (error) {
-      const errRes = errorResponse(error);
+    } catch (e) {
+      const errRes = errorResponse(e);
       res.status(errRes.code).send(errRes.message);
     }
   }

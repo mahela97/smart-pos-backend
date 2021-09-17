@@ -3,8 +3,6 @@ import RegisterUserHandler from "../../services/userServices/registerUser/regist
 
 const userRouter = Router();
 
-userRouter
-    .route("/register")
-    .post(RegisterUserHandler.registerUser);
+userRouter.route("/register").post(RegisterUserHandler.registerUser);
 
 export default userRouter;
