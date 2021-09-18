@@ -1,7 +1,7 @@
 interface LeaveModel {
   userId: string;
   description: string;
-  approved: boolean;
+  approved: string;
   from: string;
   to: string;
   createdAt?: string;

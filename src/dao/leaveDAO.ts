@@ -1,6 +1,10 @@
+import mongodb = require("mongodb");
 import Leave from "../schemaModels/leave.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
+import LeaveModel from "../models/leaveModel";
+
+const { ObjectID } = mongodb;
 
 export default class LeaveDAO extends Dao {
   constructor() {
@@ -12,7 +16,7 @@ export default class LeaveDAO extends Dao {
   ): Promise<Record<string, any>> {
     const queryHelper = new QueryHelper(
       filterData.query,
-      ["description"],
+      ["approved"],
       ["userId"],
       filterData.sortBy,
       filterData.filter,
@@ -21,5 +25,12 @@ export default class LeaveDAO extends Dao {
     );
 
     return queryHelper.generate(Leave);
+  }
+
+  public async updateLeave(
+    productId: string,
+    productDetails: Partial<LeaveModel>
+  ): Promise<void> {
+    await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
   }
 }
