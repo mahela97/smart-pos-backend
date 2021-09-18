@@ -1,7 +1,10 @@
 interface ProductModel {
   name: string;
   categoryId: string;
-  unitPrice: number;
+  variant1: string;
+  variant2: string;
+  variant1Option: string[];
+  variant2Option: string[];
   description: string;
   photo: string;
   archived: boolean;
