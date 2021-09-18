@@ -26,6 +26,8 @@ import AddWarehouseService from "../services/adminServices/addWarehouse/addWareh
 import GetOrdersOfOneShopService from "../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopService";
 import ShopDAO from "../dao/shopDAO";
 import OrderDAO from "../dao/orderDAO";
+import GetLeavesService from "../services/managerServices/getLeaves/getLeavesServices";
+import UpdateLeaveService from "../services/managerServices/updateLeave/updateLeavesServices";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -254,6 +256,22 @@ export default class ServiceLocator {
     const key = "update_product";
     if (!this.instances.get(key)) {
       this.instances.set(key, new UpdateProductService(this.productDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getLeaves(): GetLeavesService {
+    const key = "get_leaves";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetLeavesService(this.leaveDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get updateLeave(): UpdateLeaveService {
+    const key = "update_leave";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new UpdateLeaveService(this.leaveDAO));
     }
     return this.instances.get(key);
   }
