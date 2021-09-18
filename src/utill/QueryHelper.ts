@@ -4,6 +4,7 @@ interface QueryHelperResult<T> {
   total: number;
   items: T[];
 }
+
 export default class QueryHelper<T extends Document> {
   constructor(
     private query: string,

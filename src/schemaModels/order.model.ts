@@ -9,14 +9,24 @@ const orderSchema = new mongoose.Schema(
   {
     products: [
       {
-        variant: { type: mongoose.Types.ObjectId, ref: DBUtil.VARIANT },
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: DBUtil.PRODUCT,
+        },
         quantity: {
           type: Number,
         },
       },
     ],
     shop: {
-      type: { type: mongoose.Types.ObjectId, ref: DBUtil.SHOP },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: DBUtil.SHOP,
+      required: true,
+    },
+    salesperson: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: DBUtil.USER,
+      required: true,
     },
     totalPrice: {
       type: Number,

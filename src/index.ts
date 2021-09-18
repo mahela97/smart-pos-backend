@@ -4,7 +4,6 @@ import * as dotenv from "dotenv";
 
 import apiRouter from "./routes/api-routers/api-router";
 
-
 dotenv.config();
 
 const app = express();
@@ -25,4 +24,3 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   console.log("Press Ctrl+C to quit.");
 });
-

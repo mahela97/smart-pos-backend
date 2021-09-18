@@ -6,6 +6,7 @@ export class InvalidInput extends SystemError {
     super("Input data is invalid");
     Object.setPrototypeOf(this, InvalidInput.prototype);
   }
+
   get error(): ErrorResponse {
     return ErrorResponse.invalidInputData(this.desc);
   }

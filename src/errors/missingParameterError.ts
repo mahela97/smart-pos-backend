@@ -6,6 +6,7 @@ export class MissingParameter extends SystemError {
     super(`Some required parameters are Missing`);
     Object.setPrototypeOf(this, MissingParameter.prototype);
   }
+
   get error(): ErrorResponse {
     return ErrorResponse.paramTypeError(this.desc);
   }
