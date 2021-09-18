@@ -41,6 +41,22 @@ export default class UserDAO extends Dao {
     return queryHelper.generate(User);
   }
 
+  public async getAllSalespersons(
+    filterData: Record<string, any>
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["firstName"],
+      ["warehouseId"],
+      filterData.sortBy,
+      filterData.filter,
+      filterData.page,
+      filterData.limit
+    );
+
+    return queryHelper.generate(User);
+  }
+
   public async addUser(
     userData: UserModel,
     session: any
