@@ -1,11 +1,11 @@
 import ShopDAO from "../../../dao/shopDAO";
-import {ShopDocument} from "../../../schemaModels/shop.model";
+import { ShopDocument } from "../../../schemaModels/shop.model";
 
-export default class GetOneShopService{
-    constructor(protected shopDao: ShopDAO) {}
+export default class GetOneShopService {
+  constructor(protected shopDao: ShopDAO) {}
 
-    async getOneShop(id: string): Promise<ShopDocument>{
-        const result = await this.shopDao.getOneShop(id);
-        return result;
-    }
+  async getOneShop(id: string): Promise<ShopDocument> {
+    const result = await this.shopDao.getOneShop(id);
+    return result;
+  }
 }

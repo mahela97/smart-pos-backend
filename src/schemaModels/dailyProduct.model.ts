@@ -17,7 +17,7 @@ const dailyProductSchema = new mongoose.Schema(
     ],
     salesperson: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: DBUtil.DAILYPRODUCT,
+      ref: DBUtil.USER,
     },
     archived: {
       type: Boolean,

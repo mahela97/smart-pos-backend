@@ -9,4 +9,8 @@ managerRouter.use("/product", productRouter);
 managerRouter.use("/category", categoryRouter);
 managerRouter.use("/leaves", leavesRouter);
 
+managerRouter
+  .route("/dailyProducts")
+  .post(AddDailyProductsHandler.addDailyProducts);
+
 export default managerRouter;

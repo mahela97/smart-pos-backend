@@ -28,6 +28,9 @@ import ShopDAO from "../dao/shopDAO";
 import OrderDAO from "../dao/orderDAO";
 import GetLeavesService from "../services/managerServices/getLeaves/getLeavesServices";
 import UpdateLeaveService from "../services/managerServices/updateLeave/updateLeavesServices";
+import DailyProductsDAO from "../dao/dailyProductsDAO";
+import AddDailyProductsService from "../services/managerServices/addDailyProducts/addDailyProductsService";
+import GetDailyProductsService from "../services/salespersonServices/getDailyProducts/getDailyProductsService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -136,6 +139,37 @@ export default class ServiceLocator {
     const key = "order_dao";
     if (!this.instances.get(key)) {
       this.instances.set(key, new OrderDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  // Daily Product
+  static get dailyProductsDAO(): DailyProductsDAO {
+    const key = "daily_products";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new DailyProductsDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  static get addDailyProducts(): AddDailyProductsService {
+    const key = "add_dailyProducts_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new AddDailyProductsService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getDailyProducts(): GetDailyProductsService {
+    const key = "get_dailyProducts_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetDailyProductsService(this.dailyProductsDAO)
+      );
     }
     return this.instances.get(key);
   }
