@@ -31,6 +31,7 @@ import UpdateLeaveService from "../services/managerServices/updateLeave/updateLe
 import DailyProductsDAO from "../dao/dailyProductsDAO";
 import AddDailyProductsService from "../services/managerServices/addDailyProducts/addDailyProductsService";
 import GetDailyProductsService from "../services/salespersonServices/getDailyProducts/getDailyProductsService";
+import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
 import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
 
 export default class ServiceLocator {
@@ -171,6 +172,14 @@ export default class ServiceLocator {
         key,
         new GetDailyProductsService(this.dailyProductsDAO)
       );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getUnassignedManagers(): GetAllUnassignedManagerService {
+    const key = "get_unassigned_manager_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllUnassignedManagerService(this.userDAO));
     }
     return this.instances.get(key);
   }

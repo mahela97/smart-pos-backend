@@ -15,6 +15,15 @@ export default class UserDAO extends Dao {
     return super.add(userData);
   }
 
+  public async getAllUnassignedManagers(): Promise<UserDocument[]> {
+    const result = await this.model.find({
+      role: "manager",
+      warehouseId: { $exists: false },
+      archived: false,
+    });
+    return result;
+  }
+
   public async assignWarehouse(
     warehouseId: string,
     managerId: string
@@ -28,6 +37,7 @@ export default class UserDAO extends Dao {
   public async getAllManagers(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
+    console.log(filterData);
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],
