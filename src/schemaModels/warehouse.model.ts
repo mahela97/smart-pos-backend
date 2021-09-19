@@ -6,17 +6,12 @@ import WarehouseModel from "../models/warehouseModel";
 export interface WarehouseDocument extends WarehouseModel, Document {}
 
 const wareHouseSchema = new mongoose.Schema({
-  location: {
-    type: String,
-    trim: true,
-  },
   telephone: {
     type: String,
     trim: true,
   },
   name: {
     type: String,
-    trim: true,
   },
   salesPersonId: {
     type: [mongoose.Schema.Types.ObjectId],
@@ -29,6 +24,12 @@ const wareHouseSchema = new mongoose.Schema({
   managerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: DBUtil.USER,
+  },
+  district: {
+    type: String,
+  },
+  town: {
+    type: String,
   },
   archived: {
     type: Boolean,

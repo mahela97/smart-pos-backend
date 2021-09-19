@@ -9,7 +9,7 @@ export default class AddLeaveHandler {
     const schema = Joi.object({
       userId: Joi.string().required(),
       description: Joi.string().required(),
-      approved: Joi.boolean().required(),
+      approved: Joi.string().required(),
       from: Joi.string().required(),
       to: Joi.string().required(),
       archived: Joi.boolean().default(false),

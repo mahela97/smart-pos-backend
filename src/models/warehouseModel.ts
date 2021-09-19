@@ -1,5 +1,6 @@
 interface WarehouseModel {
-  location: string;
+  district: string;
+  town: string;
   telephone: string;
   name: string;
   salesPersonId?: string[];
