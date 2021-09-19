@@ -7,7 +7,8 @@ import { errorResponse } from "../../../utill/responses";
 export default class AddWarehouseHandler {
   public static async addWarehouse(req: Request, res: Response): Promise<void> {
     const schema = Joi.object({
-      location: Joi.string().required(),
+      district: Joi.string().required(),
+      town: Joi.string().required(),
       telephone: Joi.string().required(),
       name: Joi.string().required(),
       salesPersonId: Joi.array().items(Joi.string().allow("")).min(0),
