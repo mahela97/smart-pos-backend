@@ -19,7 +19,10 @@ const wareHouseSchema = new mongoose.Schema({
   },
   products: [
     {
-      product: { type: mongoose.Schema.Types.ObjectId, ref: DBUtil.PRODUCT },
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: DBUtil.PRODUCT,
+      },
       quantity: {
         type: Number,
       },

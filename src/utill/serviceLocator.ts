@@ -34,6 +34,11 @@ import GetDailyProductsService from "../services/salespersonServices/getDailyPro
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
 import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
 import GetOneSalespersonService from "../services/managerServices/getOneSalesperson/getOneSalespersonService";
+import GetAllWarehouseProductsService
+  from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
+import AddWarehouseProductService from "../services/managerServices/addWarehouseProduct/addWarehouseProductService";
+import UpdateWarehouseProductService
+  from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -333,6 +338,30 @@ export default class ServiceLocator {
     const key = "get_one_salesperson";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetOneSalespersonService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllWarehouseProducts(): GetAllWarehouseProductsService {
+    const key = "get_all_warehouse_products";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllWarehouseProductsService(this.warehouseDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get addWarehouseProduct(): AddWarehouseProductService {
+    const key = "add_product_to_warehouse";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new AddWarehouseProductService(this.warehouseDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get updateWarehouseProduct(): UpdateWarehouseProductService {
+    const key = "update_warehouse_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new UpdateWarehouseProductService(this.warehouseDAO));
     }
     return this.instances.get(key);
   }
