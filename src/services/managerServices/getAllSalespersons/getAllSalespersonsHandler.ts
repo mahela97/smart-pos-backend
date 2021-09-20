@@ -10,11 +10,16 @@ export default class GetAllSalespersonsHandler {
       sortBy: Joi.string().required(),
       page: Joi.number().default(1),
       limit: Joi.number().default(10),
-      filter: Joi.string()
-        .allow("")
-        .default("role eq salesperson,archived eq false"),
+      filter: Joi.string().allow(""),
     });
 
+    const pathSchema = Joi.object({ id: Joi.string().required() });
+    const pathValidation = pathSchema.validate(req.params);
+    if (pathValidation.error) {
+      res.status(401).send(pathValidation.error);
+      return;
+    }
+    const { id } = pathValidation.value;
     const validation = schema.validate(req.query);
     if (validation.error) {
       res.status(401).send({ message: validation.error.message });
@@ -23,7 +28,7 @@ export default class GetAllSalespersonsHandler {
     const data = validation.value;
     const service = ServiceLocator.getAllSalespersons;
     try {
-      const result = await service.getAllSalespersons(data);
+      const result = await service.getAllSalespersons(id, data);
       res.status(201).send({
         totalItems: result.total,
         items: result.items,

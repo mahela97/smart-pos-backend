@@ -33,6 +33,7 @@ import AddDailyProductsService from "../services/managerServices/addDailyProduct
 import GetDailyProductsService from "../services/salespersonServices/getDailyProducts/getDailyProductsService";
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
 import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
+import GetOneSalespersonService from "../services/managerServices/getOneSalesperson/getOneSalespersonService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -321,9 +322,17 @@ export default class ServiceLocator {
   }
 
   static get getAllSalespersons(): GetAllSalespersonsService {
-    const key = "get_all_managers";
+    const key = "get_all_salespersons";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetAllSalespersonsService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getOneSalesperson(): GetOneSalespersonService {
+    const key = "get_one_salesperson";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetOneSalespersonService(this.userDAO));
     }
     return this.instances.get(key);
   }

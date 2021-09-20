@@ -17,12 +17,14 @@ const wareHouseSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: DBUtil.USER,
   },
-  products: {
-    product: { type: mongoose.Schema.Types.ObjectId, ref: DBUtil.PRODUCT },
-    quantity: {
-      type: Number,
+  products: [
+    {
+      product: { type: mongoose.Schema.Types.ObjectId, ref: DBUtil.PRODUCT },
+      quantity: {
+        type: Number,
+      },
     },
-  },
+  ],
   managerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: DBUtil.USER,
