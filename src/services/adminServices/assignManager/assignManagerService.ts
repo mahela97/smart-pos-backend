@@ -9,6 +9,10 @@ export default class AssignManagerService {
 
   async assignManager(warehouseId: string, managerId: string): Promise<void> {
     await this.userDao.assignWarehouse(warehouseId, managerId);
-    await this.warehouseDao.assignManager(managerId, warehouseId);
+    const result = await this.warehouseDao.assignManager(
+      managerId,
+      warehouseId
+    );
+    console.log(result);
   }
 }

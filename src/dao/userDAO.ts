@@ -15,6 +15,15 @@ export default class UserDAO extends Dao {
     return super.add(userData);
   }
 
+  public async getAllUnassignedManagers(): Promise<UserDocument[]> {
+    const result = await this.model.find({
+      role: "manager",
+      warehouseId: { $exists: false },
+      archived: false,
+    });
+    return result;
+  }
+
   public async assignWarehouse(
     warehouseId: string,
     managerId: string
@@ -28,12 +37,30 @@ export default class UserDAO extends Dao {
   public async getAllManagers(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
+    console.log(filterData);
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],
       ["warehouseId"],
       filterData.sortBy,
       filterData.filter,
+      filterData.page,
+      filterData.limit
+    );
+
+    return queryHelper.generate(User);
+  }
+
+  public async getAllSalespersons(
+    id: string,
+    filterData: Record<string, any>
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["firstName"],
+      [""],
+      filterData.sortBy,
+      `role eq salesperson,archived eq false,warehouseId eq ${id}`,
       filterData.page,
       filterData.limit
     );
@@ -52,5 +79,13 @@ export default class UserDAO extends Dao {
     return this.model
       .findOne({ _id: id, role: "manager", archived: false })
       .populate("warehouseId");
+  }
+
+  public async getOneSalesperson(id: string): Promise<UserDocument> {
+    return this.model.findOne({
+      _id: id,
+      role: "salesperson",
+      archived: false,
+    });
   }
 }

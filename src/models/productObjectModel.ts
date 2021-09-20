@@ -1,5 +1,5 @@
 interface ProductObjectModel {
-  variant: string;
+  product: string;
   quantity: number;
 }
 
