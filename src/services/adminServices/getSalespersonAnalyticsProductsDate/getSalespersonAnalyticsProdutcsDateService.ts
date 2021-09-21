@@ -15,7 +15,6 @@ export default class GetSalespersonAnalyticsProductsDateService {
       startDate,
       endDate
     );
-    console.log(result, "gg");
     const products: Record<string, string | number>[] = [];
     if (result) {
       result.dailyProducts.forEach((salesProduct: SalesProductObjectModel) => {

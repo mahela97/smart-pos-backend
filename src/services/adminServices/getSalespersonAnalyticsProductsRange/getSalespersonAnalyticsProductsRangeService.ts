@@ -11,7 +11,6 @@ export default class GetSalespersonAnalyticsProductsRangeService {
     startDate: moment.Moment,
     endDate: moment.Moment
   ): Promise<{ [p: string]: any }> {
-    console.log("hh geeg");
     const result = await this.dailyProductsDao.getSalesByDateAnalytics(
       id,
       startDate,
