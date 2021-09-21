@@ -20,7 +20,6 @@ import UpdateProductService from "../services/managerServices/updateProduct/upda
 import AddOrderService from "../services/salespersonServices/addOrder/addOrderService";
 import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
 import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
-// import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 import GetOneShopService from "../services/salespersonServices/getOneShop/getoneShopService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
 import GetOrdersOfOneShopService from "../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopService";
@@ -32,6 +31,11 @@ import DailyProductsDAO from "../dao/dailyProductsDAO";
 import AddDailyProductsService from "../services/managerServices/addDailyProducts/addDailyProductsService";
 import GetDailyProductsService from "../services/salespersonServices/getDailyProducts/getDailyProductsService";
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
+import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
+import GetOneSalespersonService from "../services/managerServices/getOneSalesperson/getOneSalespersonService";
+import GetAllWarehouseProductsService from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
+import AddWarehouseProductService from "../services/managerServices/addWarehouseProduct/addWarehouseProductService";
+import UpdateWarehouseProductService from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
 import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
 
 export default class ServiceLocator {
@@ -334,6 +338,54 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getAllSalespersons(): GetAllSalespersonsService {
+    const key = "get_all_salespersons";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllSalespersonsService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getOneSalesperson(): GetOneSalespersonService {
+    const key = "get_one_salesperson";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetOneSalespersonService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllWarehouseProducts(): GetAllWarehouseProductsService {
+    const key = "get_all_warehouse_products";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetAllWarehouseProductsService(this.warehouseDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get addWarehouseProduct(): AddWarehouseProductService {
+    const key = "add_product_to_warehouse";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new AddWarehouseProductService(this.warehouseDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get updateWarehouseProduct(): UpdateWarehouseProductService {
+    const key = "update_warehouse_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new UpdateWarehouseProductService(this.warehouseDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
   // static get getWarehouseSales(): GetWarehouseSalesService {
   //   const key = "get_warehouse_sales";
   //   if (!this.instances.get(key)) {
