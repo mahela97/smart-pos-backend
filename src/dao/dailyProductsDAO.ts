@@ -9,6 +9,36 @@ export default class DailyProductsDAO extends Dao {
     super(DailyProduct);
   }
 
+  public async getSalesByDateAnalytics(
+    id: string,
+    start: moment.Moment,
+    end: moment.Moment
+  ): Promise<DailyProductDocument[]> {
+    const result = await this.model
+      .find({
+        salesperson: id,
+        createdAt: { $gte: start, $lt: end },
+      })
+      .populate("dailyProducts.product")
+      .select(["createdAt", "dailyProducts"]);
+    return result;
+  }
+
+  public async getSalesByDateAnalyticsDate(
+    id: string,
+    start: moment.Moment,
+    end: moment.Moment
+  ): Promise<DailyProductDocument> {
+    const result = await this.model
+      .findOne({
+        salesperson: id,
+        createdAt: { $gte: start, $lt: end },
+      })
+      .populate("dailyProducts.product")
+      .select(["createdAt", "dailyProducts"]);
+    return result;
+  }
+
   public async getDailyProductsOfOneSalesperson(
     id: string
   ): Promise<DailyProductDocument[]> {
