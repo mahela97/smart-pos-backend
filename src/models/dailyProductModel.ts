@@ -1,7 +1,7 @@
-import ProductObjectModel from "./productObjectModel";
+import SalesProductObjectModel from "./salesProductObjectModel";
 
 interface DailyProductModel {
-  dailyProducts: ProductObjectModel[];
+  dailyProducts: SalesProductObjectModel[];
   salespersonId: string;
 }
 
