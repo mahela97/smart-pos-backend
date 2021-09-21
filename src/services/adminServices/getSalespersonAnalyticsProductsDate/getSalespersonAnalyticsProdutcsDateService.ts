@@ -1,9 +1,8 @@
 import moment from "moment";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
-import { DailyProductDocument } from "../../../schemaModels/dailyProduct.model";
 import SalesProductObjectModel from "../../../models/salesProductObjectModel";
 
-export default class GetSalespersonAnalyticsProductsRangeService {
+export default class GetSalespersonAnalyticsProductsDateService {
   constructor(private dailyProductsDao: DailyProductsDAO) {}
 
   async getAnalyticsSalesSalesperson(
@@ -16,19 +15,12 @@ export default class GetSalespersonAnalyticsProductsRangeService {
       startDate,
       endDate
     );
-    console.log(result);
-    const salesByDate: Map<string, any> = new Map<string, any>();
-    result.forEach((dailyProduct: DailyProductDocument) => {
-      const date = `${moment(dailyProduct.createdAt).year()}-${moment(
-        dailyProduct.createdAt
-      ).month()}-${moment(dailyProduct.createdAt).date()}`;
-      if (!salesByDate.get(date)) {
-        salesByDate.set(date, []);
-      }
-      dailyProduct.dailyProducts.forEach(
+    const products: Record<string, string | number>[] = [];
+    if (result[0]) {
+      result[0].dailyProducts.forEach(
         (salesProduct: SalesProductObjectModel) => {
           const { quantity, sales } = salesProduct;
-          salesByDate.get(date).push({
+          products.push({
             name: salesProduct.product.name,
             unitPrice: salesProduct.product.unitPrice,
             photo: salesProduct.product.photo,
@@ -37,8 +29,7 @@ export default class GetSalespersonAnalyticsProductsRangeService {
           });
         }
       );
-    });
-    const salesProductQuantity = Object.fromEntries(salesByDate);
-    return salesProductQuantity;
+    }
+    return products;
   }
 }

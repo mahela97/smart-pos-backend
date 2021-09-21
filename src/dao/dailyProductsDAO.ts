@@ -11,8 +11,8 @@ export default class DailyProductsDAO extends Dao {
 
   public async getSalesByDateAnalytics(
     id: string,
-    start: Date,
-    end: Date
+    start: moment.Moment,
+    end: moment.Moment
   ): Promise<DailyProductDocument[]> {
     const result = await this.model
       .find({

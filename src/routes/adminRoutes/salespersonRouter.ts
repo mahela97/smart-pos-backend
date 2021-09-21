@@ -4,6 +4,7 @@ import GetOneSalespersonHandler from "../../services/managerServices/getOneSales
 import GetSalespersonAnalyticsHandler from "../../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsSalesHandler";
 import GetSalespersonAnalyticsProductsRangeHandler from "../../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeHandler";
 import GetSalespersonAnalyticsSalesRangeHandler from "../../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeHandler";
+import GetSalespersonAnalyticsProdutcsDateHandler from "../../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateHandler";
 
 const salespersonRouter = Router();
 

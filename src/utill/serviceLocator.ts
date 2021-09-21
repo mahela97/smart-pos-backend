@@ -40,6 +40,8 @@ import GetAllSalespersonsServiceAdmin from "../services/adminServices/getAllSale
 import GetSalespersonAnalyticsSalesService from "../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsSalesService";
 import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
 import GetSalespersonAnalyticsProductsRangeService from "../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeService";
+import GetSalespersonAnalyticsSalesRangeService from "../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeService";
+import GetSalespersonAnalyticsProductsDateService from "../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
