@@ -4,7 +4,7 @@ import moment from "moment";
 import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
 
-export default class GetSalespersonAnalyticsProdutcsDateHandler {
+export default class GetSalespersonAnalyticsSalesDateHandler {
   public static async getAnalytics(req: Request, res: Response): Promise<void> {
     const querySchema = Joi.object({
       date: Joi.date().required(),
@@ -24,14 +24,14 @@ export default class GetSalespersonAnalyticsProdutcsDateHandler {
     const startDate = moment(date).subtract(1, "day").startOf("day");
     const endDate = moment(date).subtract(1, "day").endOf("day");
     const { id } = validation.value;
-    const service = ServiceLocator.getSalespersonAnalyticsProductsDateService;
+    const service = ServiceLocator.getSalespersonAnalyticsSalesDateService;
     try {
       const result = await service.getAnalyticsSalesSalesperson(
         id,
         startDate,
         endDate
       );
-      res.status(201).send({ products: result });
+      res.status(201).send({ sales: result });
     } catch (error) {
       const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.message);

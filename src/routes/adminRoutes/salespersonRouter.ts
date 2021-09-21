@@ -5,16 +5,13 @@ import GetSalespersonAnalyticsHandler from "../../services/adminServices/getSale
 import GetSalespersonAnalyticsProductsRangeHandler from "../../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeHandler";
 import GetSalespersonAnalyticsSalesRangeHandler from "../../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeHandler";
 import GetSalespersonAnalyticsProdutcsDateHandler from "../../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateHandler";
+import GetSalespersonAnalyticsSalesDateHandler from "../../services/adminServices/getSalespersonAnalyticsSalesDate/getSalespersonAnalyticsSalesDateHandler";
 
 const salespersonRouter = Router();
 
 salespersonRouter
   .route("/")
   .get(GetAllSalespersonsHandlerAdmin.getAllSalespersons);
-salespersonRouter.route("/:id").get(GetOneSalespersonHandler.getOneSalesperson);
-salespersonRouter
-  .route("/:id/analytics")
-  .get(GetSalespersonAnalyticsHandler.getAnalytics);
 
 salespersonRouter
   .route("/:id/analytics/products/range")
@@ -31,5 +28,9 @@ salespersonRouter
 salespersonRouter
   .route("/:id/analytics/sales/date")
   .get(GetSalespersonAnalyticsSalesDateHandler.getAnalytics);
+salespersonRouter.route("/:id").get(GetOneSalespersonHandler.getOneSalesperson);
+salespersonRouter
+  .route("/:id/analytics")
+  .get(GetSalespersonAnalyticsHandler.getAnalytics);
 
 export default salespersonRouter;

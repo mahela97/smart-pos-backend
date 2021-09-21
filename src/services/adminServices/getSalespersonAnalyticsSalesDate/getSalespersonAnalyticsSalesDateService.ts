@@ -2,7 +2,7 @@ import moment from "moment";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
 import SalesProductObjectModel from "../../../models/salesProductObjectModel";
 
-export default class GetSalespersonAnalyticsProductsDateService {
+export default class GetSalespersonAnalyticsSalesDateService {
   constructor(private dailyProductsDao: DailyProductsDAO) {}
 
   async getAnalyticsSalesSalesperson(
@@ -15,20 +15,16 @@ export default class GetSalespersonAnalyticsProductsDateService {
       startDate,
       endDate
     );
-    console.log(result, "gg");
-    const products: Record<string, string | number>[] = [];
+    const totalSales = { totalIncome: 0, totalQuantity: 0, totalSales: 0 };
     if (result) {
       result.dailyProducts.forEach((salesProduct: SalesProductObjectModel) => {
-        const { quantity, sales } = salesProduct;
-        products.push({
-          name: salesProduct.product.name,
-          unitPrice: salesProduct.product.unitPrice,
-          photo: salesProduct.product.photo,
-          quantity,
-          sales,
-        });
+        const { sales, quantity } = salesProduct;
+        const income = sales * salesProduct.product.unitPrice;
+        totalSales.totalIncome += income;
+        totalSales.totalSales += sales;
+        totalSales.totalQuantity += quantity;
       });
     }
-    return products;
+    return totalSales;
   }
 }

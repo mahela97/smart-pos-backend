@@ -8,8 +8,8 @@ export default class GetSalespersonAnalyticsSalesRangeService {
 
   async getAnalyticsSalesSalesperson(
     id: string,
-    startDate: Date,
-    endDate: Date
+    startDate: moment.Moment,
+    endDate: moment.Moment
   ): Promise<{ [p: string]: any }> {
     const result = await this.dailyProductsDao.getSalesByDateAnalytics(
       id,

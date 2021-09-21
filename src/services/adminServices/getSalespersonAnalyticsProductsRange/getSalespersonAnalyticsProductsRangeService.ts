@@ -11,12 +11,12 @@ export default class GetSalespersonAnalyticsProductsRangeService {
     startDate: moment.Moment,
     endDate: moment.Moment
   ): Promise<{ [p: string]: any }> {
+    console.log("hh geeg");
     const result = await this.dailyProductsDao.getSalesByDateAnalytics(
       id,
       startDate,
       endDate
     );
-    console.log(result);
     const salesByDate: Map<string, any> = new Map<string, any>();
     result.forEach((dailyProduct: DailyProductDocument) => {
       const date = `${moment(dailyProduct.createdAt).year()}-${moment(

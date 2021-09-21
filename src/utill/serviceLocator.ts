@@ -42,6 +42,7 @@ import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices
 import GetSalespersonAnalyticsProductsRangeService from "../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeService";
 import GetSalespersonAnalyticsSalesRangeService from "../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeService";
 import GetSalespersonAnalyticsProductsDateService from "../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateService";
+import GetSalespersonAnalyticsSalesDateService from "../services/adminServices/getSalespersonAnalyticsSalesDate/getSalespersonAnalyticsSalesDateService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -97,7 +98,7 @@ export default class ServiceLocator {
     if (!this.instances.get(key)) {
       this.instances.set(
         key,
-        new GetSalespersonAnalyticsSalesService(this.dailyProductsDAO)
+        new GetSalespersonAnalyticsProductsRangeService(this.dailyProductsDAO)
       );
     }
     return this.instances.get(key);
