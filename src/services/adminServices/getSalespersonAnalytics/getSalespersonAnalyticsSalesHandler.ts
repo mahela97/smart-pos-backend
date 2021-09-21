@@ -4,11 +4,11 @@ import moment from "moment";
 import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
 
-export default class GetSalespersonAnalyticsHandler {
+export default class GetSalespersonAnalyticsSalesHandler {
   public static async getAnalytics(req: Request, res: Response): Promise<void> {
     const querySchema = Joi.object({
       startDate: Joi.date().default(
-        moment().subtract(1, "days").startOf("day")
+        moment().subtract(5, "days").startOf("day")
       ),
       endDate: Joi.date().default(moment().subtract(1, "days").endOf("day")),
     });
@@ -23,12 +23,16 @@ export default class GetSalespersonAnalyticsHandler {
       res.status(401).send({ message: validation.error.message });
       return;
     }
-    const dates = validate.value;
+    const { startDate, endDate } = validate.value;
     const { id } = validation.value;
     const service = ServiceLocator.getSalespersoAnalyticsService;
     try {
-      const result = await service.getAnalyticsSalesperson(id, dates);
-      res.status(201).send({ result });
+      const result = await service.getAnalyticsSalesSalesperson(
+        id,
+        startDate,
+        endDate
+      );
+      res.status(201).send(result);
     } catch (error) {
       const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.message);

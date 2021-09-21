@@ -1,5 +1,7 @@
+import ProductModel from "./productModel";
+
 interface SalesProductObjectModel {
-  product: string;
+  product: ProductModel;
   quantity: number;
   sales: number;
 }
