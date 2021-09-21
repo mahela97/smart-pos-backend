@@ -27,6 +27,23 @@ export default class LeaveDAO extends Dao {
     return queryHelper.generate(Leave);
   }
 
+  public async getAllFromOneSalesPerson(
+    filterData: Record<string, any>,
+    id: string
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["approved"],
+      [""],
+      filterData.sortBy,
+      `userId eq ${id}`,
+      filterData.page,
+      filterData.limit
+    );
+
+    return queryHelper.generate(Leave);
+  }
+
   public async updateLeave(
     productId: string,
     productDetails: Partial<LeaveModel>

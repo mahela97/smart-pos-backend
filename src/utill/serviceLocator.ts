@@ -32,6 +32,7 @@ import DailyProductsDAO from "../dao/dailyProductsDAO";
 import AddDailyProductsService from "../services/managerServices/addDailyProducts/addDailyProductsService";
 import GetDailyProductsService from "../services/salespersonServices/getDailyProducts/getDailyProductsService";
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
+import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -153,6 +154,17 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getAllOrdersOfOneSalesperson(): GetAllOrdersOfOneSalespersonService {
+    const key = "get_allOrders_fromOneSalesperson";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetAllOrdersOfOneSalespersonService(this.orderDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
   static get addDailyProducts(): AddDailyProductsService {
     const key = "add_dailyProducts_service";
     if (!this.instances.get(key)) {
@@ -242,7 +254,10 @@ export default class ServiceLocator {
   static get addOrder(): AddOrderService {
     const key = "add_order_service";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new AddOrderService(this.orderDAO));
+      this.instances.set(
+        key,
+        new AddOrderService(this.orderDAO, this.dailyProductsDAO)
+      );
     }
     return this.instances.get(key);
   }
