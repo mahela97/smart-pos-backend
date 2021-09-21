@@ -51,6 +51,23 @@ export default class UserDAO extends Dao {
     return queryHelper.generate(User);
   }
 
+  public async getAllSalespersons(
+    id: string,
+    filterData: Record<string, any>
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["firstName"],
+      [""],
+      filterData.sortBy,
+      `role eq salesperson,archived eq false,warehouseId eq ${id}`,
+      filterData.page,
+      filterData.limit
+    );
+
+    return queryHelper.generate(User);
+  }
+
   public async addUser(
     userData: UserModel,
     session: any
@@ -62,5 +79,13 @@ export default class UserDAO extends Dao {
     return this.model
       .findOne({ _id: id, role: "manager", archived: false })
       .populate("warehouseId");
+  }
+
+  public async getOneSalesperson(id: string): Promise<UserDocument> {
+    return this.model.findOne({
+      _id: id,
+      role: "salesperson",
+      archived: false,
+    });
   }
 }
