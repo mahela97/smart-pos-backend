@@ -13,6 +13,9 @@ const dailyProductSchema = new mongoose.Schema(
         quantity: {
           type: Number,
         },
+        sales: {
+          type: Number,
+        },
       },
     ],
     salesperson: {

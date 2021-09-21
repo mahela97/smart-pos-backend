@@ -4,7 +4,7 @@ import AddDailyProductsHandler from "../../services/managerServices/addDailyProd
 const dailyProductsRouter = Router();
 
 dailyProductsRouter
-  .route("/dailyProducts")
+  .route("/")
   .post(AddDailyProductsHandler.addDailyProducts);
 
 export default dailyProductsRouter;
