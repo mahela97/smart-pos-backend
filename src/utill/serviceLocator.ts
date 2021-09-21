@@ -34,11 +34,11 @@ import GetDailyProductsService from "../services/salespersonServices/getDailyPro
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
 import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
 import GetOneSalespersonService from "../services/managerServices/getOneSalesperson/getOneSalespersonService";
-import GetAllWarehouseProductsService
-  from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
+import GetAllWarehouseProductsService from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
 import AddWarehouseProductService from "../services/managerServices/addWarehouseProduct/addWarehouseProductService";
-import UpdateWarehouseProductService
-  from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
+import UpdateWarehouseProductService from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
+import GetAllSalespersonsServiceAdmin from "../services/adminServices/getAllSalespersons/getAllSalespersonsService";
+import GetSalespersonAnalyticsService from "../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -74,6 +74,17 @@ export default class ServiceLocator {
     const key = "category_dao";
     if (!this.instances.get(key)) {
       this.instances.set(key, new CategoryDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersoAnalyticsService(): GetSalespersonAnalyticsService {
+    const key = "Salesperson_analytic_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonAnalyticsService(this.dailyProductsDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -334,6 +345,14 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getAllSalespersonAdmin(): GetAllSalespersonsServiceAdmin {
+    const key = "get_all_salespersons_admin";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllSalespersonsServiceAdmin(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
   static get getOneSalesperson(): GetOneSalespersonService {
     const key = "get_one_salesperson";
     if (!this.instances.get(key)) {
@@ -345,7 +364,10 @@ export default class ServiceLocator {
   static get getAllWarehouseProducts(): GetAllWarehouseProductsService {
     const key = "get_all_warehouse_products";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new GetAllWarehouseProductsService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new GetAllWarehouseProductsService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -353,7 +375,10 @@ export default class ServiceLocator {
   static get addWarehouseProduct(): AddWarehouseProductService {
     const key = "add_product_to_warehouse";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new AddWarehouseProductService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new AddWarehouseProductService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -361,7 +386,10 @@ export default class ServiceLocator {
   static get updateWarehouseProduct(): UpdateWarehouseProductService {
     const key = "update_warehouse_product";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new UpdateWarehouseProductService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new UpdateWarehouseProductService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }

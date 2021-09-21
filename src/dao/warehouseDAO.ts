@@ -1,10 +1,10 @@
-// import mongodb = require("mongodb");
+import mongodb = require("mongodb");
 import Warehouse, { WarehouseDocument } from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 import ProductObjectModel from "../models/productObjectModel";
 
-// const { ObjectID } = mongodb;
+const { ObjectID } = mongodb;
 
 export default class WarehouseDAO extends Dao {
   constructor() {
