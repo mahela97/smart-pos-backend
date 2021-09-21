@@ -1,3 +1,4 @@
+import moment from "moment";
 import Dao from "../interfaces/dao";
 import DailyProduct, {
   DailyProductDocument,
@@ -11,8 +12,14 @@ export default class DailyProductsDAO extends Dao {
   public async getDailyProductsOfOneSalesperson(
     id: string
   ): Promise<DailyProductDocument[]> {
+    const startDate = moment().startOf("day");
+    const endTime = moment().endOf("day");
     return this.model
-      .find({ salesperson: id, archived: false })
+      .find({
+        salesperson: id,
+        archived: false,
+        createdAt: { $gte: startDate, $lt: endTime },
+      })
       .populate("dailyProducts.product");
   }
 }

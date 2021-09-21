@@ -20,7 +20,6 @@ import UpdateProductService from "../services/managerServices/updateProduct/upda
 import AddOrderService from "../services/salespersonServices/addOrder/addOrderService";
 import GetOneWarehouseService from "../services/adminServices/getOneWarehouse/getOneWarehouseService";
 import GetAllWarehouseService from "../services/adminServices/getAllWarehouses/getAllWarehouseService";
-// import GetWarehouseSalesService from "../services/adminServices/getWarehouseSales/getWarehouseSalesService";
 import GetOneShopService from "../services/salespersonServices/getOneShop/getoneShopService";
 import AddWarehouseService from "../services/adminServices/addWarehouse/addWarehouseService";
 import GetOrdersOfOneShopService from "../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopService";
@@ -34,11 +33,10 @@ import GetDailyProductsService from "../services/salespersonServices/getDailyPro
 import GetAllUnassignedManagerService from "../services/adminServices/getAllUnassignedManagers/getAllUnassignedManagerService";
 import GetAllSalespersonsService from "../services/managerServices/getAllSalespersons/getAllSalespersonsService";
 import GetOneSalespersonService from "../services/managerServices/getOneSalesperson/getOneSalespersonService";
-import GetAllWarehouseProductsService
-  from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
+import GetAllWarehouseProductsService from "../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsService";
 import AddWarehouseProductService from "../services/managerServices/addWarehouseProduct/addWarehouseProductService";
-import UpdateWarehouseProductService
-  from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
+import UpdateWarehouseProductService from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
+import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -160,6 +158,17 @@ export default class ServiceLocator {
     return this.instances.get(key);
   }
 
+  static get getAllOrdersOfOneSalesperson(): GetAllOrdersOfOneSalespersonService {
+    const key = "get_allOrders_fromOneSalesperson";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetAllOrdersOfOneSalespersonService(this.orderDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
   static get addDailyProducts(): AddDailyProductsService {
     const key = "add_dailyProducts_service";
     if (!this.instances.get(key)) {
@@ -249,7 +258,10 @@ export default class ServiceLocator {
   static get addOrder(): AddOrderService {
     const key = "add_order_service";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new AddOrderService(this.orderDAO));
+      this.instances.set(
+        key,
+        new AddOrderService(this.orderDAO, this.dailyProductsDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -345,7 +357,10 @@ export default class ServiceLocator {
   static get getAllWarehouseProducts(): GetAllWarehouseProductsService {
     const key = "get_all_warehouse_products";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new GetAllWarehouseProductsService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new GetAllWarehouseProductsService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -353,7 +368,10 @@ export default class ServiceLocator {
   static get addWarehouseProduct(): AddWarehouseProductService {
     const key = "add_product_to_warehouse";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new AddWarehouseProductService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new AddWarehouseProductService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }
@@ -361,7 +379,10 @@ export default class ServiceLocator {
   static get updateWarehouseProduct(): UpdateWarehouseProductService {
     const key = "update_warehouse_product";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new UpdateWarehouseProductService(this.warehouseDAO));
+      this.instances.set(
+        key,
+        new UpdateWarehouseProductService(this.warehouseDAO)
+      );
     }
     return this.instances.get(key);
   }
