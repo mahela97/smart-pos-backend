@@ -37,7 +37,6 @@ export default class UserDAO extends Dao {
   public async getAllManagers(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
-    console.log(filterData);
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],

@@ -1,9 +1,9 @@
-import mongodb = require("mongodb");
+// import mongodb = require("mongodb");
 import Warehouse, { WarehouseDocument } from "../schemaModels/warehouse.model";
 import Dao from "../interfaces/dao";
 import QueryHelper from "../utill/QueryHelper";
 
-const { ObjectID } = mongodb;
+// const { ObjectID } = mongodb;
 
 export default class WarehouseDAO extends Dao {
   constructor() {
@@ -30,15 +30,16 @@ export default class WarehouseDAO extends Dao {
     return this.model
       .findById(id)
       .populate("managerId")
-      .populate("salespersonId");
+      .populate(["salespersonId", "products.product"]);
   }
 
   public async assignManager(
     managerId: string,
     warehouseId: string
   ): Promise<void> {
-    await this.model.findByIdAndUpdate(new ObjectID(warehouseId), {
+    const result = await this.model.findByIdAndUpdate(warehouseId, {
       managerId,
     });
+    console.log(result);
   }
 }
