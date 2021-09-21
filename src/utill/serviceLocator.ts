@@ -39,6 +39,7 @@ import UpdateWarehouseProductService from "../services/managerServices/updateWar
 import GetAllSalespersonsServiceAdmin from "../services/adminServices/getAllSalespersons/getAllSalespersonsService";
 import GetSalespersonAnalyticsSalesService from "../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsSalesService";
 import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
+import GetSalespersonAnalyticsProductsRangeService from "../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -84,6 +85,50 @@ export default class ServiceLocator {
       this.instances.set(
         key,
         new GetSalespersonAnalyticsSalesService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonAnalyticsProductsRangeService(): GetSalespersonAnalyticsProductsRangeService {
+    const key = "Salesperson_analytic_service_products_range";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonAnalyticsSalesService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonAnalyticsSalesRangeService(): GetSalespersonAnalyticsSalesRangeService {
+    const key = "Salesperson_analytic_service_sales_range";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonAnalyticsSalesRangeService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonAnalyticsProductsDateService(): GetSalespersonAnalyticsProductsDateService {
+    const key = "Salesperson_analytic_service_products_date";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonAnalyticsProductsDateService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonAnalyticsSalesDateService(): GetSalespersonAnalyticsSalesDateService {
+    const key = "Salesperson_analytic_service_sales_date";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonAnalyticsSalesDateService(this.dailyProductsDAO)
       );
     }
     return this.instances.get(key);
