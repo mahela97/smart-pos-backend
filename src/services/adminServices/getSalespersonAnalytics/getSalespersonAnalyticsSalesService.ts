@@ -16,7 +16,6 @@ export default class GetSalespersonAnalyticsSalesService {
       startDate,
       endDate
     );
-    console.log(result);
     const salesByDate: Map<string, any> = new Map<string, any>();
     result.forEach((dailyProduct: DailyProductDocument) => {
       const date = `${moment(dailyProduct.createdAt).year()}-${moment(
