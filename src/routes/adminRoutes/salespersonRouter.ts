@@ -1,7 +1,6 @@
 import { Router } from "express";
 import GetAllSalespersonsHandlerAdmin from "../../services/adminServices/getAllSalespersons/getAllSalespersonsHandler";
 import GetOneSalespersonHandler from "../../services/managerServices/getOneSalesperson/getOneSalespersonHandler";
-import GetSalespersonAnalyticsHandler from "../../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsSalesHandler";
 import GetSalespersonAnalyticsProductsRangeHandler from "../../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeHandler";
 import GetSalespersonAnalyticsSalesRangeHandler from "../../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeHandler";
 import GetSalespersonAnalyticsProdutcsDateHandler from "../../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateHandler";
@@ -34,8 +33,5 @@ salespersonRouter
   .route("/:id/analytics/sales/date")
   .get(GetSalespersonAnalyticsSalesDateHandler.getAnalytics);
 salespersonRouter.route("/:id").get(GetOneSalespersonHandler.getOneSalesperson);
-salespersonRouter
-  .route("/:id/analytics")
-  .get(GetSalespersonAnalyticsHandler.getAnalytics);
 
 export default salespersonRouter;

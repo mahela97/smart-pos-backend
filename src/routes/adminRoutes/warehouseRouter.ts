@@ -15,5 +15,6 @@ warehouseRouter.route("/:id").get(GetOneWarehouseHandler.getWarehouse);
 warehouseRouter
   .route("/:id/analytics")
   .get(GetOneWarehouseAnalyticsHandler.getAnalytics);
+warehouseRouter.route("/analytics").get();
 
 export default warehouseRouter;
