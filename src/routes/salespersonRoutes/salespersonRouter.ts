@@ -8,6 +8,7 @@ import AddOrderHandler from "../../services/salespersonServices/addOrder/addOrde
 import GetOrdersOfOneShopHandler from "../../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopHandler";
 import GetDailyProductsHandler from "../../services/salespersonServices/getDailyProducts/getDailyProductsHandler";
 import GetAllOrdersOfOneSalespersonHandler from "../../services/salespersonServices/getAllOrdersOfOneSalesperson/getAllOrdersHandler";
+import UpdateShopOrderDueAmountHandler from "../../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountHandler";
 
 const salespersonRouter = Router();
 
@@ -29,6 +30,10 @@ salespersonRouter
 salespersonRouter
   .route("/ordersOfOneSalesperson/:id")
   .get(GetAllOrdersOfOneSalespersonHandler.getAllOrders);
+
+salespersonRouter
+  .route("/updateDue/:id")
+  .patch(UpdateShopOrderDueAmountHandler.updateShopOrderDueAmount);
 
 // Daily Products
 salespersonRouter
