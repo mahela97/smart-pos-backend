@@ -25,9 +25,9 @@ export default class GetOneWarehouseAnalyticsHandler {
     }
     const { startDate, endDate } = validate.value;
     const { id } = validation.value;
-    const service = ServiceLocator.getSalespersoAnalyticsService;
+    const service = ServiceLocator.getOneWarehouseAnalyticsService;
     try {
-      const result = await service.getAnalyticsSalesSalesperson(
+      const result = await service.getOneWarehouseAnalytics(
         id,
         startDate,
         endDate

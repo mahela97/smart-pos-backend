@@ -5,7 +5,7 @@ interface WarehouseModel {
   town: string;
   telephone: string;
   name: string;
-  salesPersonId?: string[];
+  salesPersonId: string[];
   products?: ProductObjectModel[];
   managerId?: string;
   archived: boolean;
