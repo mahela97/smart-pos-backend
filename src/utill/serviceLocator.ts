@@ -45,6 +45,7 @@ import GetSalespersonAnalyticsProductsDateService from "../services/adminService
 import GetSalespersonAnalyticsSalesDateService from "../services/adminServices/getSalespersonAnalyticsSalesDate/getSalespersonAnalyticsSalesDateService";
 import GetSalespersonsIncomeOrderService from "../services/adminServices/getSalespersonsIncome/getSalespersonsIncomeOrderService";
 import GetOneWarehouseAnalyticsService from "../services/adminServices/getOneWarehouseAnalytics/getOneWarehouseAnalyticsService";
+import UnAssignManagerService from "../services/adminServices/unAssignManager/unAssignManagerService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -134,6 +135,17 @@ export default class ServiceLocator {
       this.instances.set(
         key,
         new GetSalespersonAnalyticsProductsDateService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get unassignManagerService(): UnAssignManagerService {
+    const key = "unassign_manager";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new UnAssignManagerService(this.userDAO, this.warehouseDAO)
       );
     }
     return this.instances.get(key);
