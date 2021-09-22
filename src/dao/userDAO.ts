@@ -28,7 +28,6 @@ export default class UserDAO extends Dao {
     warehouseId: string,
     managerId: string
   ): Promise<void> {
-    console.log(warehouseId, managerId);
     await this.model.findByIdAndUpdate(new ObjectID(managerId), {
       warehouseId,
     });
