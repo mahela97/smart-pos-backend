@@ -6,12 +6,17 @@ import GetSalespersonAnalyticsProductsRangeHandler from "../../services/adminSer
 import GetSalespersonAnalyticsSalesRangeHandler from "../../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeHandler";
 import GetSalespersonAnalyticsProdutcsDateHandler from "../../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateHandler";
 import GetSalespersonAnalyticsSalesDateHandler from "../../services/adminServices/getSalespersonAnalyticsSalesDate/getSalespersonAnalyticsSalesDateHandler";
+import GetSalespersonsIncomeOrderHandler from "../../services/adminServices/getSalespersonsIncome/getSalespersonsIncomeOrderHandler";
 
 const salespersonRouter = Router();
 
 salespersonRouter
   .route("/")
   .get(GetAllSalespersonsHandlerAdmin.getAllSalespersons);
+
+salespersonRouter
+  .route("/analyticsByIncome-range")
+  .get(GetSalespersonsIncomeOrderHandler.getAnalytics);
 
 salespersonRouter
   .route("/:id/analytics/products/range")

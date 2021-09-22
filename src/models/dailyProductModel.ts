@@ -1,8 +1,9 @@
 import SalesProductObjectModel from "./salesProductObjectModel";
+import UserModel from "./userModel";
 
 interface DailyProductModel {
   dailyProducts: SalesProductObjectModel[];
-  salespersonId: string;
+  salesperson: UserModel | string;
   createdAt: Date;
 }
 

@@ -43,6 +43,7 @@ import GetSalespersonAnalyticsProductsRangeService from "../services/adminServic
 import GetSalespersonAnalyticsSalesRangeService from "../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeService";
 import GetSalespersonAnalyticsProductsDateService from "../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateService";
 import GetSalespersonAnalyticsSalesDateService from "../services/adminServices/getSalespersonAnalyticsSalesDate/getSalespersonAnalyticsSalesDateService";
+import GetSalespersonsIncomeOrderService from "../services/adminServices/getSalespersonsIncome/getSalespersonsIncomeOrderService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -99,6 +100,17 @@ export default class ServiceLocator {
       this.instances.set(
         key,
         new GetSalespersonAnalyticsProductsRangeService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonsIncomeOrderService(): GetSalespersonsIncomeOrderService {
+    const key = "all_Salesperson_analytics_sales_range";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonsIncomeOrderService(this.dailyProductsDAO)
       );
     }
     return this.instances.get(key);
