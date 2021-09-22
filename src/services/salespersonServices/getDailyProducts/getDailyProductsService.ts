@@ -6,7 +6,7 @@ export default class GetDailyProductsService {
 
   async getDailyProductsOfOneSalesperson(
     id: string
-  ): Promise<DailyProductDocument[]> {
+  ): Promise<DailyProductDocument> {
     const result = await this.dailyProductDAO.getDailyProductsOfOneSalesperson(
       id
     );
