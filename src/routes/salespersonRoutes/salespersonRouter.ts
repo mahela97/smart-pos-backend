@@ -7,7 +7,7 @@ import GetOneShopHandler from "../../services/salespersonServices/getOneShop/get
 import AddOrderHandler from "../../services/salespersonServices/addOrder/addOrderHandler";
 import GetOrdersOfOneShopHandler from "../../services/salespersonServices/getOdersOfOneShop/getOrdersOfOneShopHandler";
 import GetDailyProductsHandler from "../../services/salespersonServices/getDailyProducts/getDailyProductsHandler";
-import GetAllOrdersOfOneSalespersonHandler from "../../services/salespersonServices/getAllOrders/getAllOrdersHandler";
+import GetAllOrdersOfOneSalespersonHandler from "../../services/salespersonServices/getAllOrdersOfOneSalesperson/getAllOrdersHandler";
 
 const salespersonRouter = Router();
 

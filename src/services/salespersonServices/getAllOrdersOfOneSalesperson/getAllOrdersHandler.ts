@@ -1,7 +1,6 @@
 import Joi from "joi";
 import { Request, Response } from "express";
 import { errorResponse } from "../../../utill/responses";
-// eslint-disable-next-line import/no-cycle
 import ServiceLocator from "../../../utill/serviceLocator";
 
 export default class GetAllOrdersOfOneSalespersonHandler {
@@ -34,7 +33,6 @@ export default class GetAllOrdersOfOneSalespersonHandler {
     const service = ServiceLocator.getAllOrdersOfOneSalesperson;
     try {
       const result = await service.getAllOrdersOfOneSalesperson(data, id);
-      console.log(result);
       res.status(201).send({
         sucess: 1,
         result,
