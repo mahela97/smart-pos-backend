@@ -1,6 +1,8 @@
 import OrderDAO from "../../../dao/orderDAO";
 import OrderModel from "../../../models/orderModel";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
+import { OrderDocument } from "../../../schemaModels/order.model";
+import ProductObjectModel from "../../../models/productObjectModel";
 
 export default class AddOrderService {
   constructor(
@@ -8,23 +10,38 @@ export default class AddOrderService {
     protected dailyProductDAO: DailyProductsDAO
   ) {}
 
-  async addOrder(data: OrderModel): Promise<string> {
-    const result = await this.orderDAO.add(data);
-    const res = await this.dailyProductDAO.getDailyProductsOfOneSalesperson(
-      data.salesperson
+  async addOrder(data: OrderModel): Promise<void> {
+    const dailyProducts =
+      await this.dailyProductDAO.getDailyProductsOfOneSalesperson(
+        data.salesperson
+      );
+    if (!dailyProducts) {
+      throw new Error("No products has assigned");
+      return;
+    }
+    const dailyProductId: Map<string, any> = new Map<string, any>();
+    dailyProducts.dailyProducts.map((product: any) =>
+      dailyProductId.set(product.product._id.toString(), {
+        product: product._id,
+        quantity: product.quantity,
+        sales: product.sales,
+      })
     );
-    // const orderProducts: Map<string, any> = new Map<string, any>();
-    // data.products.forEach((product) => {
-    //   orderProducts.set(product.product, product.quantity);
-    // });
-    // const updatedDailyProducts: DailyProductModel[] = [];
-    //
-    // result[0].dailyProducts.forEach((p: any) => {
-    //   if (orderProducts.get(p.product)) {
-    //     updatedDailyProducts.push();
-    //   }
-    // });
-    console.log(res);
-    return result._id;
+    const orders: OrderDocument = await this.orderDAO.add(data);
+    const dailyProductIds: string[] = [
+      ...Object.keys(Object.fromEntries(dailyProductId)),
+    ];
+    // eslint-disable-next-line array-callback-return
+    orders.products.map((order: ProductObjectModel) => {
+      if (dailyProductIds.includes(order.product.toString())) {
+        if (dailyProductId.get(order.product.toString())) {
+          dailyProductId.get(order.product.toString()).sales += order.quantity;
+        }
+      }
+    });
+    await this.dailyProductDAO.updateDailyProducts(
+      dailyProducts._id,
+      Object.values(Object.fromEntries(dailyProductId))
+    );
   }
 }

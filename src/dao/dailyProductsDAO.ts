@@ -9,6 +9,11 @@ export default class DailyProductsDAO extends Dao {
     super(DailyProduct);
   }
 
+  public async updateDailyProducts(id: string, data: any) {
+    console.log(id, data);
+    await this.model.findByIdAndUpdate(id, { dailyProducts: data });
+  }
+
   public async getSalespersons(
     start: moment.Moment,
     end: moment.Moment
@@ -52,11 +57,11 @@ export default class DailyProductsDAO extends Dao {
 
   public async getDailyProductsOfOneSalesperson(
     id: string
-  ): Promise<DailyProductDocument[]> {
+  ): Promise<DailyProductDocument> {
     const startDate = moment().startOf("day");
     const endTime = moment().endOf("day");
     return this.model
-      .find({
+      .findOne({
         salesperson: id,
         archived: false,
         createdAt: { $gte: startDate, $lt: endTime },
