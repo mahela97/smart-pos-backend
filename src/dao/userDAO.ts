@@ -28,7 +28,6 @@ export default class UserDAO extends Dao {
     warehouseId: string,
     managerId: string
   ): Promise<void> {
-    console.log(warehouseId, managerId);
     await this.model.findByIdAndUpdate(new ObjectID(managerId), {
       warehouseId,
     });
@@ -37,7 +36,6 @@ export default class UserDAO extends Dao {
   public async getAllManagers(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
-    console.log(filterData);
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],
@@ -52,15 +50,21 @@ export default class UserDAO extends Dao {
   }
 
   public async getAllSalespersons(
-    id: string,
-    filterData: Record<string, any>
+    filterData: Record<string, any>,
+    id?: string
   ): Promise<Record<string, any>> {
+    let filter = "";
+    if (id) {
+      filter = `role eq salesperson,archived eq false,warehouseId eq ${id}`;
+    } else {
+      filter = `role eq salesperson,archived eq false`;
+    }
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],
-      [""],
+      ["warehouseId"],
       filterData.sortBy,
-      `role eq salesperson,archived eq false,warehouseId eq ${id}`,
+      filter,
       filterData.page,
       filterData.limit
     );
@@ -82,10 +86,12 @@ export default class UserDAO extends Dao {
   }
 
   public async getOneSalesperson(id: string): Promise<UserDocument> {
-    return this.model.findOne({
-      _id: id,
-      role: "salesperson",
-      archived: false,
-    });
+    return this.model
+      .findOne({
+        _id: id,
+        role: "salesperson",
+        archived: false,
+      })
+      .populate("warehouseId");
   }
 }

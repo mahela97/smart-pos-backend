@@ -1,13 +1,12 @@
 import UserDAO from "../../../dao/userDAO";
 
-export default class GetAllSalespersonsService {
+export default class GetAllSalespersonsServiceAdmin {
   constructor(protected userDao: UserDAO) {}
 
   async getAllSalespersons(
-    id: string,
     data: Record<string, any>
   ): Promise<Record<string, any>> {
-    const result = await this.userDao.getAllSalespersons(data, id);
+    const result = await this.userDao.getAllSalespersons(data);
     return result;
   }
 }
