@@ -1,6 +1,7 @@
 import OrderDAO from "../../../dao/orderDAO";
 import OrderModel from "../../../models/orderModel";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
+import DailyProductModel from "../../../models/dailyProductModel";
 
 export default class AddOrderService {
   constructor(
@@ -13,17 +14,17 @@ export default class AddOrderService {
     const res = await this.dailyProductDAO.getDailyProductsOfOneSalesperson(
       data.salesperson
     );
-    // const orderProducts: Map<string, any> = new Map<string, any>();
-    // data.products.forEach((product) => {
-    //   orderProducts.set(product.product, product.quantity);
-    // });
-    // const updatedDailyProducts: DailyProductModel[] = [];
-    //
-    // result[0].dailyProducts.forEach((p: any) => {
-    //   if (orderProducts.get(p.product)) {
-    //     updatedDailyProducts.push();
-    //   }
-    // });
+    const orderProducts: Map<string, any> = new Map<string, any>();
+    data.products.forEach((product) => {
+      orderProducts.set(product.product, product.quantity);
+    });
+    const updatedDailyProducts: DailyProductModel[] = [];
+
+    res[0].dailyProducts.forEach((p: any) => {
+      if (orderProducts.get(p.product)) {
+        updatedDailyProducts.push();
+      }
+    });
     console.log(res);
     return result._id;
   }

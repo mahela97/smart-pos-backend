@@ -38,7 +38,7 @@ import AddWarehouseProductService from "../services/managerServices/addWarehouse
 import UpdateWarehouseProductService from "../services/managerServices/updateWarehouseProduct/updateWarehouseProductService";
 import GetAllSalespersonsServiceAdmin from "../services/adminServices/getAllSalespersons/getAllSalespersonsService";
 import GetSalespersonAnalyticsSalesService from "../services/adminServices/getSalespersonAnalytics/getSalespersonAnalyticsSalesService";
-import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrders/getAllOrdersService";
+import GetAllOrdersOfOneSalespersonService from "../services/salespersonServices/getAllOrdersOfOneSalesperson/getAllOrdersService";
 import GetSalespersonAnalyticsProductsRangeService from "../services/adminServices/getSalespersonAnalyticsProductsRange/getSalespersonAnalyticsProductsRangeService";
 import GetSalespersonAnalyticsSalesRangeService from "../services/adminServices/getSalespersonAnalyticsSalesRange/getSalespersonAnalyticsSalesRangeService";
 import GetSalespersonAnalyticsProductsDateService from "../services/adminServices/getSalespersonAnalyticsProductsDate/getSalespersonAnalyticsProdutcsDateService";
