@@ -6,7 +6,6 @@ export default class GetSalespersonShopsService {
 
   async getSalespersonShops(id: string): Promise<SalespersonShopDocument> {
     const result = await this.salespersonShopsDAO.getOneSalespersonShops(id);
-    console.log(result);
     return result;
   }
 }

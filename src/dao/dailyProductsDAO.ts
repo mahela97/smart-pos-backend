@@ -85,7 +85,7 @@ export default class DailyProductsDAO extends Dao {
     return result;
   }
 
-  public async updateDailyProducts(
+  public async updateDailyProductsQuantity(
     id: string,
     dailyProducts: SalesProductObjectModel[],
     start: moment.Moment,
