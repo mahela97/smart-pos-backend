@@ -1,19 +1,15 @@
 import Joi from "joi";
 import { Request, Response } from "express";
 import ServiceLocator from "../../../utill/serviceLocator";
-import DailyProductModel from "../../../models/dailyProductModel";
 import { errorResponse } from "../../../utill/responses";
 
-export default class AddDailyProductsHandler {
-  public static async addDailyProducts(
+export default class AssignShopsToSalespersonHandler {
+  public static async assignShopsToSalesperson(
     req: Request,
     res: Response
   ): Promise<void> {
     const schema = Joi.object({
-      dailyProducts: Joi.array().required(),
-      salesperson:Joi.string().required(),
-      createdAt: Joi.date().required(),
-      archived: Joi.boolean().default(false),
+      shops: Joi.array().items(Joi.string().allow("")).min(0),
     });
     const pathSchema = Joi.object({ id: Joi.string().required() });
     const pathValidation = pathSchema.validate(req.params);
@@ -21,17 +17,16 @@ export default class AddDailyProductsHandler {
       res.status(401).send(pathValidation.error);
       return;
     }
-    const { id } = pathValidation.value;
-
     const validation = schema.validate(req.body);
     if (validation.error) {
       res.status(401).send({ message: validation.error.message });
       return;
     }
-    const data: DailyProductModel = validation.value;
-    const service = ServiceLocator.addDailyProducts;
+    const { id } = pathValidation.value;
+    const { shops } = validation.value;
+    const service = ServiceLocator.assignShopsToSalesperson;
     try {
-      const result = await service.addDailyProducts(id, data);
+      const result = await service.assignShopsToSalesperson(id, shops);
       res.status(201).send({ id: result });
     } catch (error) {
       const errorRes = errorResponse(error);

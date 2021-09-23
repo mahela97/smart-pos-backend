@@ -46,6 +46,10 @@ import GetSalespersonAnalyticsSalesDateService from "../services/adminServices/g
 import GetSalespersonsIncomeOrderService from "../services/adminServices/getSalespersonsIncome/getSalespersonsIncomeOrderService";
 import GetOneWarehouseAnalyticsService from "../services/adminServices/getOneWarehouseAnalytics/getOneWarehouseAnalyticsService";
 import UnAssignManagerService from "../services/adminServices/unAssignManager/unAssignManagerService";
+import GetAllDailyProductsService from "../services/managerServices/getAllDailyProducts/getAllDailyProductsService";
+import AssignShopsToSalespersonService from "../services/managerServices/assignShopsToSalesperson/assignShopsToSalespersonService";
+import SalespersonShopsDAO from "../dao/salespersonShopsDAO";
+import GetSalespersonShopsService from "../services/managerServices/getSalespersonShops/getSalespersonShopsService";
 import UpdateShopOrderDueAmountService from "../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountService";
 
 export default class ServiceLocator {
@@ -241,6 +245,15 @@ export default class ServiceLocator {
     const key = "daily_products";
     if (!this.instances.get(key)) {
       this.instances.set(key, new DailyProductsDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  // Salesperson Shops
+  static get salespersonShopsDAO(): SalespersonShopsDAO {
+    const key = "salesperson_shops";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new SalespersonShopsDAO());
     }
     return this.instances.get(key);
   }
@@ -502,6 +515,39 @@ export default class ServiceLocator {
       this.instances.set(
         key,
         new UpdateWarehouseProductService(this.warehouseDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllDailyProducts(): GetAllDailyProductsService {
+    const key = "get_all_daily_products";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetAllDailyProductsService(this.dailyProductsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get assignShopsToSalesperson(): AssignShopsToSalespersonService {
+    const key = "assign_shops_to_salesperson";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new AssignShopsToSalespersonService(this.salespersonShopsDAO)
+      );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonShops(): GetSalespersonShopsService {
+    const key = "get_salesperson_shops";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new GetSalespersonShopsService(this.salespersonShopsDAO)
       );
     }
     return this.instances.get(key);
