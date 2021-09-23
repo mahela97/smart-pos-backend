@@ -7,6 +7,7 @@ interface ShopModel {
   latitude: string;
   ownerName: string;
   address: string;
+  warehouse: string;
   archived: boolean;
 }
 

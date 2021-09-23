@@ -20,9 +20,10 @@ export default class AddOrderService {
       return;
     }
     const dailyProductId: Map<string, any> = new Map<string, any>();
+
     dailyProducts.dailyProducts.map((product: any) =>
       dailyProductId.set(product.product._id.toString(), {
-        product: product._id,
+        product: product.product._id,
         quantity: product.quantity,
         sales: product.sales,
       })
