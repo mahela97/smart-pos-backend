@@ -24,8 +24,8 @@ export default class GetAllDailyProductsHandler {
       return;
     }
     const { date } = validate.value;
-    const startDate = moment(date).subtract(1, "day").startOf("day");
-    const endDate = moment(date).subtract(1, "day").endOf("day");
+    const startDate = moment(date).subtract(0, "day").startOf("day");
+    const endDate = moment(date).subtract(0, "day").endOf("day");
     const { id } = validation.value;
     const service = ServiceLocator.getAllDailyProducts;
     try {

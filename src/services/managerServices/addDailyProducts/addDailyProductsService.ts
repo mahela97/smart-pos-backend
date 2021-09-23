@@ -7,8 +7,8 @@ export default class AddDailyProductsService {
 
   async addDailyProducts(id: string, data: DailyProductModel): Promise<string> {
     const { createdAt } = data;
-    const startDate = moment(createdAt).subtract(0, "day").startOf("day");
-    const endDate = moment(createdAt).subtract(0, "day").endOf("day");
+    const startDate = moment(createdAt).subtract(1, "day").startOf("day");
+    const endDate = moment(createdAt).subtract(1, "day").endOf("day");
     const result1 = await this.dailyProductDAO.getAllDailyProducts(
       id,
       startDate,
