@@ -15,6 +15,7 @@ export default class AddShopHandler {
       latitude: Joi.string().required(),
       ownerName: Joi.string().required(),
       address: Joi.string().required(),
+      warehouse: Joi.string().required(),
       archived: Joi.string().default(false),
     });
 
