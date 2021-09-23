@@ -5,6 +5,7 @@ import leavesRouter from "./leavesRouter";
 import dailyProductsRouter from "./dailyProductsRouter";
 import salesPersonsRouter from "./salesPersonsRouter";
 import warehouseRouter from "./warehouseRouter";
+import shopsRouter from "./shopsRouter";
 
 const managerRouter = Router();
 
@@ -14,5 +15,6 @@ managerRouter.use("/leaves", leavesRouter);
 managerRouter.use("/dailyProducts", dailyProductsRouter);
 managerRouter.use("/salespersons", salesPersonsRouter);
 managerRouter.use("/warehouse", warehouseRouter);
+managerRouter.use("/shops", shopsRouter);
 
 export default managerRouter;

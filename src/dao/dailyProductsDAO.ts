@@ -3,6 +3,7 @@ import Dao from "../interfaces/dao";
 import DailyProduct, {
   DailyProductDocument,
 } from "../schemaModels/dailyProduct.model";
+import SalesProductObjectModel from "../models/salesProductObjectModel";
 
 export default class DailyProductsDAO extends Dao {
   constructor() {
@@ -62,5 +63,38 @@ export default class DailyProductsDAO extends Dao {
         createdAt: { $gte: startDate, $lt: endTime },
       })
       .populate("dailyProducts.product");
+  }
+
+  public async getAllDailyProducts(
+    id: string,
+    start: moment.Moment,
+    end: moment.Moment
+  ): Promise<Partial<DailyProductDocument>> {
+    const result = await this.model
+      .findOne({
+        salesperson: id,
+        createdAt: { $gte: start, $lt: end },
+      })
+      .populate("dailyProducts.product")
+      .select("dailyProducts");
+    return result;
+  }
+
+  public async updateDailyProducts(
+    id: string,
+    dailyProducts: SalesProductObjectModel[],
+    start: moment.Moment,
+    end: moment.Moment
+  ): Promise<string> {
+    const result = await this.model.findOneAndUpdate(
+      {
+        salesperson: id,
+        createdAt: { $gte: start, $lt: end },
+      },
+      {
+        dailyProducts,
+      }
+    );
+    return result._id;
   }
 }
