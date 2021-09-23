@@ -46,6 +46,7 @@ import GetSalespersonAnalyticsSalesDateService from "../services/adminServices/g
 import GetSalespersonsIncomeOrderService from "../services/adminServices/getSalespersonsIncome/getSalespersonsIncomeOrderService";
 import GetOneWarehouseAnalyticsService from "../services/adminServices/getOneWarehouseAnalytics/getOneWarehouseAnalyticsService";
 import UnAssignManagerService from "../services/adminServices/unAssignManager/unAssignManagerService";
+import UpdateShopOrderDueAmountService from "../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -240,6 +241,17 @@ export default class ServiceLocator {
     const key = "daily_products";
     if (!this.instances.get(key)) {
       this.instances.set(key, new DailyProductsDAO());
+    }
+    return this.instances.get(key);
+  }
+
+  static get updateShopOrderDueAmount(): UpdateShopOrderDueAmountService {
+    const key = "update_shopOrderDueAmount";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+        key,
+        new UpdateShopOrderDueAmountService(this.orderDAO)
+      );
     }
     return this.instances.get(key);
   }
