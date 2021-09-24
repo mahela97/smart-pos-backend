@@ -49,9 +49,9 @@ export default class AddDailyProductsService {
     // const service = ServiceLocator.updateWarehouseProduct;
     const result = await this.warehouseDAO.getAllProductsOfWarehouse(id);
     // const warehouseProducts: Map<string, any> = new Map<string, any>();
-    dailyProducts.map(async (product) => {
-      // console.log(product.product._id);
-    });
+    // dailyProducts.map(async (product) => {
+    //   // console.log(product.product._id);
+    // });
     console.log(result);
     return result2._id;
   }
