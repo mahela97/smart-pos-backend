@@ -20,7 +20,9 @@ export default class GetSalespersonAnalyticsSalesService {
     result.forEach((dailyProduct: DailyProductDocument) => {
       const date = `${moment(dailyProduct.createdAt).year()}-${moment(
         dailyProduct.createdAt
-      ).month()}-${moment(dailyProduct.createdAt).date()}`;
+      )
+        .add(1, "month")
+        .month()}-${moment(dailyProduct.createdAt).date()}`;
       if (!salesByDate.get(date)) {
         salesByDate.set(date, {
           products: [],

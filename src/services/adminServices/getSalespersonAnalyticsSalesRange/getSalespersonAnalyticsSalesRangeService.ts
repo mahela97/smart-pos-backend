@@ -1,7 +1,6 @@
 import moment from "moment";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
 import { DailyProductDocument } from "../../../schemaModels/dailyProduct.model";
-import SalesProductObjectModel from "../../../models/salesProductObjectModel";
 
 export default class GetSalespersonAnalyticsSalesRangeService {
   constructor(private dailyProductsDao: DailyProductsDAO) {}
@@ -20,7 +19,9 @@ export default class GetSalespersonAnalyticsSalesRangeService {
     result.forEach((dailyProduct: DailyProductDocument) => {
       const date = `${moment(dailyProduct.createdAt).year()}-${moment(
         dailyProduct.createdAt
-      ).month()}-${moment(dailyProduct.createdAt).date()}`;
+      )
+        .add(1, "month")
+        .month()}-${moment(dailyProduct.createdAt).date()}`;
       if (!salesByDate.get(date)) {
         salesByDate.set(date, {
           totalIncome: 0,
@@ -28,15 +29,13 @@ export default class GetSalespersonAnalyticsSalesRangeService {
           totalSales: 0,
         });
       }
-      dailyProduct.dailyProducts.forEach(
-        (salesProduct: SalesProductObjectModel) => {
-          const { sales, quantity } = salesProduct;
-          const income = sales * salesProduct.product.unitPrice;
-          salesByDate.get(date).totalIncome += income;
-          salesByDate.get(date).totalSales += sales;
-          salesByDate.get(date).totalQuantity += quantity;
-        }
-      );
+      dailyProduct.dailyProducts.forEach((salesProduct: any) => {
+        const { sales, quantity } = salesProduct;
+        const income = sales * salesProduct.product.unitPrice;
+        salesByDate.get(date).totalIncome += income;
+        salesByDate.get(date).totalSales += sales;
+        salesByDate.get(date).totalQuantity += quantity;
+      });
     });
     const salesProductQuantity = Object.fromEntries(salesByDate);
     return salesProductQuantity;
