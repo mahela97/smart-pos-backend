@@ -1,5 +1,5 @@
 interface ProductObjectModel {
-  _id: string;
+  _id?: string;
   product: string;
   quantity: number;
 }
