@@ -38,7 +38,8 @@ export default class DailyProductsDAO extends Dao {
         createdAt: { $gte: start, $lt: end },
       })
       .populate("dailyProducts.product")
-      .select(["createdAt", "dailyProducts"]);
+      .select(["createdAt", "dailyProducts"])
+      .sort("createdAt");
     return result;
   }
 
@@ -53,7 +54,8 @@ export default class DailyProductsDAO extends Dao {
         createdAt: { $gte: start, $lt: end },
       })
       .populate("dailyProducts.product")
-      .select(["createdAt", "dailyProducts"]);
+      .select(["createdAt", "dailyProducts"])
+      .sort("createdAt");
     return result;
   }
 
@@ -68,7 +70,8 @@ export default class DailyProductsDAO extends Dao {
         archived: false,
         createdAt: { $gte: startDate, $lt: endTime },
       })
-      .populate("dailyProducts.product");
+      .populate("dailyProducts.product")
+      .sort("createdAt");
   }
 
   public async getAllDailyProducts(

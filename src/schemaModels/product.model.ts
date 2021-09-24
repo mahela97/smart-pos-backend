@@ -1,9 +1,9 @@
 import * as mongoose from "mongoose";
 import { Document } from "mongoose";
 import DBUtil from "../utill/dBUtil";
-import productModel from "../models/productModel";
+import ProductModel from "../models/productModel";
 
-export interface ProductDocument extends productModel, Document {}
+export interface ProductDocument extends ProductModel, Document {}
 
 const productSchema = new mongoose.Schema({
   name: {

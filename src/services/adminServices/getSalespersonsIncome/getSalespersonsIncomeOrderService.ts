@@ -21,7 +21,7 @@ export default class GetSalespersonsIncomeOrderService {
       incomes.sort(this.orderByDeccending);
     }
     if (order === "asc") {
-      incomes.sort(this.orderByDeccending);
+      incomes.sort(this.orderByAccending);
     }
     return incomes;
   }
@@ -87,7 +87,9 @@ export default class GetSalespersonsIncomeOrderService {
     result.forEach((dailyProduct: DailyProductDocument) => {
       const date = `${moment(dailyProduct.createdAt).year()}-${moment(
         dailyProduct.createdAt
-      ).month()}-${moment(dailyProduct.createdAt).date()}`;
+      )
+        .add(1, "month")
+        .month()}-${moment(dailyProduct.createdAt).date()}`;
       if (!salesByDate.get(date)) {
         salesByDate.set(date, {
           totalIncome: 0,
