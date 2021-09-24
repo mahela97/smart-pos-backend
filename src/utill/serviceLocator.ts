@@ -51,6 +51,7 @@ import AssignShopsToSalespersonService from "../services/managerServices/assignS
 import SalespersonShopsDAO from "../dao/salespersonShopsDAO";
 import GetSalespersonShopsService from "../services/managerServices/getSalespersonShops/getSalespersonShopsService";
 import UpdateShopOrderDueAmountService from "../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountService";
+import GetAllWarehouseShopsService from "../services/managerServices/getAllwarehouseShops/getAllwarehouseShopsService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -285,7 +286,7 @@ export default class ServiceLocator {
     if (!this.instances.get(key)) {
       this.instances.set(
         key,
-        new AddDailyProductsService(this.dailyProductsDAO)
+        new AddDailyProductsService(this.dailyProductsDAO, this.warehouseDAO)
       );
     }
     return this.instances.get(key);
@@ -549,6 +550,14 @@ export default class ServiceLocator {
         key,
         new GetSalespersonShopsService(this.salespersonShopsDAO)
       );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getAllWarehouseShops(): GetAllWarehouseShopsService {
+    const key = "get_all_warehouse_shops";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetAllWarehouseShopsService(this.shopDAO));
     }
     return this.instances.get(key);
   }
