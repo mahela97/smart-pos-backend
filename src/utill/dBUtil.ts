@@ -16,4 +16,6 @@ export default abstract class DBUtil {
   static readonly ORDER = "orders";
 
   static readonly DAILYPRODUCT = "dailyProducts";
+
+  static readonly SALESPERSONSHOP = "salespersonShops";
 }
