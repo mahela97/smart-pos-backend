@@ -10,9 +10,7 @@ export default class GetAllManagerHandler {
       sortBy: Joi.string().required(),
       page: Joi.number().default(1),
       limit: Joi.number().default(10),
-      filter: Joi.string()
-        .allow("")
-        .default("role eq manager,archived eq false"),
+      filter: Joi.string().allow(""),
     });
 
     const validation = schema.validate(req.query);

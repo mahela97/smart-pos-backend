@@ -36,12 +36,16 @@ export default class UserDAO extends Dao {
   public async getAllManagers(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
+    let filter = "role eq manager,archived eq false";
+    if (filterData.filter) {
+      filter += `,${filterData.filter}`;
+    }
     const queryHelper = new QueryHelper(
       filterData.query,
       ["firstName"],
       ["warehouseId"],
       filterData.sortBy,
-      filterData.filter,
+      filter,
       filterData.page,
       filterData.limit
     );
@@ -58,6 +62,9 @@ export default class UserDAO extends Dao {
       filter = `role eq salesperson,archived eq false,warehouseId eq ${id}`;
     } else {
       filter = `role eq salesperson,archived eq false`;
+    }
+    if (filterData.filter) {
+      filter += `,${filterData.filter}`;
     }
     const queryHelper = new QueryHelper(
       filterData.query,
