@@ -27,6 +27,21 @@ export default class DailyProductsDAO extends Dao {
       .lean();
   }
 
+  public async getWarehouseSalespersons(
+    id: string,
+    start: moment.Moment,
+    end: moment.Moment
+  ): Promise<DailyProductDocument[]> {
+    return (
+      this.model
+        .find({ createdAt: { $gte: start, $lt: end } })
+        .select("salesperson")
+        // .populate("salesperson")
+        .populate({ path: "salesperson", match: { warehouseId: id } })
+        .lean()
+    );
+  }
+
   public async getSalesByDateAnalytics(
     id: string,
     start: moment.Moment,
