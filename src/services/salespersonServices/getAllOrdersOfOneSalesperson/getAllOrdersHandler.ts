@@ -20,7 +20,6 @@ export default class GetAllOrdersOfOneSalespersonHandler {
       return;
     }
     const data = validation.value;
-    console.log(data);
     // Path params
     const pathSchema = Joi.object({ id: Joi.string().required() });
     const pathValidation = pathSchema.validate(req.params);

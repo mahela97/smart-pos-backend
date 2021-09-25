@@ -32,7 +32,8 @@ export default class OrderDAO extends Dao {
   ): Promise<OrderDocument[]> {
     const result = await this.model
       .find({ salesperson: id, archived: false })
-      .lean();
+      .lean()
+      .populate("shop");
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return result;
