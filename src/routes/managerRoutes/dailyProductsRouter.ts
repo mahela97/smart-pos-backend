@@ -4,7 +4,11 @@ import GetAllDailyProductsHandler from "../../services/managerServices/getAllDai
 
 const dailyProductsRouter = Router();
 
-dailyProductsRouter.route("/:id").post(AddDailyProductsHandler.addDailyProducts);
-dailyProductsRouter.route("/:id").get(GetAllDailyProductsHandler.getAllDailyProducts);
+dailyProductsRouter
+  .route("/:id")
+  .post(AddDailyProductsHandler.addDailyProducts);
+dailyProductsRouter
+  .route("/:id")
+  .get(GetAllDailyProductsHandler.getAllDailyProducts);
 
 export default dailyProductsRouter;

@@ -22,6 +22,22 @@ export default class ShopDAO extends Dao {
     return queryHelper.generate(Shop);
   }
 
+  public async getAllWarehouseShops(
+    id: string,
+    filterData: Record<string, any>
+  ): Promise<Record<string, any>> {
+    const queryHelper = new QueryHelper(
+      filterData.query,
+      ["name"],
+      [],
+      filterData.sortBy,
+      `warehouse eq ${id},archived eq false`,
+      filterData.page,
+      filterData.limit
+    );
+    return queryHelper.generate(Shop);
+  }
+
   public async getOneShop(id: string): Promise<ShopDocument> {
     return this.model.findOne({ _id: id, archived: false });
   }

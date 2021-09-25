@@ -6,7 +6,9 @@ import GetOneSalespersonHandler from "../../services/managerServices/getOneSales
 const salesPersonsRouter = Router();
 
 salesPersonsRouter.route("/").post(RegisterUserHandler.registerUser);
-salesPersonsRouter.route("/getAll/:id").get(GetAllSalespersonsHandler.getAllSalespersons);
+salesPersonsRouter
+  .route("/getAll/:id")
+  .get(GetAllSalespersonsHandler.getAllSalespersons);
 salesPersonsRouter
   .route("/getOne/:id")
   .get(GetOneSalespersonHandler.getOneSalesperson);
