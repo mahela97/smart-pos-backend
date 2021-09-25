@@ -2,6 +2,7 @@ import moment from "moment";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
 import { DailyProductDocument } from "../../../schemaModels/dailyProduct.model";
 import SalesProductObjectModel from "../../../models/salesProductObjectModel";
+import { UserDocument } from "../../../schemaModels/user.model";
 
 export default class GetSalespersonsIncomeOrderService {
   constructor(private dailyProductsDao: DailyProductsDAO) {}
@@ -15,7 +16,13 @@ export default class GetSalespersonsIncomeOrderService {
       startDate,
       endDate
     );
-    const salespersons = result.map((s: DailyProductDocument) => s.salesperson);
+
+    const salespersons: UserDocument[] = [];
+    result.forEach((s: DailyProductDocument) => {
+      if (!salespersons.includes(<UserDocument>s.salesperson)) {
+        salespersons.push(<UserDocument>s.salesperson);
+      }
+    });
     const incomes = await this.getIncomes(salespersons, startDate, endDate);
     if (order === "dsc") {
       incomes.sort(this.orderByDeccending);
