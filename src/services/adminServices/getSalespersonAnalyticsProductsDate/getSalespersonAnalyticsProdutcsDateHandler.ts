@@ -21,8 +21,8 @@ export default class GetSalespersonAnalyticsProdutcsDateHandler {
       return;
     }
     const { date } = validate.value;
-    const startDate = moment(date).subtract(1, "day").startOf("day");
-    const endDate = moment(date).subtract(1, "day").endOf("day");
+    const startDate = moment(date).startOf("day");
+    const endDate = moment(date).endOf("day");
     const { id } = validation.value;
     const service = ServiceLocator.getSalespersonAnalyticsProductsDateService;
     try {

@@ -3,24 +3,19 @@ import { Request, Response } from "express";
 import { errorResponse } from "../../../utill/responses";
 import ServiceLocator from "../../../utill/serviceLocator";
 
-export default class GetAllOrdersOfOneSalespersonHandler {
-  public static async getAllOrders(req: Request, res: Response): Promise<void> {
-    // Query Params
+export default class GetAllwarehouseShopsHandler {
+  public static async getAllWarehouseShops(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     const schema = Joi.object({
       query: Joi.string().allow("").default(""),
       sortBy: Joi.string().required(),
       page: Joi.number().default(1),
+      limit: Joi.number().default(100),
       filter: Joi.string().allow("").default(""),
     });
 
-    const validation = schema.validate(req.query);
-
-    if (validation.error) {
-      res.status(401).send({ message: validation.error.message });
-      return;
-    }
-    const data = validation.value;
-    // Path params
     const pathSchema = Joi.object({ id: Joi.string().required() });
     const pathValidation = pathSchema.validate(req.params);
     if (pathValidation.error) {
@@ -28,16 +23,18 @@ export default class GetAllOrdersOfOneSalespersonHandler {
       return;
     }
     const { id } = pathValidation.value;
-    console.log(id);
-    const service = ServiceLocator.getAllOrdersOfOneSalesperson;
+    const validation = schema.validate(req.query);
+    if (validation.error) {
+      res.status(401).send({ message: validation.error.message });
+      return;
+    }
+    const data = validation.value;
+    const service = ServiceLocator.getAllWarehouseShops;
     try {
-      const result = await service.getAllOrdersOfOneSalesperson(data, id);
-      res.status(201).send({
-        sucess: 1,
-        result,
-      });
-    } catch (e) {
-      const errorRes = errorResponse(e);
+      const result = await service.getAllWarehouseShops(id, data);
+      res.status(201).send({ shops: result ? result.items : [] });
+    } catch (error) {
+      const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.response);
     }
   }

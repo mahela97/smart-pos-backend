@@ -4,6 +4,7 @@ import DailyProduct, {
   DailyProductDocument,
 } from "../schemaModels/dailyProduct.model";
 import SalesProductObjectModel from "../models/salesProductObjectModel";
+import UserModel from "../models/userModel";
 
 export default class DailyProductsDAO extends Dao {
   constructor() {
@@ -74,7 +75,7 @@ export default class DailyProductsDAO extends Dao {
   }
 
   public async getAllDailyProducts(
-    id: string,
+    id: string | UserModel,
     start: moment.Moment,
     end: moment.Moment
   ): Promise<Partial<DailyProductDocument>> {
@@ -89,7 +90,7 @@ export default class DailyProductsDAO extends Dao {
   }
 
   public async updateDailyProductsQuantity(
-    id: string,
+    id: string | UserModel,
     dailyProducts: SalesProductObjectModel[],
     start: moment.Moment,
     end: moment.Moment
