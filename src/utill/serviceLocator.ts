@@ -52,6 +52,7 @@ import SalespersonShopsDAO from "../dao/salespersonShopsDAO";
 import GetSalespersonShopsService from "../services/managerServices/getSalespersonShops/getSalespersonShopsService";
 import UpdateShopOrderDueAmountService from "../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountService";
 import GetAllWarehouseShopsService from "../services/managerServices/getAllwarehouseShops/getAllwarehouseShopsService";
+import GetSalespersonsSalesService from "../services/managerServices/getSalespersonsSales/getSalespersonsSalesService";
 import GetCurrentUserService from "../services/userServices/getCurrentUser/GetCurrentUserService";
 import EmailService from "../services/emailService/emailService";
 
@@ -138,6 +139,17 @@ export default class ServiceLocator {
     const key = "get_email_service";
     if (!this.instances.get(key)) {
       this.instances.set(key, new EmailService());
+    }
+    return this.instances.get(key);
+  }
+
+  static get getSalespersonsSalesService(): GetSalespersonsSalesService {
+    const key = "get_Salespersons_sales_range";
+    if (!this.instances.get(key)) {
+      this.instances.set(
+          key,
+          new GetSalespersonsSalesService(this.dailyProductsDAO)
+      );
     }
     return this.instances.get(key);
   }
