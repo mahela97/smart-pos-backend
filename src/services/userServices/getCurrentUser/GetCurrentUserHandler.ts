@@ -4,7 +4,10 @@ import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
 
 export default class GetCurrentUserHandler {
-  public static async getCurrentUser(req: Request, res: Response) {
+  public static async getCurrentUser(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     const schema = Joi.object({ uid: Joi.string().required() });
     const validation = schema.validate(req.query);
     if (validation.error) {
