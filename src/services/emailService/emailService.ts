@@ -13,7 +13,7 @@ export default class EmailService {
       from: "smartpos14@gmail.com", // Change to your verified sender
       subject,
       cc,
-      html: `<h3>${message}</div>`,
+      html: `<div>${message}</div>`,
     };
     sgMail
       .send(msg)
