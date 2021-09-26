@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    telephone: {
+      type: String,
+    },
     archived: {
       type: Boolean,
       default: false,
