@@ -6,7 +6,7 @@ import { errorResponse } from "../../../utill/responses";
 export default class GetCurrentUserHandler {
   public static async getCurrentUser(req: Request, res: Response) {
     const schema = Joi.object({ uid: Joi.string().required() });
-    const validation = schema.validate(req.params);
+    const validation = schema.validate(req.query);
     if (validation.error) {
       res.status(401).send({ message: validation.error.message });
       return;

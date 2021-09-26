@@ -13,7 +13,7 @@ export default class RegisterUserService {
     await emailService.sendMail(
       [data.email],
       "New Manager Account Login Credentials",
-      `Login email - ${data.email}. Login Password - ${data.password}`
+      `<h3>Login email - ${data.email}. Login Password - ${data.password}</h3>`
     );
     // eslint-disable-next-line no-param-reassign
     delete data.password;
