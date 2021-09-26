@@ -16,8 +16,8 @@ export default class GetOneWarehouseAnalyticsService {
     endDate: moment.Moment
   ): Promise<Record<string, string>> {
     const result = await this.warehouseDao.getOneWarehouse(id);
-
-    return this.getIncomeDaily(result.salesPersonId, startDate, endDate);
+    const result2= await this.getIncomeDaily(result.salesPersonId, startDate, endDate);
+    return result2;
   }
 
   async getIncomeDaily(

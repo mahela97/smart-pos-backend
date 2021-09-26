@@ -5,6 +5,6 @@ import GetCurrentUserHandler from "../../services/userServices/getCurrentUser/Ge
 const userRouter = Router();
 
 userRouter.route("/register").post(RegisterUserHandler.registerUser);
-userRouter.route("/me").get(GetCurrentUserHandler.getCurrentUser);
+userRouter.route("/me/:uid").get(GetCurrentUserHandler.getCurrentUser);
 
 export default userRouter;
