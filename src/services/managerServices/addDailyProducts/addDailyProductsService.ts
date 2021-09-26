@@ -40,7 +40,6 @@ export default class AddDailyProductsService {
         product: product.product._id,
         quantity: newQuantity,
       };
-      console.log(newQuantity);
       await this.updateWarehouseProduct(id, productObjectModel);
     });
     // add daily products
