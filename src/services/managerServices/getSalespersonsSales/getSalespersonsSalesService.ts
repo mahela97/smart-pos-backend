@@ -119,7 +119,6 @@ export default class GetSalespersonsSalesService {
       );
     });
     const salesProductQuantity = Object.fromEntries(salesByDate);
-    // console.log(salesProductQuantity);
     return salesProductQuantity;
   }
 }
