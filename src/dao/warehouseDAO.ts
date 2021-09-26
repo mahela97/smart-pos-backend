@@ -17,7 +17,7 @@ export default class WarehouseDAO extends Dao {
     const queryHelper = new QueryHelper(
       filterData.query,
       ["name"],
-      ["managerId", "salesPersonId"],
+      ["managerId"],
       filterData.sortBy,
       filterData.filter,
       filterData.page,
@@ -31,7 +31,7 @@ export default class WarehouseDAO extends Dao {
     return this.model
       .findById(id)
       .populate("managerId")
-      .populate(["salespersonId", "products.product"]);
+      .populate(["products.product"]);
   }
 
   public async assignManager(
@@ -68,7 +68,10 @@ export default class WarehouseDAO extends Dao {
   ): Promise<Partial<WarehouseDocument>> {
     const result = await this.model
       .findById(id)
-      .populate({path:"products.product",match:{name:{$regex:filterData.query,$options:"i"}}})
+      .populate({
+        path: "products.product",
+        match: { name: { $regex: filterData.query, $options: "i" } },
+      })
       .select("products")
       .sort(filterData.sortBy);
     return result;
