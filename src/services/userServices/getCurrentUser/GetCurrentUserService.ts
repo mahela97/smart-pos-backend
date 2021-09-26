@@ -6,6 +6,9 @@ export default class GetCurrentUserService {
 
   async getUser(uid: string): Promise<UserDocument> {
     const user = await this.userDao.getUserByUid(uid);
+    if (!user) {
+      throw new Error("User Not Found");
+    }
     return user;
   }
 }
