@@ -10,7 +10,7 @@ export default class GetSalespersonsIncomeOrderHandler {
       startDate: Joi.date().default(
         moment().subtract(5, "days").startOf("day")
       ),
-      endDate: Joi.date().default(moment().subtract(1, "days").endOf("day")),
+      endDate: Joi.date().default(moment().endOf("day")),
       order: Joi.string().default("dsc"),
     });
     const validate = querySchema.validate(req.query);

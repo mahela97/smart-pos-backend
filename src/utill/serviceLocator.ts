@@ -147,8 +147,8 @@ export default class ServiceLocator {
     const key = "get_Salespersons_sales_range";
     if (!this.instances.get(key)) {
       this.instances.set(
-          key,
-          new GetSalespersonsSalesService(this.dailyProductsDAO)
+        key,
+        new GetSalespersonsSalesService(this.dailyProductsDAO)
       );
     }
     return this.instances.get(key);
@@ -338,10 +338,7 @@ export default class ServiceLocator {
     if (!this.instances.get(key)) {
       this.instances.set(
         key,
-        new GetOneWarehouseAnalyticsService(
-          this.dailyProductsDAO,
-          this.warehouseDAO
-        )
+        new GetOneWarehouseAnalyticsService(this.dailyProductsDAO, this.userDAO)
       );
     }
     return this.instances.get(key);
