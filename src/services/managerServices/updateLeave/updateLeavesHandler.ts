@@ -27,7 +27,6 @@ export default class UpdateLeaveHandler {
       await service.updateLeave(leaveId, leaveState);
       res.status(201).send({ success: 1 });
     } catch (error) {
-      console.log(error);
       const errorRs = errorResponse(error);
       res.status(errorRs.code).send(errorRs.message);
     }

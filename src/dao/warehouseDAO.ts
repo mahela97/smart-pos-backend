@@ -68,19 +68,9 @@ export default class WarehouseDAO extends Dao {
   ): Promise<Partial<WarehouseDocument>> {
     const result = await this.model
       .findById(id)
-      .populate({
-        path: "products.product",
-        match: {
-          name: {
-            $regex: filterData.query,
-            $options: "i",
-          },
-        },
-      })
-      // .populate("products.product")
+      .populate({path:"products.product",match:{name:{$regex:filterData.query,$options:"i"}}})
       .select("products")
       .sort(filterData.sortBy);
-    console.log(result);
     return result;
   }
 
