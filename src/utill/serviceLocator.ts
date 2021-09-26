@@ -52,6 +52,8 @@ import SalespersonShopsDAO from "../dao/salespersonShopsDAO";
 import GetSalespersonShopsService from "../services/managerServices/getSalespersonShops/getSalespersonShopsService";
 import UpdateShopOrderDueAmountService from "../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountService";
 import GetAllWarehouseShopsService from "../services/managerServices/getAllwarehouseShops/getAllwarehouseShopsService";
+import GetCurrentUserService from "../services/userServices/getCurrentUser/GetCurrentUserService";
+import EmailService from "../services/emailService/emailService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -120,6 +122,22 @@ export default class ServiceLocator {
         key,
         new GetSalespersonsIncomeOrderService(this.dailyProductsDAO)
       );
+    }
+    return this.instances.get(key);
+  }
+
+  static get getCurrentUserService(): GetCurrentUserService {
+    const key = "get_current_user_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new GetCurrentUserService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get getEmailService(): EmailService {
+    const key = "get_email_service";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new EmailService());
     }
     return this.instances.get(key);
   }
