@@ -10,15 +10,35 @@ export default class AddDailyProductsService {
     protected warehouseDAO: WarehouseDAO
   ) {}
 
-  async addDailyProducts(id: string, data: DailyProductModel): Promise<any> {
+  async addDailyProducts(id: string, data: DailyProductModel): Promise<string> {
     const { createdAt, dailyProducts, salesperson } = data;
+    const startDate = moment(createdAt).subtract(0, "day").startOf("day");
+    const endDate = moment(createdAt).subtract(0, "day").endOf("day");
+    const result1 = await this.dailyProductDAO.getAllDailyProducts(
+      salesperson,
+      startDate,
+      endDate
+    );
+    const dailyProductsIds: Map<string, any> = new Map<string, any>();
+    if (result1) {
+      result1.dailyProducts?.map((product: any) =>
+        dailyProductsIds.set(product.product._id.toString(), product.quantity)
+      );
+    }
     const warehouseProducts = await this.warehouseDAO.getAllProductsOfWarehouse(
       id
     );
+    // if daily products are already assigned for this date, then those quantities are added to warehouse first.
+    // after that new quantities are reduced from warehouse.
     const warehouseProductIds: Map<string, any> = new Map<string, any>();
-    warehouseProducts.products?.map((product: any) =>
-      warehouseProductIds.set(product.product.toString(), product.quantity)
-    );
+    warehouseProducts.products?.forEach((product: any) => {
+      let previousQuantity = 0;
+      if (dailyProductsIds.get(product.product.toString())) {
+        previousQuantity = dailyProductsIds.get(product.product.toString());
+      }
+      warehouseProductIds.set(product.product.toString(), product.quantity+previousQuantity);
+    });
+
     let checkingQuantity;
     dailyProducts.map(async (product: any) => {
       const newQuantity =
@@ -30,7 +50,7 @@ export default class AddDailyProductsService {
     });
     if (checkingQuantity) {
       throw new Error(checkingQuantity);
-      return;
+      return "Error";
     }
     dailyProducts.map(async (product: any) => {
       const newQuantity =
@@ -43,14 +63,7 @@ export default class AddDailyProductsService {
       await this.updateWarehouseProduct(id, productObjectModel);
     });
     // add daily products
-    const startDate = moment(createdAt).subtract(0, "day").startOf("day");
-    const endDate = moment(createdAt).subtract(0, "day").endOf("day");
     let result2;
-    const result1 = await this.dailyProductDAO.getAllDailyProducts(
-      salesperson,
-      startDate,
-      endDate
-    );
     if (result1) {
       await this.dailyProductDAO.updateDailyProductsQuantity(
         salesperson,
