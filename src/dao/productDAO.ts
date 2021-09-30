@@ -37,4 +37,8 @@ export default class ProductDAO extends Dao {
   ): Promise<void> {
     await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
   }
+
+  public async deleteProduct(productId: string): Promise<void> {
+    await this.model.findByIdAndDelete(new ObjectID(productId));
+  }
 }
