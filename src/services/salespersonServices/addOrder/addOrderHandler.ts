@@ -27,7 +27,6 @@ export default class AddOrderHandler {
       res.status(201).send({ id: result });
     } catch (error) {
       console.log(error);
-
       const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.response);
     }
