@@ -9,7 +9,7 @@ export default class GetCurrentUserHandler {
     res: Response
   ): Promise<void> {
     const schema = Joi.object({ uid: Joi.string().required() });
-    const validation = schema.validate(req.query);
+    const validation = schema.validate(req.params);
     if (validation.error) {
       res.status(401).send({ message: validation.error.message });
       return;
