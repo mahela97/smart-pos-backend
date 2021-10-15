@@ -102,7 +102,15 @@ export default class UserDAO extends Dao {
         _id: id,
         role: "salesperson",
         archived: false,
-      })
-      .populate("warehouseId");
+      });
+      // .populate("warehouseId");
+  }
+
+  public async editUser(
+      userId: string,
+      data: UserModel
+  ): Promise<string> {
+    const result = await this.model.findByIdAndUpdate(new ObjectID(userId), data);
+    return result;
   }
 }

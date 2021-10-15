@@ -56,6 +56,7 @@ import GetSalespersonsSalesService from "../services/managerServices/getSalesper
 import GetCurrentUserService from "../services/userServices/getCurrentUser/GetCurrentUserService";
 import EmailService from "../services/emailService/emailService";
 import DeleteProductService from "../services/managerServices/deleteProduct/deleteProductService";
+import EditUserService from "../services/userServices/editUser/editUserService";
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -64,6 +65,14 @@ export default class ServiceLocator {
     const key = "register_user";
     if (!this.instances.get(key)) {
       this.instances.set(key, new RegisterUserService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get editWebUser(): EditUserService {
+    const key = "edit_user";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new EditUserService(this.userDAO));
     }
     return this.instances.get(key);
   }
