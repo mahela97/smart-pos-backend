@@ -17,9 +17,11 @@ export default class UpdateShopOrderDueAmountHandler {
     const pathValidation = pathSchema.validate(req.params);
     if (pathValidation.error) {
       res.status(401).send(pathValidation.error);
+      return;
     }
     if (validation.error) {
       res.status(401).send(validation.error.message);
+      return;
     }
     const orderId = pathValidation.value.id;
     const orderState: Partial<OrderModel> = validation.value;
