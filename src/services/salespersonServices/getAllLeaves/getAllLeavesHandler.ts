@@ -37,7 +37,6 @@ export default class GetAllLeavesHandler {
         items: result.items,
       });
     } catch (error) {
-      console.log(error);
       const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.response);
     }

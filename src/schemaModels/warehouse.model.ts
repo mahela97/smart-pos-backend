@@ -13,10 +13,6 @@ const wareHouseSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  salesPersonId: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: DBUtil.USER,
-  },
   products: [
     {
       product: {

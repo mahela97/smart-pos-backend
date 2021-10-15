@@ -2,12 +2,13 @@ import moment from "moment";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
 import { DailyProductDocument } from "../../../schemaModels/dailyProduct.model";
 import SalesProductObjectModel from "../../../models/salesProductObjectModel";
-import WarehouseDAO from "../../../dao/warehouseDAO";
+import UserDAO from "../../../dao/userDAO";
+import { UserDocument } from "../../../schemaModels/user.model";
 
 export default class GetOneWarehouseAnalyticsService {
   constructor(
     private dailyProductsDao: DailyProductsDAO,
-    private warehouseDao: WarehouseDAO
+    private userDao: UserDAO
   ) {}
 
   async getOneWarehouseAnalytics(
@@ -15,9 +16,14 @@ export default class GetOneWarehouseAnalyticsService {
     startDate: moment.Moment,
     endDate: moment.Moment
   ): Promise<Record<string, string>> {
-    const result = await this.warehouseDao.getOneWarehouse(id);
-
-    return this.getIncomeDaily(result.salesPersonId, startDate, endDate);
+    const result = await this.userDao.getAllSalespersons(
+      { query: "", sortBy: "+firstName", page: 1, limit: 100 },
+      id
+    );
+    const salespersons = result.items.map(
+      (person: UserDocument) => <string>person._id
+    );
+    return this.getIncomeDaily(salespersons, startDate, endDate);
   }
 
   async getIncomeDaily(
