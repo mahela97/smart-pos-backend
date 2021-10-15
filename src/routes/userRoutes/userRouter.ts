@@ -6,7 +6,8 @@ import UpdateUserLocationHandler from "../../services/userServices/updateUserLoc
 const userRouter = Router();
 
 userRouter.route("/register").post(RegisterUserHandler.registerUser);
-userRouter.route("/me").get(GetCurrentUserHandler.getCurrentUser);
 userRouter.route("/updateLocation/:salesperson").patch(UpdateUserLocationHandler.updateUserLocation);
+userRouter.route("/me/:uid").get(GetCurrentUserHandler.getCurrentUser);
+
 
 export default userRouter;
