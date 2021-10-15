@@ -87,6 +87,7 @@ export default class UserDAO extends Dao {
     userData: UserModel,
     session: any
   ): Promise<UserDocument> {
+    // eslint-disable-next-line new-cap
     return new this.model(userData).save(session);
   }
 
@@ -112,5 +113,12 @@ export default class UserDAO extends Dao {
   ): Promise<string> {
     const result = await this.model.findByIdAndUpdate(new ObjectID(userId), data);
     return result;
+  }
+
+  public async updateLocation(
+      userId: string,
+      userLocation: Partial<UserModel>
+  ): Promise<void>{
+    await this.model.findByIdAndUpdate(new ObjectID(userId), userLocation);
   }
 }
