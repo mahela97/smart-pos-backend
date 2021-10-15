@@ -3,6 +3,8 @@ interface UserModel {
   firstName: string;
   lastName: string;
   role: string;
+  longitude?: string;
+  latitude?: string;
   warehouseId?: string;
   email: string;
   telephone: string;

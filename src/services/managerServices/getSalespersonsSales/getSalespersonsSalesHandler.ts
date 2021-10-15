@@ -5,12 +5,15 @@ import ServiceLocator from "../../../utill/serviceLocator";
 import { errorResponse } from "../../../utill/responses";
 
 export default class GetSalespersonsSalesHandler {
-  public static async getSalespersonsSales(req: Request, res: Response): Promise<void> {
+  public static async getSalespersonsSales(
+    req: Request,
+    res: Response
+  ): Promise<void> {
     const querySchema = Joi.object({
       startDate: Joi.date().default(
         moment().subtract(5, "days").startOf("day")
       ),
-      endDate: Joi.date().default(moment().subtract(1, "days").endOf("day")),
+      endDate: Joi.date().default(moment().subtract(0, "days").endOf("day")),
       order: Joi.string().default("dsc"),
     });
     const validate = querySchema.validate(req.query);
@@ -30,8 +33,8 @@ export default class GetSalespersonsSalesHandler {
     try {
       const result = await service.getSalesperosnsSalesanalytics(
         id,
-        startDate,
-        endDate,
+        moment(startDate).startOf("day"),
+        moment(endDate).endOf("day"),
         order
       );
 

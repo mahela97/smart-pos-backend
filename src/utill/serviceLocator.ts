@@ -55,6 +55,9 @@ import GetAllWarehouseShopsService from "../services/managerServices/getAllwareh
 import GetSalespersonsSalesService from "../services/managerServices/getSalespersonsSales/getSalespersonsSalesService";
 import GetCurrentUserService from "../services/userServices/getCurrentUser/GetCurrentUserService";
 import EmailService from "../services/emailService/emailService";
+import UpdateUserLocationService from "../services/userServices/updateUserLocation/updateUserLocationService";
+import DeleteProductService from "../services/managerServices/deleteProduct/deleteProductService";
+
 
 export default class ServiceLocator {
   private static readonly instances: Map<string, any> = new Map<string, any>();
@@ -75,6 +78,15 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+  static get updateUserLocation(): UpdateUserLocationService{
+    const key = "update_userLocation";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new UpdateUserLocationService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
 
   // warehouse
   static get warehouseDAO(): WarehouseDAO {
@@ -585,6 +597,14 @@ export default class ServiceLocator {
     const key = "get_all_warehouse_shops";
     if (!this.instances.get(key)) {
       this.instances.set(key, new GetAllWarehouseShopsService(this.shopDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get deleteProduct(): DeleteProductService {
+    const key = "delete_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new DeleteProductService(this.productDAO));
     }
     return this.instances.get(key);
   }
