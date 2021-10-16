@@ -2,7 +2,8 @@
   "development": {
     "config_id": "development",
     "mongo_url": " mongodb+srv://mahela:12345@cluster0.qi8o5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "storageBucket": "smart-pos-9254b.appspot.com"
+    "storageBucket": "smart-pos-9254b.appspot.com",
+    "mongo_url_testing": "mongodb+srv://mahela:12345@cluster0.isp0t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
   },
   "firebase": {
     "type": "service_account",
