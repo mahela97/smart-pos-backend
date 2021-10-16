@@ -16,7 +16,7 @@ export default class UserDAO extends Dao {
   }
 
   public async getUserByUid(uid: string): Promise<UserDocument> {
-    return this.model.findOne({ uid });
+    return this.model.findOne({ uid, archived: false });
   }
 
   public async getAllUnassignedManagers(): Promise<UserDocument[]> {
@@ -103,8 +103,16 @@ export default class UserDAO extends Dao {
         _id: id,
         role: "salesperson",
         archived: false,
-      })
-      .populate("warehouseId");
+      });
+      // .populate("warehouseId");
+  }
+
+  public async editUser(
+      userId: string,
+      data: UserModel
+  ): Promise<string> {
+    const result = await this.model.findByIdAndUpdate(new ObjectID(userId), data);
+    return result;
   }
 
   public async updateLocation(
