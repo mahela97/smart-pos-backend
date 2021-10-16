@@ -16,7 +16,7 @@ export default class UserDAO extends Dao {
   }
 
   public async getUserByUid(uid: string): Promise<UserDocument> {
-    return this.model.findOne({ uid });
+    return this.model.findOne({ uid, archived: false });
   }
 
   public async getAllUnassignedManagers(): Promise<UserDocument[]> {
