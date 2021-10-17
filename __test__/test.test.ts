@@ -1,7 +1,7 @@
 // import AddCategoryService from "../src/services/managerServices/addCategory/addCaregoryService";
 
 describe("addCategory service", () => {
-  it("test add new category", () => {
+  test("test add new category", () => {
     // const { fName, mNames, lName } = AddCategoryService.addCategory({
     //   name: "test",
     //   archived: false,
