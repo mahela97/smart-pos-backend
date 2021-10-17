@@ -4,7 +4,7 @@ import config from "../config/appConfig.json";
 export default class DBConnection {
   private static db: Mongoose.Connection;
 
-  private static uri = config.development.mongo_url;
+  private static uri = config.development.mongo_url_testing;
 
   static async connect(): Promise<Mongoose.Connection> {
     if (this.db !== undefined) return this.db;
