@@ -5,7 +5,7 @@ import { CategoryDocument } from "../../src/schemaModels/category.model";
 
 chai.should();
 
-describe("CategoryDao Unit Testings", () => {
+describe("CategoryDao Unit Testings", async () => {
   let testCategory: CategoryDocument;
   let categoryArray: Record<string, any>;
   const categoryDAO = new CategoryDAO();
@@ -13,10 +13,16 @@ describe("CategoryDao Unit Testings", () => {
     await categoryDAO.add({ name: "Test Category One" });
   });
 
-  it("Check Add Category", async () => {
-    testCategory = await categoryDAO.add({ name: "Test Category" });
-    expect(testCategory).to.be.a("object");
-  });
+ await new Promise<void>((resolve,reject)=>{
+     it("Check Add Category", async () => {
+         testCategory = await categoryDAO.add({ name: "Test Category" });
+         expect(testCategory).to.be.a("object");
+         after(async () => {
+             await categoryDAO.delete(testCategory._id);
+             resolve();
+         });
+     });
+ })
 
   it("Check Get All Categories", async () => {
     categoryArray = await categoryDAO.getAll({
@@ -26,7 +32,8 @@ describe("CategoryDao Unit Testings", () => {
       limit: 100,
       filter: "",
     });
-    expect(categoryArray.total).to.eql(2);
+    console.log(categoryArray.items);
+    expect(categoryArray.total).to.eql(1);
     expect(categoryArray.items).to.be.a("array");
   });
 

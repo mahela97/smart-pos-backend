@@ -10,6 +10,7 @@ describe("UserDao Unit Testings", () => {
   const userDao = new UserDAO();
   let testUser: UserDocument;
   before(async () => {
+    console.log('before all')
     testUser = await userDao.add({
       firstName: "Test",
       uid: "uid",
@@ -35,11 +36,13 @@ describe("UserDao Unit Testings", () => {
     expect(user).to.be.a("object");
 
     after(async () => {
+      console.log('after one')
       await userDao.delete(user._id);
     });
   });
 
   after(async () => {
+    console.log('after all')
     await userDao.delete(testUser._id);
   });
 });
