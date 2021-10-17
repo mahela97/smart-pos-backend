@@ -57,6 +57,7 @@ import GetCurrentUserService from "../services/userServices/getCurrentUser/GetCu
 import EmailService from "../services/emailService/emailService";
 import UpdateUserLocationService from "../services/userServices/updateUserLocation/updateUserLocationService";
 import DeleteProductService from "../services/managerServices/deleteProduct/deleteProductService";
+import EditUserService from "../services/userServices/editUser/editUserService";
 
 
 export default class ServiceLocator {
@@ -66,6 +67,14 @@ export default class ServiceLocator {
     const key = "register_user";
     if (!this.instances.get(key)) {
       this.instances.set(key, new RegisterUserService(this.userDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get editWebUser(): EditUserService {
+    const key = "edit_user";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new EditUserService(this.userDAO));
     }
     return this.instances.get(key);
   }
