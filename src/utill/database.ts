@@ -11,7 +11,7 @@ export default class DBConnection {
 
     await Mongoose.connect(this.uri, {
       useNewUrlParser: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
