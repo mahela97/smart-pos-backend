@@ -6,23 +6,21 @@ import { CategoryDocument } from "../../src/schemaModels/category.model";
 chai.should();
 
 describe("CategoryDao Unit Testings", async () => {
-  let testCategory: CategoryDocument;
   let categoryArray: Record<string, any>;
   const categoryDAO = new CategoryDAO();
   before(async () => {
     await categoryDAO.add({ name: "Test Category One" });
+    await categoryDAO.add({ name: "Test Category Two" });
   });
 
- await new Promise<void>((resolve,reject)=>{
-     it("Check Add Category", async () => {
-         testCategory = await categoryDAO.add({ name: "Test Category" });
-         expect(testCategory).to.be.a("object");
-         after(async () => {
-             await categoryDAO.delete(testCategory._id);
-             resolve();
-         });
-     });
- })
+  it("Check Add Category", async () => {
+    const category = { name: "Test Category" };
+    const testCategory: CategoryDocument = await categoryDAO.add(category);
+    expect(testCategory).to.be.a("object");
+    expect(testCategory).to.have.property("name");
+    expect(testCategory).to.deep.include(category);
+    await categoryDAO.delete(testCategory._id);
+  });
 
   it("Check Get All Categories", async () => {
     categoryArray = await categoryDAO.getAll({
@@ -32,8 +30,7 @@ describe("CategoryDao Unit Testings", async () => {
       limit: 100,
       filter: "",
     });
-    console.log(categoryArray.items);
-    expect(categoryArray.total).to.eql(1);
+    expect(categoryArray.total).to.eql(2);
     expect(categoryArray.items).to.be.a("array");
   });
 
