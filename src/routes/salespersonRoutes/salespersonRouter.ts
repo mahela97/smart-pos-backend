@@ -23,6 +23,7 @@ salespersonRouter
 // Leave
 salespersonRouter.route("/leave").post(AddLeaveHandler.addLeave);
 salespersonRouter.route("/leave/:id").get(GetAllLeavesHandler.getAllLeaves);
+salespersonRouter.route("/leave/:id").delete();
 
 // Order
 salespersonRouter.route("/order").post(AddOrderHandler.addOrder);
