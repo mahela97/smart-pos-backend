@@ -39,12 +39,18 @@ export default abstract class Dao {
       console.log(query);
       const res = await query.exec();
       console.log(res);
+      return res;
     }
+    return this.model.findById(ref);
   }
 
   async findIdByuid(uid: string): Promise<string> {
     const user: UserDocument = await this.model.findOne({ uid });
     return user._id;
+  }
+
+  async getDocumentByObjectId(objectId: string): Promise<any> {
+    return this.model.findOne({ _id: objectId }).lean();
   }
 
   async delete(ref: string): Promise<any> {
