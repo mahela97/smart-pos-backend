@@ -20,8 +20,14 @@ app.use((req, res, next) => {
 });
 app.use("/api", apiRouter);
 
-export default app.listen(PORT, () => {
+// export default app.listen(PORT, () => {
+//   console.log(`Server listening on port ${PORT}`);
+//   console.log("Press Ctrl+C to quit.");
+// });
+
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   console.log("Press Ctrl+C to quit.");
 });
 
+export default app;

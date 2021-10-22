@@ -99,7 +99,9 @@ describe("LeaveDAO Unit Testings", () => {
       });
       expect(updatedLeaves.total).to.eql(1);
       expect(updatedLeaves.items).to.be.an("array");
-      expect(updatedLeaves.items).to.containSubset([{ approved: "approved" }]);
+      expect(updatedLeaves.items).to.containSubset([
+        { _id: leave._id, approved: "approved" },
+      ]);
     });
     after(async () => {
       updatedLeaves.items.map(async (leave: any) => {
