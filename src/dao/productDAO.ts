@@ -38,8 +38,8 @@ export default class ProductDAO extends Dao {
   public async updateProduct(
     productId: string,
     productDetails: Partial<ProductModel>
-  ): Promise<void> {
-    await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
+  ): Promise<ProductDocument> {
+    return  this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
   }
 
   public async deleteProduct(productId: string): Promise<void> {
