@@ -83,14 +83,6 @@ export default class UserDAO extends Dao {
     return queryHelper.generate(User);
   }
 
-  public async addUser(
-    userData: UserModel,
-    session: any
-  ): Promise<UserDocument> {
-    // eslint-disable-next-line new-cap
-    return new this.model(userData).save(session);
-  }
-
   public async getOneManager(id: string): Promise<UserDocument> {
     return this.model
       .findOne({ _id: id, role: "manager", archived: false })
@@ -109,7 +101,7 @@ export default class UserDAO extends Dao {
 
   public async editUser(
       userId: string,
-      data: UserModel
+      data: Partial<UserModel>
   ): Promise<string> {
     const result = await this.model.findByIdAndUpdate(new ObjectID(userId), data);
     return result;
