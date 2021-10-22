@@ -1,6 +1,5 @@
 import chai from "chai";
 import DailyProductsDAO from "../../src/dao/dailyProductsDAO";
-// import DailyProductModel from "../../src/models/dailyProductModel";
 import moment from "moment";
 import ProductDAO from "../../src/dao/productDAO";
 import ProductModel from "../../src/models/productModel";
@@ -33,7 +32,9 @@ describe("DailyProductsDAO Unit Testing", () => {
     startDate = moment().startOf("day");
     endDate = moment().endOf("day");
     testCategory = { name: "Test Category" };
-    testCategoryId = (await categoryDAO.add(testCategory))._id;
+    testCategoryId = JSON.parse(
+      JSON.stringify((await categoryDAO.add(testCategory))._id)
+    );
     testProduct = {
       name: "Test Product",
       categoryId: testCategoryId,
@@ -42,17 +43,23 @@ describe("DailyProductsDAO Unit Testing", () => {
       photo: "photo",
       archived: false,
     };
-    testProductId = (await productDAO.add(testProduct))._id;
-    testUser = await userDao.add({
-      firstName: "Test",
-      uid: "uid",
-      archived: false,
-      lastName: "Add",
-      telephone: "0779667935",
-      email: "addUser@gmail.com",
-      role: "manager",
-      warehouseId: warehouseId,
-    });
+    testProductId = JSON.parse(
+      JSON.stringify((await productDAO.add(testProduct))._id)
+    );
+    testUser = JSON.parse(
+      JSON.stringify(
+        await userDao.add({
+          firstName: "Test",
+          uid: "uid",
+          archived: false,
+          lastName: "Add",
+          telephone: "0779667935",
+          email: "addUser@gmail.com",
+          role: "manager",
+          warehouseId: warehouseId,
+        })
+      )
+    );
     dailyProductsObject = {
       dailyProducts: [
         {
@@ -74,7 +81,7 @@ describe("DailyProductsDAO Unit Testing", () => {
     });
   });
 
-  describe("Check Update Daily Products List", () => {
+  describe("Check Update Daily Products List BY Object Id", () => {
     let newDailyProductsList: any;
     before(() => {
       newDailyProductsList = [
@@ -87,19 +94,18 @@ describe("DailyProductsDAO Unit Testing", () => {
         dailyProductsObjectID._id,
         newDailyProductsList
       );
-      const updatedDailyProduct: DailyProductDocument =
-        await dailyProductsDAO.getDocumentByObjectId(dailyProductsObjectID._id);
+      const updatedDailyProduct: DailyProductDocument = JSON.parse(
+        JSON.stringify(
+          await dailyProductsDAO.getDocumentByObjectId(
+            dailyProductsObjectID._id
+          )
+        )
+      );
 
       expect(updatedDailyProduct.dailyProducts).to.be.an("array");
-      expect(
-        JSON.parse(JSON.stringify(updatedDailyProduct.dailyProducts))
-      ).to.containSubset([
-        {
-          product: testProductId.toString(),
-          quantity: 10,
-          sales: 5,
-        },
-      ]);
+      expect(updatedDailyProduct.dailyProducts).to.containSubset(
+        newDailyProductsList
+      );
     });
   });
 
@@ -135,14 +141,76 @@ describe("DailyProductsDAO Unit Testing", () => {
   describe("Check Get Sales Of A Salesperson By Date Analytics", () => {
     it("Should get sales by date analytics ", async () => {
       const salesAnalytics = await dailyProductsDAO.getSalesByDateAnalytics(
-          testUser._id,
-          startDate,
-          endDate
+        testUser._id,
+        startDate,
+        endDate
       );
 
-      expect(salesAnalytics).to.be.an('array');
-      expect(salesAnalytics[0]).to.have.property('createdAt')
-      expect(salesAnalytics[0]).to.have.property('dailyProducts')
+      expect(salesAnalytics).to.be.an("array");
+      expect(salesAnalytics[0]).to.have.property("createdAt");
+      expect(salesAnalytics[0]).to.have.property("dailyProducts");
+    });
+  });
+
+  describe("Check Get Sales Of A Salesperson IN A Given Date", () => {
+    it("Should get sales of salesperson in a given date ", async () => {
+      const salesInADay = await dailyProductsDAO.getSalesByDateAnalyticsDate(
+        testUser._id,
+        startDate,
+        endDate
+      );
+
+      expect(salesInADay).to.be.an("object");
+      expect(salesInADay).to.have.property("createdAt");
+      expect(salesInADay).to.have.property("dailyProducts");
+      expect(salesInADay.dailyProducts).to.be.an("array");
+    });
+  });
+
+  describe("Check Get Daily Products Assigned To A Given Salesperson In Current Date ", () => {
+    it("Should get Daily Products of given salesperson in current date ", async () => {
+      const currentDailyProducts = JSON.parse(
+        JSON.stringify(
+          await dailyProductsDAO.getDailyProductsOfOneSalesperson(testUser._id)
+        )
+      );
+      expect(currentDailyProducts).to.be.an("object");
+      expect(currentDailyProducts).to.have.property("createdAt");
+      expect(currentDailyProducts).to.have.property("dailyProducts");
+      expect(currentDailyProducts).to.have.property(
+        "salesperson",
+        testUser._id
+      );
+      expect(currentDailyProducts.dailyProducts).to.be.an("array");
+    });
+  });
+
+  describe("Check Update Daily Products Quantity Of A Given Salesperson In A Given Date ", () => {
+    let newDailyProductsList: any;
+    before(() => {
+      newDailyProductsList = [
+        { product: testProductId, quantity: 20, sales: 0 },
+      ];
+    });
+    it("Should update Daily Products quantity of given salesperson in the given date ", async () => {
+      const updatedDocumentId =
+        await dailyProductsDAO.updateDailyProductsQuantity(
+          testUser._id,
+          newDailyProductsList,
+          startDate,
+          endDate
+        );
+      const updatedDailyProducts = JSON.parse(
+        JSON.stringify(
+          await dailyProductsDAO.getDocumentByObjectId(updatedDocumentId)
+        )
+      );
+      expect(updatedDailyProducts).to.be.an("object");
+      expect(updatedDailyProducts).to.have.property("dailyProducts");
+      expect(updatedDailyProducts.dailyProducts).to.be.an("array");
+      expect(updatedDailyProducts.dailyProducts).to.containSubset(
+        newDailyProductsList
+      );
     });
   });
 
