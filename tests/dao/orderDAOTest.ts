@@ -1,4 +1,4 @@
-import OrderDAO from "../../src/dao/OrderDAO";
+import OrderDAO from "../../src/dao/orderDAO";
 import chai from "chai";
 import { expect } from 'chai';
 import {OrderDocument} from "../../src/schemaModels/order.model";
