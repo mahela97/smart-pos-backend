@@ -7,7 +7,7 @@ chai.should();
 chai.use(chaiHttp);
 chai.use(chaiThings);
 
-describe("Category Routes Tests", () => {
+describe("/manager/category Routes Tests", () => {
   let categoryDAO: CategoryDAO;
   before(() => {
     categoryDAO = new CategoryDAO();
@@ -25,6 +25,16 @@ describe("Category Routes Tests", () => {
           res.body.should.have.a("object");
           res.body.should.have.property("id");
           id = res.body.id;
+          done();
+        });
+    });
+    it("It should give validation error response", (done) => {
+      chai
+        .request(app)
+        .post("/api/manager/category")
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(401);
           done();
         });
     });

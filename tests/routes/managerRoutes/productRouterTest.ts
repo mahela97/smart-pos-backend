@@ -1,4 +1,4 @@
-import chai from "chai";
+import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import app from "../../../src/index";
 import ProductDAO from "../../../src/dao/productDAO";
@@ -8,7 +8,7 @@ chai.should();
 chai.use(chaiHttp);
 chai.use(chaiThings);
 
-describe("Products Routes Tests", () => {
+describe("/manager/products Routes Tests", () => {
   let productDAO: ProductDAO;
   let categoryDAO: CategoryDAO;
   let categoryId: string;
@@ -27,6 +27,22 @@ describe("Products Routes Tests", () => {
   });
   describe("POST /api/manager/product", () => {
     let productId: string;
+    it("It Should give validation error response", (done) => {
+      const testProduct = {
+        categoryId: categoryId,
+        unitPrice: 100,
+        description: "Test Product",
+        photo: "photo url",
+      };
+      chai
+        .request(app)
+        .post("/api/manager/product")
+        .send(testProduct)
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
     it("It should add new product", (done) => {
       const testProduct = {
         name: "Test Product",
@@ -136,48 +152,94 @@ describe("Products Routes Tests", () => {
     });
   });
   describe("PATCH /api/manager/product/id", () => {
-        let productId: string;
-        before((done) => {
-            const testProduct = {
-                name: "Test Product",
-                categoryId: categoryId,
-                unitPrice: 100,
-                description: "Test Product",
-                photo: "photo url",
-            };
-            chai
-                .request(app)
-                .post("/api/manager/product")
-                .send(testProduct)
-                .end((err, res) => {
-                    productId = res.body.id;
-                    done();
-                });
-        });
-        it("It should update product", (done) => {
-            chai
-                .request(app)
-                .patch(`/api/manager/product/${productId}`)
-                .send()
-                .end((err, res) => {
-                    res.should.have.status(201);
-                    res.body.should.have.a("object");
-                    res.body.should.have.any.keys(
-                        "result",
-                        "name",
-                        "unitPrice",
-                        "description",
-                        "categoryId",
-                        "photo"
-                    );
-                    res.body.result.should.have.property("_id", productId);
-                    done();
-                });
-        });
-        after(async () => {
-            await productDAO.delete(productId);
+    let productId: string;
+    before((done) => {
+      const testProduct = {
+        name: "Test Product",
+        categoryId: categoryId,
+        unitPrice: 100,
+        description: "Test Product",
+        photo: "photo url",
+      };
+      chai
+        .request(app)
+        .post("/api/manager/product")
+        .send(testProduct)
+        .end((err, res) => {
+          productId = res.body.id;
+          done();
         });
     });
+    it("It should update product", (done) => {
+      chai
+        .request(app)
+        .patch(`/api/manager/product/${productId}`)
+        .send({
+          name: "Updated Test Product",
+          unitPrice: 200,
+          description: "Updated Test Product",
+          photo: "Updated photo url",
+        })
+        .end((err, res) => {
+          res.should.have.status(201);
+          expect(res.body.success).to.be.equal(1);
+          done();
+        });
+    });
+    it("It Should give validation error response", (done) => {
+      chai
+        .request(app)
+        .patch(`/api/manager/product/${productId}`)
+        .send({
+          productName: "Updated Test Product",
+          unitPrice: 200,
+          description: "Updated Test Product",
+          photo: "Updated photo url",
+        })
+        .end((err, res) => {
+          res.should.have.status(401);
+          done();
+        });
+    });
+    after(async () => {
+      await productDAO.delete(productId);
+    });
+  });
+
+  describe("DELETE /api/manager/product/id", () => {
+    let productId: string;
+    before((done) => {
+      const testProduct = {
+        name: "Test Product",
+        categoryId: categoryId,
+        unitPrice: 100,
+        description: "Test Product",
+        photo: "photo url",
+      };
+      chai
+        .request(app)
+        .post("/api/manager/product")
+        .send(testProduct)
+        .end((err, res) => {
+          productId = res.body.id;
+          done();
+        });
+    });
+    it("It should delete product", (done) => {
+      chai
+        .request(app)
+        .delete(`/api/manager/product/${productId}`)
+        .end((err, res) => {
+          res.should.have.status(201);
+          expect(res.body.success).to.be.equal(1);
+          done();
+        });
+    });
+    after(async () => {
+      await productDAO.delete(productId);
+    });
+  });
+
   after(async () => {
     await categoryDAO.delete(categoryId);
   });
