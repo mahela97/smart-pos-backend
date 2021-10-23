@@ -15,7 +15,7 @@ describe("CategoryDao Unit Testings", async () => {
       newCategory = await categoryDAO.add(category);
       expect(newCategory).to.be.a("object");
       expect(newCategory).to.have.property("name");
-      expect(newCategory).to.deep.include(category);
+      expect(newCategory).to.include(category);
     });
     after(async () => {
       await categoryDAO.delete(newCategory._id);

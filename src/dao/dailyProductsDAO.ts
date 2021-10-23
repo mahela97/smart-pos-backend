@@ -12,7 +12,6 @@ export default class DailyProductsDAO extends Dao {
   }
 
   public async updateDailyProducts(id: string, data: any) {
-    console.log(id, data);
     await this.model.findByIdAndUpdate(id, { dailyProducts: data });
   }
 
@@ -36,7 +35,6 @@ export default class DailyProductsDAO extends Dao {
       this.model
         .find({ createdAt: { $gte: start, $lt: end } })
         .select("salesperson")
-        // .populate("salesperson")
         .populate({ path: "salesperson", match: { warehouseId: id } })
         .lean()
     );

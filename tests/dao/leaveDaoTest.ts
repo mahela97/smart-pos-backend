@@ -2,9 +2,11 @@ import LeaveDAO from "../../src/dao/leaveDAO";
 import UserDAO from "../../src/dao/userDAO";
 import chai from "chai";
 import { expect } from "chai";
+import chaiSubset from "chai-subset";
 import { UserDocument } from "../../src/schemaModels/user.model";
 // import { LeaveDocument } from "../../src/schemaModels/leave.model";
 
+chai.use(chaiSubset);
 chai.should();
 
 describe("LeaveDAO Unit Testings", () => {
@@ -22,8 +24,8 @@ describe("LeaveDAO Unit Testings", () => {
       role: "salesperson",
     });
   });
-  describe("Check add leave", () => {
-    let leave: { id: string };
+  describe("Check Add Leave", () => {
+    let leave: any;
     it("Should add new leave", async () => {
       leave = await leaveDAO.add({
         userId: user._id,
@@ -33,13 +35,13 @@ describe("LeaveDAO Unit Testings", () => {
         to: "2021/09/11",
       });
       expect(leave).to.be.a("object");
-      expect(leave).to.have.property("id");
+      expect(leave).to.have.property("_id");
     });
     after(async () => {
       await leaveDAO.delete(leave.id);
     });
   });
-  describe("Check get All Leaves", () => {
+  describe("Check Get All Leaves", () => {
     let allLeaves: Record<string, any>;
     before(async () => {
       await leaveDAO.add({
@@ -75,7 +77,7 @@ describe("LeaveDAO Unit Testings", () => {
     });
   });
   describe("Check Update Leave", () => {
-    let leave: { id: string };
+    let leave: any;
     let updatedLeaves: Record<string, any>;
     before(async () => {
       leave = await leaveDAO.add({
@@ -87,7 +89,7 @@ describe("LeaveDAO Unit Testings", () => {
       });
     });
     it("Should update leave request", async () => {
-      await leaveDAO.updateLeave(leave.id, { approved: "approved" });
+      await leaveDAO.updateLeave(leave._id, { approved: "approved" });
       updatedLeaves = await leaveDAO.getAll({
         sortBy: " name",
         query: "approved",
@@ -96,7 +98,10 @@ describe("LeaveDAO Unit Testings", () => {
         filter: "",
       });
       expect(updatedLeaves.total).to.eql(1);
-      expect(updatedLeaves.items).to.be.a("array");
+      expect(updatedLeaves.items).to.be.an("array");
+      expect(updatedLeaves.items).to.containSubset([
+        { _id: leave._id, approved: "approved" },
+      ]);
     });
     after(async () => {
       updatedLeaves.items.map(async (leave: any) => {

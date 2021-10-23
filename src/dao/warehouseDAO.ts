@@ -38,10 +38,9 @@ export default class WarehouseDAO extends Dao {
     managerId: string,
     warehouseId: string
   ): Promise<void> {
-    const result = await this.model.findByIdAndUpdate(warehouseId, {
+    await this.model.findByIdAndUpdate(warehouseId, {
       managerId,
     });
-    console.log(result);
   }
 
   public async addWarehouseProduct(
@@ -68,7 +67,10 @@ export default class WarehouseDAO extends Dao {
   ): Promise<Partial<WarehouseDocument>> {
     const result = await this.model
       .findById(id)
-      .populate({path:"products.product",match:{name:{$regex:filterData.query,$options:"i"}}})
+      .populate({
+        path: "products.product",
+        match: { name: { $regex: filterData.query, $options: "i" } },
+      })
       .select("products")
       .sort(filterData.sortBy);
     return result;
