@@ -6,11 +6,13 @@ import ProductModel from "../../src/models/productModel";
 import CategoryDAO from "../../src/dao/categoryDAO";
 import { expect } from "chai";
 import chaiSubset from "chai-subset";
+import chaiThings from "chai-things";
 import { DailyProductDocument } from "../../src/schemaModels/dailyProduct.model";
 import { UserDocument } from "../../src/schemaModels/user.model";
 import UserDAO from "../../src/dao/userDAO";
 
 chai.use(chaiSubset);
+chai.use(chaiThings);
 chai.should();
 
 describe("DailyProductsDAO Unit Testing", () => {
@@ -55,7 +57,7 @@ describe("DailyProductsDAO Unit Testing", () => {
           lastName: "Add",
           telephone: "0779667935",
           email: "addUser@gmail.com",
-          role: "manager",
+          role: "salesperson",
           warehouseId: warehouseId,
         })
       )
@@ -115,6 +117,8 @@ describe("DailyProductsDAO Unit Testing", () => {
         startDate,
         endDate
       );
+      expect(salespersons).to.be.an("array");
+      salespersons.should.all.have.nested.property("salesperson.role", 'salesperson');
       expect(salespersons).to.containSubset([
         { salesperson: { email: testUser.email } },
       ]);
@@ -129,7 +133,8 @@ describe("DailyProductsDAO Unit Testing", () => {
           startDate,
           endDate
         );
-
+      expect(warehouseSalespersons).to.be.an("array");
+      warehouseSalespersons.should.all.have.nested.property("salesperson.role", 'salesperson');
       expect(
         JSON.parse(JSON.stringify(warehouseSalespersons))
       ).to.containSubset([
