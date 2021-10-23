@@ -1,33 +1,65 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import app from "../../../src/index";
-// import CategoryDAO from "../../../src/dao/categoryDAO";
+import CategoryDAO from "../../../src/dao/categoryDAO";
+import chaiThings from "chai-things";
 chai.should();
 chai.use(chaiHttp);
+chai.use(chaiThings);
 
 describe("Category Routes Tests", () => {
-  // let categoryDAO: CategoryDAO;
+  let categoryDAO: CategoryDAO;
   before(() => {
-    // categoryDAO = new CategoryDAO();
+    categoryDAO = new CategoryDAO();
   });
-  describe("POST add category /api/manager/category", () => {
-    let testCategory: Record<string, any>;
+  describe("POST /api/manager/category", () => {
+    let id: string;
     it("It should add new category", (done) => {
-      testCategory = { name: "Test Category" };
-      console.log(testCategory);
-      chai.request(app)
-      .post("/api/manager/category/")
+      const testCategory = { name: "Test Category" };
+      chai
+        .request(app)
+        .post("/api/manager/category")
         .send(testCategory)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.have.a("object");
           res.body.should.have.property("id");
-          console.log(res.body);
-      done();
+          id = res.body.id;
+          done();
         });
     });
     after(async () => {
-      // await categoryDAO.delete(id);
+      await categoryDAO.delete(id);
+    });
+  });
+  describe("GET /api/manager/category", () => {
+    let id: string;
+    before((done) => {
+      const testCategory = { name: "Test Category" };
+      chai
+        .request(app)
+        .post("/api/manager/category")
+        .send(testCategory)
+        .end((err, res) => {
+          id = res.body.id;
+          done();
+        });
+    });
+    it("It should get all categories", (done) => {
+      chai
+        .request(app)
+        .get("/api/manager/category?sortBy=+name")
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.have.a("object");
+          res.body.should.have.property("totalItems");
+          res.body.should.have.property("items");
+          res.body.items.should.all.have.property("name");
+          done();
+        });
+    });
+    after(async () => {
+      await categoryDAO.delete(id);
     });
   });
 });

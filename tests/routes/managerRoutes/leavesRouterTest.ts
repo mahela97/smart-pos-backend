@@ -1,0 +1,35 @@
+// import chai from "chai";
+// import chaiHttp from "chai-http";
+// import app from "../../../src/index";
+// import CategoryDAO from "../../../src/dao/categoryDAO";
+// import chaiThings from "chai-things";
+// chai.should();
+// chai.use(chaiHttp);
+// chai.use(chaiThings);
+//
+// describe("Category Routes Tests", () => {
+//   let categoryDAO: CategoryDAO;
+//   before(() => {
+//     categoryDAO = new CategoryDAO();
+//   });
+//   describe("POST /api/manager/category", () => {
+//     let id: string;
+//     it("It should add new category", (done) => {
+//       const testCategory = { name: "Test Category" };
+//       chai
+//         .request(app)
+//         .post("/api/manager/category")
+//         .send(testCategory)
+//         .end((err, res) => {
+//           res.should.have.status(201);
+//           res.body.should.have.a("object");
+//           res.body.should.have.property("id");
+//           id = res.body.id;
+//           done();
+//         });
+//     });
+//     after(async () => {
+//       await categoryDAO.delete(id);
+//     });
+//   });
+// });
