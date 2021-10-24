@@ -136,7 +136,7 @@ describe("/salesperson/order Routes Integration Tests", () => {
                 });
         })
     })
-    describe("GET salesperson/ordersOfOneShop", () => {
+    describe("GET salesperson/ordersOfOneShop/:id", () => {
         it("Should return all orders to given shop ID", (done) => {
             chai.request(app)
                 .get(`/api/salesperson/ordersOfOneShop/${testShop._id}`)
@@ -153,7 +153,7 @@ describe("/salesperson/order Routes Integration Tests", () => {
         });
 
     });
-    describe("GET salesperson/ordersOfOneSalesperson", () => {
+    describe("GET salesperson/ordersOfOneSalesperson/:id", () => {
         it("Should return all orders to given salesperson ID", (done) => {
             chai.request(app)
                 .get(`/api/salesperson/ordersOfOneSalesperson/${testSalesperson._id}?sortBy=+createdAt`)

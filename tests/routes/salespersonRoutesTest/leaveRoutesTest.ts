@@ -43,7 +43,7 @@ describe("/salesperson/leave Routes Integration Testing", () => {
                 });
         });
 
-        describe("GET salesperson/leave", () => {
+        describe("GET salesperson/leave/:id", () => {
             it("Should return all the leaves to given Salesperson ID", (done) => {
                 chai.request(app)
                     .get("/api/salesperson/leave/6169ddf7ecde041eece94d2d?sortBy=+name")
