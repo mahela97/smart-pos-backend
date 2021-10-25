@@ -36,7 +36,6 @@ export default class DailyProductsDAO extends Dao {
       this.model
         .find({ createdAt: { $gte: start, $lt: end } })
         .select("salesperson")
-        // .populate("salesperson")
         .populate({ path: "salesperson", match: { warehouseId: id } })
         .lean()
     );

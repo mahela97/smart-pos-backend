@@ -47,6 +47,10 @@ export default abstract class Dao {
     return user._id;
   }
 
+  async getDocumentByObjectId(objectId: string): Promise<any> {
+    return this.model.findOne({ _id: objectId }).lean();
+  }
+
   async delete(ref: string): Promise<any> {
     return this.model.findByIdAndDelete(ref);
   }

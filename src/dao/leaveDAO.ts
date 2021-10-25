@@ -14,6 +14,7 @@ export default class LeaveDAO extends Dao {
   public async getAll(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
+    console.log(filterData);
     const queryHelper = new QueryHelper(
       filterData.query,
       ["approved"],
@@ -45,9 +46,9 @@ export default class LeaveDAO extends Dao {
   }
 
   public async updateLeave(
-    productId: string,
-    productDetails: Partial<LeaveModel>
+    leaveId: string,
+    leaveDetails: Partial<LeaveModel>
   ): Promise<void> {
-    await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
+    await this.model.findByIdAndUpdate(new ObjectID(leaveId), leaveDetails);
   }
 }
