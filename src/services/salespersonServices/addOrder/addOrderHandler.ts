@@ -23,8 +23,8 @@ export default class AddOrderHandler {
     const orderService = ServiceLocator.addOrder;
     const data: OrderModel = validation.value;
     try {
-      const result = await orderService.addOrder(data);
-      res.status(201).send({ id: result });
+      await orderService.addOrder(data);
+      res.status(201).send({ result: "success" });
     } catch (error) {
       console.log(error);
       const errorRes = errorResponse(error);
