@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon -x ts-node src/index.ts",
-    "build": "npm test && tsc",
+    "build": "tsc",
     "postinstall": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
