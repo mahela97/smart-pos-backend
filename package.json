@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prestart": "npm run build",
-    "test": "mocha --require ts-node/register --timeout 10000 --watch-extensions ts 'tests/**/*.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"
   },
   "repository": {
