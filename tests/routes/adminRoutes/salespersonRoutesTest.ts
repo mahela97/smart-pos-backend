@@ -75,7 +75,7 @@ describe("/admin/warehouse Routes Integration Tests", () => {
                 },
             ],
             salesperson: testSalesperson._id,
-            createdAt: moment(),
+            createdAt: moment().subtract("days",2),
         });
 
     });
@@ -113,7 +113,6 @@ describe("/admin/warehouse Routes Integration Tests", () => {
         });
     });
 
-
     describe("GET User Not Found admin/salespersons/:id", () => {
         it("Should give not found error response", (done) => {
             chai.request(app)
@@ -126,8 +125,67 @@ describe("/admin/warehouse Routes Integration Tests", () => {
         });
     });
 
+    describe("GET admin/salespersons/analyticsByIncome-range", () => {
+        it("Should give all salespersons analytics by income", (done) => {
+            chai.request(app)
+                .get(`/api/admin/salespersons/analyticsByIncome-range`)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    expect(res.body).to.be.a("object");
+                    expect(res.body.incomes).to.be.a("array")
+                    res.body.incomes.should.all.have.property("income");
+                    done();
+                });
+        });
+    });
+
+    describe("GET admin/salespersons/:id/analytics/products/range", () => {
+        it("Should return analytics and sale products", (done) => {
+            chai.request(app)
+                .get(`/api/admin/salespersons/${testSalesperson._id}/analytics/products/range`)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    expect(res.body).to.be.a("object");
+                    done();
+                });
+        });
+    });
+
+    describe("GET Unprocessed Entity admin/salespersons/:id/analytics/products/range", () => {
+        it("Should Give 422 error", (done) => {
+            chai.request(app)
+                .get(`/api/admin/salespersons/id/analytics/products/range`)
+                .end((err, res) => {
+                    res.should.have.status(422);
+                    done();
+                });
+        });
+    });
 
 
+    describe("GET admin/salespersons/:id/analytics/sales/range", () => {
+        it("Should return analytics of sales", (done) => {
+            chai.request(app)
+                .get(`/api/admin/salespersons/${testSalesperson._id}/analytics/sales/range`)
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    expect(res.body).to.be.a("object");
+                    done();
+                });
+        });
+    });
+
+
+    describe("GET Unprocessed Entity admin/salespersons/:id/analytics/sales/range", () => {
+        it("Should Give 422 error", (done) => {
+            chai.request(app)
+                .get(`/api/admin/salespersons/id/analytics/sales/range`)
+                .end((err, res) => {
+                    res.should.have.status(422);
+                    done();
+                });
+        });
+    });
 
     after(async () => {
         await categoryDAO.delete(testCategory._id);
