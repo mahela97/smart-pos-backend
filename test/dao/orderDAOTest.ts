@@ -8,7 +8,7 @@ import {ShopDocument} from "../../src/schemaModels/shop.model";
 chai.should();
 
 
-describe('OrderDAO Unit Testings', () => { // the tests container
+describe('OrderDAO Unit Testings', () => { // the test container
 
     const orderDAO = new OrderDAO();
     const shopDAO = new ShopDAO();

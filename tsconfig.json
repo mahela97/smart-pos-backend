@@ -23,7 +23,7 @@
     "src/**/*.ts"   /* Include every ts file in source folder */
   ],
   "exclude" : [
-    "./tests/",
+    "./test/",
     "./lib/",
     "node_modules"  /* exclude everything in  node_modules */
   ]

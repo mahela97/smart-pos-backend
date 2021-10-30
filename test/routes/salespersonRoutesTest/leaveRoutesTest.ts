@@ -1,6 +1,6 @@
 import chai, {expect} from "chai";
 import chaiHttp from "chai-http";
-import app from "../../../src/index";
+import app from "../../../src";
 import chaiThings from "chai-things";
 import LeaveDAO from "../../../src/dao/leaveDAO";
 import {LeaveDocument} from "../../../src/schemaModels/leave.model";
