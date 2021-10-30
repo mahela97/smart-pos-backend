@@ -16,6 +16,7 @@ export default class DBConnection {
       useCreateIndex: true,
     });
 
+
     this.db = Mongoose.connection;
 
     this.db.once("open", async () => {
