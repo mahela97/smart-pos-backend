@@ -12,7 +12,6 @@ export default class DailyProductsDAO extends Dao {
   }
 
   public async updateDailyProducts(id: string, data: any) {
-    console.log(id, data);
     await this.model.findByIdAndUpdate(id, { dailyProducts: data });
   }
 

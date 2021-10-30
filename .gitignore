@@ -4,4 +4,7 @@ lib/
 package-lock.json
 functions/node_modules/
 functions/package-lock.json
-"sendgrid.env" 
+"sendgrid.env"
+coverage/
+.nyc_output/
+

@@ -3,9 +3,10 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 
 import apiRouter from "./routes/api-routers/api-router";
+import firebaseInitialize from "./utill/firebaseInstance";
 
 dotenv.config();
-
+firebaseInitialize();
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -20,8 +21,14 @@ app.use((req, res, next) => {
 });
 app.use("/api", apiRouter);
 
-export default app.listen(PORT, () => {
+// export default app.listen(PORT, () => {
+//   console.log(`Server listening on port ${PORT}`);
+//   console.log("Press Ctrl+C to quit.");
+// });
+
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   console.log("Press Ctrl+C to quit.");
 });
 
+export default app;
