@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prestart": "npm run build",
-    "test": "mocha --require ts-node/register --timeout 10000 --watch-extensions ts 'tests/**/*.ts'",
+    "test": "  nyc --reporter=html --reporter=text mocha --exit --require ts-node/register --timeout 10000 --watch-extensions ts 'test/**/*.ts'",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
     "coverage": "nyc npm run test"
   },
