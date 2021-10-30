@@ -80,4 +80,5 @@ export default class WarehouseDAO extends Dao {
     const result = await this.model.findById(id).select("products");
     return result;
   }
+
 }
