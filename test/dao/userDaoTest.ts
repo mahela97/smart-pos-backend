@@ -7,7 +7,7 @@ import WarehouseDAO from "../../src/dao/warehouseDAO";
 chai.should();
 
 describe("UserDao Unit Testings", () => {
-    // the tests container
+    // the test container
     const userDao = new UserDAO();
     const warehouseDao = new WarehouseDAO();
     let testManager: UserDocument;

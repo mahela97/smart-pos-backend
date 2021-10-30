@@ -3,9 +3,10 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 
 import apiRouter from "./routes/api-routers/api-router";
+import firebaseInitialize from "./utill/firebaseInstance";
 
 dotenv.config();
-
+firebaseInitialize();
 const app = express();
 
 const PORT = process.env.PORT || 8080;
