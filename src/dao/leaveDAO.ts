@@ -50,4 +50,10 @@ export default class LeaveDAO extends Dao {
   ): Promise<void> {
     await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
   }
+
+  public async deleteLeave(leaveId: string): Promise<void> {
+    await this.model.findByIdAndUpdate(new ObjectID(leaveId), {
+      archived: true,
+    });
+  }
 }
