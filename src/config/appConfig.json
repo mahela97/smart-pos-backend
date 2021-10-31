@@ -1,6 +1,22 @@
 {
   "development": {
     "config_id": "development",
-    "mongo_url": " mongodb+srv://mahela:12345@cluster0.qi8o5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongo_url": " mongodb+srv://mahela:12345@cluster0.qi8o5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "storageBucket": "smart-pos-9254b.appspot.com",
+    "mongo_url_testing": "mongodb+srv://mahela:12345@cluster0.isp0t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  },
+  "firebase": {
+    "type": "service_account",
+    "project_id": "smart-pos-9254b",
+    "private_key_id": "e393e15b18b6b2b279ac8c60cb564a72726b4f8a",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDNcNaJ1NqJYoqi\naV5e0ukblondwYamEWlE9aDJ28zr3YB1ObV6pb7Mp0vYaED+sZLQph2XPSukYgYU\njk/xK2ooydF0GiIBLvRAyXmenaxamtRSWzXBYn2SA5GftM5zWjbZDdQjFMBorwBS\nhBwtzQA6yjvZjXpbQXGBQXSoAhfqu0cLVMqqiYYhFmXI6r82HI1W7KzE+Uo6naD7\n76RltgAKScoNXbohKFNuKvXsmCT1o8npQcVlP5+6AW9XJuRC0YifSFZp6yMmK6cV\nttjXCl/dNNctqrUFiF8m+lFFbNf0BqOxvBWy9KQAMbst2+RA5jxIJYpzZNZq9Yf5\nVWhBt9e3AgMBAAECggEASaDnQv7GU/a9OPgKmnF8miaZwqBZYatbzxs5RR9BkkcQ\ngvLr18kPWMmcpTK4GJALzju63zlNKtz20OcwP38PzQ6HwtSa21G4uH981xwraU2U\nSu/llCl4V5xv1I04cJ8kiSYroWcOjnYp52jxsHiIXImeaZoLACm0RF7xMEWPzNAt\nGmkxRim5GeXYFAiIcLlxYxj7Q+k2233BBSH/dH7DrosweHV/ht7BV20cZAHFn8Fv\npvOirfTrqR3f6F/atytI0QvAOgnVFgERbGreOg0TwO0mfz5fdPP9oskKsKnMSJG/\nJPHCrfg5Qy94Tfwhebglb9h7kgS7aOs50Z7itENoAQKBgQD2JlPgzGWgTFISeLTr\n03ODVeinuK3R/hR8RIPwuE93EDzGyn6lP8iCXOJksuqawqaV1OD8LDggYhkWSqUt\nJBxfPahy4+e7wwBugKokW6wmx26Jb/BJNN1Be5gg51i6WU569k4Jxdstwrd/bkEW\nkJX5n+IPGEfoPL/056LaHQwmEQKBgQDVqXgRHKARvLaG/6MHxmOcLYu16QUTCm+4\nkKyGF3J6iDA/6HlTswGO6FHEqEJcfj9NctwloWd61Koq8U4QJ7Xb/lk/iWQyuWxc\nW+QhmDFt8jCZSjsiA2Cf3NYvCn+SPlDWheIa7SeuyqK9hSMBavofWBF7lxlL2hUb\n0qYga2e5RwKBgQC3Ch1JhvTzVI2bSsNOsjitq06Mmho3k3bsSY7LjGMbKKnpMV8n\nxtx1hFidhSZL2v9BX8HGA6PhANGi7/MQNFAcyp7egHcr+n/xrB/ZVYoYdCjQbrsB\n1RvKu/uOTDqAqDRh35J8VfL8flUxn20rOG0t6SSTEP03xyT/GtjQ1NTZ4QKBgH0Q\nQnh5sfRP6uNgVTRi2sF7I3EqYU8A5943yNSAewDgIKX31LS6beoRcHNVLern9vPF\njLj2HhUW0DhsoI3yQI/x9JmtORo70QLKwuErLZu2jN3dRnmlUnSgljpYwc1/bl/z\nZCLwuC6m69VVTeUxkhCwwyL9kdAFah+sEJOfaspXAoGBAK9qLMzmjycX43wcfvF9\nkNpGfCcp9OHDZBfPlkK6jyS9t4pD7WZ0p1IUGws9abTEFxgCmUGGutR78OpXYxgf\njp12i0+v3t/PsWbpzHcYOqycOCvGPo5h2OwHZc8veYsTPWi+bPZQu9WKQBlsbLlV\nJtbjOwSxcSFZQiZ2Ynf9J9V0\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-1v5uu@smart-pos-9254b.iam.gserviceaccount.com",
+    "client_id": "116187582126055225562",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-1v5uu%40smart-pos-9254b.iam.gserviceaccount.com"
   }
+
+
 }

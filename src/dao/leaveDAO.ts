@@ -45,10 +45,10 @@ export default class LeaveDAO extends Dao {
   }
 
   public async updateLeave(
-    productId: string,
-    productDetails: Partial<LeaveModel>
+    leaveId: string,
+    leaveDetails: Partial<LeaveModel>
   ): Promise<void> {
-    await this.model.findByIdAndUpdate(new ObjectID(productId), productDetails);
+    await this.model.findByIdAndUpdate(new ObjectID(leaveId), leaveDetails);
   }
 
   public async deleteLeave(leaveId: string): Promise<void> {
