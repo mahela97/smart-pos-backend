@@ -501,7 +501,7 @@ export default class ServiceLocator {
   static get getLeaves(): GetLeavesService {
     const key = "get_leaves";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new GetLeavesService(this.leaveDAO));
+      this.instances.set(key, new GetLeavesService(this.leaveDAO, this.userDAO));
     }
     return this.instances.get(key);
   }

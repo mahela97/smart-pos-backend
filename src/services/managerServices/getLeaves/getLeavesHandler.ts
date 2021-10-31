@@ -19,9 +19,10 @@ export default class GetLeavesHandler {
       return;
     }
     const data = validation.value;
+    const uid = req.user?.uid;
     const service = ServiceLocator.getLeaves;
     try {
-      const result = await service.getLeaves(data);
+      const result = await service.getLeaves(data, uid);
       res.status(201).send({
         totalItems: result.total,
         items: result.items,
