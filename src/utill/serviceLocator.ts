@@ -58,6 +58,8 @@ import EmailService from "../services/emailService/emailService";
 import UpdateUserLocationService from "../services/userServices/updateUserLocation/updateUserLocationService";
 import DeleteProductService from "../services/managerServices/deleteProduct/deleteProductService";
 import EditUserService from "../services/userServices/editUser/editUserService";
+import DeleteWarehouseProductService
+  from "../services/managerServices/deleteWarehouseProduct/deleteWarehouseProductService";
 
 
 export default class ServiceLocator {
@@ -499,7 +501,7 @@ export default class ServiceLocator {
   static get getLeaves(): GetLeavesService {
     const key = "get_leaves";
     if (!this.instances.get(key)) {
-      this.instances.set(key, new GetLeavesService(this.leaveDAO));
+      this.instances.set(key, new GetLeavesService(this.leaveDAO, this.userDAO));
     }
     return this.instances.get(key);
   }
@@ -614,6 +616,14 @@ export default class ServiceLocator {
     const key = "delete_product";
     if (!this.instances.get(key)) {
       this.instances.set(key, new DeleteProductService(this.productDAO));
+    }
+    return this.instances.get(key);
+  }
+
+  static get deleteWarehouseProduct(): DeleteWarehouseProductService {
+    const key = "delete_warehouse_product";
+    if (!this.instances.get(key)) {
+      this.instances.set(key, new DeleteWarehouseProductService(this.warehouseDAO));
     }
     return this.instances.get(key);
   }
