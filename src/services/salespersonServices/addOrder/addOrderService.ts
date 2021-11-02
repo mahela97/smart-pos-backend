@@ -3,6 +3,7 @@ import OrderModel from "../../../models/orderModel";
 import DailyProductsDAO from "../../../dao/dailyProductsDAO";
 import { OrderDocument } from "../../../schemaModels/order.model";
 import ProductObjectModel from "../../../models/productObjectModel";
+import EmailService from "../../emailService/emailService";
 
 export default class AddOrderService {
   constructor(
@@ -10,7 +11,14 @@ export default class AddOrderService {
     protected dailyProductDAO: DailyProductsDAO
   ) {}
 
-  async addOrder(data: OrderModel): Promise<void> {
+  async addOrder(data: OrderModel,emailService: EmailService, shopEmail: string): Promise<void> {
+
+    await emailService.sendMail(
+        [shopEmail],
+        "New Manager Account Login Credentials",
+        `<h3>Total Price - ${data.totalPrice}</h3>`
+    );
+
     const dailyProducts =
       await this.dailyProductDAO.getDailyProductsOfOneSalesperson(
         data.salesperson

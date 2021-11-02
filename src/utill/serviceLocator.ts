@@ -58,8 +58,8 @@ import EmailService from "../services/emailService/emailService";
 import UpdateUserLocationService from "../services/userServices/updateUserLocation/updateUserLocationService";
 import DeleteProductService from "../services/managerServices/deleteProduct/deleteProductService";
 import EditUserService from "../services/userServices/editUser/editUserService";
-import DeleteWarehouseProductService
-  from "../services/managerServices/deleteWarehouseProduct/deleteWarehouseProductService";
+import DeleteLeaveService from "../services/salespersonServices/deleteLeave/deleteLeaveService";
+import DeleteWarehouseProductService from "../services/managerServices/deleteWarehouseProduct/deleteWarehouseProductService";
 
 
 export default class ServiceLocator {
@@ -284,6 +284,14 @@ export default class ServiceLocator {
     }
     return this.instances.get(key);
   }
+
+ static get deleteLeave(): DeleteLeaveService {
+    const key = "delete_leave";
+    if(!this.instances.get(key)){
+      this.instances.set(key, new DeleteLeaveService(this.leaveDAO));
+    }
+    return this.instances.get(key);
+ }
 
   // Order
   static get orderDAO(): OrderDAO {

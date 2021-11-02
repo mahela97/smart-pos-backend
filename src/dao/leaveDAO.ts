@@ -45,7 +45,7 @@ export default class LeaveDAO extends Dao {
       ["approved"],
       [""],
       filterData.sortBy,
-      `userId eq ${id}`,
+      `userId eq ${id},archived eq false`,
       filterData.page,
       filterData.limit
     );
@@ -58,5 +58,11 @@ export default class LeaveDAO extends Dao {
     leaveDetails: Partial<LeaveModel>
   ): Promise<void> {
     await this.model.findByIdAndUpdate(new ObjectID(leaveId), leaveDetails);
+  }
+
+  public async deleteLeave(leaveId: string): Promise<void> {
+    await this.model.findByIdAndUpdate(new ObjectID(leaveId), {
+      archived: true,
+    });
   }
 }
