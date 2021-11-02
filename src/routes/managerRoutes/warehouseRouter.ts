@@ -3,6 +3,8 @@ import AddWarehouseProductHandler from "../../services/managerServices/addWareho
 import GetAllWarehouseProductsHandler from "../../services/managerServices/getAllWarehouseProducts/getAllWarehouseProductsHandler";
 import UpdateWarehouseProductHandler from "../../services/managerServices/updateWarehouseProduct/updateWarehouseProductHandler";
 import GetOneWarehouseHandler from "../../services/adminServices/getOneWarehouse/getOneWarehousehandler";
+import DeleteWarehouseProductHandler
+    from "../../services/managerServices/deleteWarehouseProduct/deleteWarehouseProductHandler";
 
 const warehouseRouter = Router();
 
@@ -18,5 +20,8 @@ warehouseRouter
 warehouseRouter
   .route("/:id/details")
   .get(GetOneWarehouseHandler.getWarehouse);
+warehouseRouter
+    .route("/:warehouseId/product/:productId")
+    .delete(DeleteWarehouseProductHandler.deleteWarehouseProduct);
 
 export default warehouseRouter;

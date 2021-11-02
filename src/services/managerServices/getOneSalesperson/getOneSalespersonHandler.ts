@@ -15,9 +15,10 @@ export default class GetOneSalespersonHandler {
       return;
     }
     const { id } = validation.value;
+    const uid = req.user?.uid;
     const service = ServiceLocator.getOneSalesperson;
     try {
-      const result = await service.getOneSalesperson(id);
+      const result = await service.getOneSalesperson(id, uid);
       res.status(201).send({ success: 1, result });
     } catch (error) {
       const errRes = errorResponse(error);
