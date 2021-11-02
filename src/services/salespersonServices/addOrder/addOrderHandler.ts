@@ -21,10 +21,14 @@ export default class AddOrderHandler {
       return;
     }
     const orderService = ServiceLocator.addOrder;
+    const getOneShopService = ServiceLocator.getOneShop;
+    const emailService = ServiceLocator.getEmailService;
     const data: OrderModel = validation.value;
+    const shop = await getOneShopService.getOneShop(data.shop);
+    const shopEmail = shop.email;
     try {
-      await orderService.addOrder(data);
-      res.status(201).send({ result: "success" });
+      const result = await orderService.addOrder(data, emailService, shopEmail);
+      res.status(201).send({ id: result });
     } catch (error) {
       console.log(error);
       const errorRes = errorResponse(error);

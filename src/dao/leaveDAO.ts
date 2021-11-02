@@ -12,19 +12,28 @@ export default class LeaveDAO extends Dao {
   }
 
   public async getAll(
-    filterData: Record<string, any>
+    filterData: Record<string, any>,
+    warehouseId: any,
   ): Promise<Record<string, any>> {
-    const queryHelper = new QueryHelper(
-      filterData.query,
-      ["approved"],
-      ["userId"],
-      filterData.sortBy,
-      filterData.filter,
-      filterData.page,
-      filterData.limit
-    );
+    const result = await this.model
+        .find({approved : filterData.query})
+        .populate({
+          path: "userId",
+          match: { warehouseId: { $in: warehouseId} },
+        })
+        .sort(filterData.sortBy);
+    return {items : result};
+    // const queryHelper = new QueryHelper(
+    //   filterData.query,
+    //   ["approved"],
+    //   ["userId"],
+    //   filterData.sortBy,
+    //   filterData.filter,
+    //   filterData.page,
+    //   filterData.limit
+    // );
 
-    return queryHelper.generate(Leave);
+    // return queryHelper.generate(Leave);
   }
 
   public async getAllFromOneSalesPerson(
@@ -36,7 +45,7 @@ export default class LeaveDAO extends Dao {
       ["approved"],
       [""],
       filterData.sortBy,
-      `userId eq ${id}`,
+      `userId eq ${id},archived eq false`,
       filterData.page,
       filterData.limit
     );
@@ -49,5 +58,11 @@ export default class LeaveDAO extends Dao {
     leaveDetails: Partial<LeaveModel>
   ): Promise<void> {
     await this.model.findByIdAndUpdate(new ObjectID(leaveId), leaveDetails);
+  }
+
+  public async deleteLeave(leaveId: string): Promise<void> {
+    await this.model.findByIdAndUpdate(new ObjectID(leaveId), {
+      archived: true,
+    });
   }
 }
