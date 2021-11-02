@@ -10,6 +10,7 @@ import GetDailyProductsHandler from "../../services/salespersonServices/getDaily
 import GetAllOrdersOfOneSalespersonHandler from "../../services/salespersonServices/getAllOrdersOfOneSalesperson/getAllOrdersHandler";
 import UpdateShopOrderDueAmountHandler from "../../services/salespersonServices/updateShopOrderDueAmount/updateShopOrderDueAmountHandler";
 import GetSalespersonShopsHandler from "../../services/managerServices/getSalespersonShops/getSalespersonShopsHandler";
+import DeleteLeaveHandler from "../../services/salespersonServices/deleteLeave/deleteLeaveHandler";
 
 const salespersonRouter = Router();
 
@@ -23,7 +24,7 @@ salespersonRouter
 // Leave
 salespersonRouter.route("/leave").post(AddLeaveHandler.addLeave);
 salespersonRouter.route("/leave/:id").get(GetAllLeavesHandler.getAllLeaves);
-salespersonRouter.route("/leave/:id").delete();
+salespersonRouter.route("/leave/:id").delete(DeleteLeaveHandler.deleteLeave);
 
 // Order
 salespersonRouter.route("/order").post(AddOrderHandler.addOrder);

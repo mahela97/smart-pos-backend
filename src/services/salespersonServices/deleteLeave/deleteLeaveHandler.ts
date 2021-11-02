@@ -14,7 +14,7 @@ export default class DeleteLeaveHandler {
         const { id } = validation.value;
         const service = ServiceLocator.deleteLeave;
         try {
-            const result = await service.deleteProduct(id);
+            const result = await service.deleteLeave(id);
             res.status(201).send({ success: 1, result });
         } catch (error) {
             const errRes = errorResponse(error);

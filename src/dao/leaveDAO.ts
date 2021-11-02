@@ -36,7 +36,7 @@ export default class LeaveDAO extends Dao {
       ["approved"],
       [""],
       filterData.sortBy,
-      `userId eq ${id}`,
+      `userId eq ${id},archived eq false`,
       filterData.page,
       filterData.limit
     );
