@@ -11,7 +11,7 @@ export default class WarehouseDAO extends Dao {
     super(Warehouse);
   }
 
-  public async getAll(
+  public async  getAll(
     filterData: Record<string, any>
   ): Promise<Record<string, any>> {
     const queryHelper = new QueryHelper(
