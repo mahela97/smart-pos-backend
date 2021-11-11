@@ -13,11 +13,7 @@ export default abstract class Dao {
   }
 
   async update(updateParams: any, ref: string): Promise<any> {
-    const opts = {
-      runValidators: true,
-      useFindAndModify: true,
-    };
-    return this.model.findByIdAndUpdate(ref, updateParams, opts);
+    return this.model.findByIdAndUpdate(ref, updateParams);
   }
 
   async find(
@@ -36,9 +32,7 @@ export default abstract class Dao {
     if (pop) {
       const query = this.model.findById(ref);
       pop.forEach((p) => query.populate(p));
-      console.log(query);
       const res = await query.exec();
-      console.log(res);
       return res;
     }
     return this.model.findById(ref);

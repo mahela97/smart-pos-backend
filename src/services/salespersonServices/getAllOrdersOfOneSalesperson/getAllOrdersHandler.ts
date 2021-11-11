@@ -28,7 +28,6 @@ export default class GetAllOrdersOfOneSalespersonHandler {
       return;
     }
     const { id } = pathValidation.value;
-    console.log(id);
     const service = ServiceLocator.getAllOrdersOfOneSalesperson;
     try {
       const result = await service.getAllOrdersOfOneSalesperson(data, id);

@@ -75,7 +75,6 @@ const isAdmin = async (req: Request,
     const userDao = new UserDAO();
     const uid =<string> req.user?.uid;
     const user = await userDao.getUserByUid(uid.toString());
-    console.log(user);
     if (user.role==="admin"){
         next();
     }else{
@@ -103,7 +102,6 @@ const isSalesperson = async (req: Request,
     const userDao = new UserDAO();
     const uid =<string> req.user?.uid;
     const user = await userDao.getUserByUid(uid.toString());
-    console.log(user);
     if (user.role==="salesperson"){
         next();
     }else{

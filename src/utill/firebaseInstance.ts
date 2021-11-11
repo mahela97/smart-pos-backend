@@ -17,7 +17,6 @@ const serviceData: any = {
 };
 
 const firebaseInitialize = () => {
-  console.log(process.env.SERVICE_TYPE);
   if (admin.apps.length === 0)
     admin.initializeApp({
       credential: admin.credential.cert(serviceData),

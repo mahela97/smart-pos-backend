@@ -11,7 +11,6 @@ export default class GetAllUnassignedManagerHandler {
         result,
       });
     } catch (error) {
-      console.log(error);
       const errorRes = errorResponse(error);
       res.status(errorRes.code).send(errorRes.response);
     }

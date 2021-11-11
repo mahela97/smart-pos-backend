@@ -20,7 +20,6 @@ export default class UnAssignManagerHandler {
       await service.unassignManager(warehouseId);
       res.status(201).send({ success: 1 });
     } catch (error) {
-      console.log(error);
       const errorRs = errorResponse(error);
       res.status(errorRs.code).send(errorRs.message);
     }

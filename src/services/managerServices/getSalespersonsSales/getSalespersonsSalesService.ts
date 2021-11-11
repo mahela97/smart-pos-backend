@@ -76,7 +76,6 @@ export default class GetSalespersonsSalesService {
 
         // eslint-disable-next-line array-callback-return
         Object.values(result).map((income) => {
-          // console.log(incomes.get(salesperson._id));
           incomes.get(salesperson._id).income += income.totalIncome;
         });
       })

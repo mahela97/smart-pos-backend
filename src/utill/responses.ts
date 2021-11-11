@@ -38,7 +38,6 @@ export const errorResponse = (error: any): ErrorResponse => {
   } else if (error.message === NO_USER) {
     errResponse = ErrorResponse.voidError(error.message, 400, error.toString());
   } else {
-    console.log(error.message);
     errResponse = ErrorResponse.voidError("Error", 422, error.toString());
   }
   return errResponse;
