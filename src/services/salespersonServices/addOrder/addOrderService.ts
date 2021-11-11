@@ -15,7 +15,7 @@ export default class AddOrderService {
 
     await emailService.sendMail(
         [shopEmail],
-        "New Manager Account Login Credentials",
+        "New Order",
         `<h3>Total Price - ${data.totalPrice}</h3>`
     );
 
