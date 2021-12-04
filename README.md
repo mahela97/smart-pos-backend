@@ -13,3 +13,9 @@ npm install
 ```bash
 npm run start
 ```
+
+To run test scripts
+
+```bash
+npm run test
+```
